@@ -17,6 +17,7 @@ from flashrsi.agents import (
     Codex,
     Hermes,
     JiuwenSwarm,
+    MetaCoRSITarget,
     MiniAgent,
     OpenClaw,
     OpenCode,
@@ -33,6 +34,7 @@ from flashrsi.algorithms import (
     DarwinX,
     EvoHarness,
     EvoPrompt,
+    MetaCoRSI,
     MetaHarness,
     ModularRSI,
     SkillAdam,
@@ -77,6 +79,7 @@ from flashrsi.config import prepare_run_dir
 from flashrsi.core import Agent, Snapshot
 
 _AGENTS = {
+    "metacorsi": MetaCoRSITarget,
     "jiuwenswarm": JiuwenSwarm,
     "miniagent": MiniAgent,
     "claude_code": ClaudeCode,
@@ -122,6 +125,7 @@ _BENCHMARKS = {
     "tau3_banking": Tau3Banking,
 }
 _ALGORITHMS = {
+    "metacorsi": MetaCoRSI,
     "arbor": Arbor,
     "adas": ADAS,
     "darwinx": DarwinX,
@@ -174,6 +178,8 @@ async def _prepare_target(config, *, snapshot=None):
     target = _make_agent(
         _lookup(_AGENTS, config.agent.name, "agent"), config.agent, "agent"
     )
+    if isinstance(target, MetaCoRSITarget) and config.benchmark.name != "deepswe":
+        raise ValueError("The MetaCoRSI Target requires benchmark.name: deepswe")
     if snapshot is not None:
         try:
             target.update(snapshot)
@@ -276,6 +282,8 @@ async def _prepare_target(config, *, snapshot=None):
         from flashrsi.integrations.deepswe import bind
 
         bind(target, benchmark)
+        if isinstance(target, MetaCoRSITarget):
+            await target.check_native()
     if isinstance(benchmark, JobBench):
         from flashrsi.integrations.jobbench import bind
 
@@ -310,15 +318,19 @@ async def _prepare(config):
     """Initialize search, including its independent Worker and algorithm checks."""
     algorithm_type = _lookup(_ALGORITHMS, config.algorithm.name, "algorithm")
     worker_config = config.algorithm.worker
-    if worker_config.type == "agent" and worker_config.name == "jiuwenswarm":
-        raise ValueError("JiuwenSwarm is available as a Target only")
-    worker_type = (
-        LLM
-        if worker_config.type == "llm"
-        else _lookup(_AGENTS, worker_config.name, "worker")
-    )
+    if algorithm_type.requires_worker == (worker_config.type == "none"):
+        expected = "llm or agent" if algorithm_type.requires_worker else "none"
+        raise ValueError(f"{algorithm_type.name} requires algorithm.worker.type: {expected}")
+    worker = None
+    if worker_config.type != "none":
+        worker_type = (
+            LLM if worker_config.type == "llm"
+            else _lookup(_AGENTS, worker_config.name, "worker")
+        )
+        if worker_type in (JiuwenSwarm, MetaCoRSITarget):
+            raise ValueError(f"{worker_type.name} is available as a Target only")
+        worker = _make_agent(worker_type, worker_config, "algorithm.worker")
     target, benchmark = await _prepare_target(config)
-    worker = _make_agent(worker_type, worker_config, "algorithm.worker")
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )
@@ -335,7 +347,7 @@ async def _run(config):
     algorithm._run_dir = run_dir
     _LOGGER.info("Experiment: %s", run_dir)
     try:
-        if worker.component_rules:
+        if worker is not None and worker.component_rules:
             worker.snapshot.save(run_dir / "snapshots" / "worker.json")
         final = await algorithm.evolve()
         results = await algorithm._evaluate(final, benchmark.test, label="test")
@@ -384,7 +396,9 @@ def _artifact_paths(target, benchmark, run_dir):
     if isinstance(
         benchmark, (TerminalBench, SpreadsheetBench2, DeepSWE, JobBench, SWEBenchPro)
     ):
-        target.config.setdefault("harbor", {}).setdefault(
+        if "harbor" not in target.config:
+            target.config["harbor"] = {}
+        target.config["harbor"].setdefault(
             "artifacts_dir", str(run_dir / "artifacts" / "harbor")
         )
 

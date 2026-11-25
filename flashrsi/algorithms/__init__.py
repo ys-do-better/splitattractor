@@ -13,6 +13,7 @@ from flashrsi.algorithms.evo_harness import EvoHarness
 from flashrsi.algorithms.evoprompt import EvoPrompt
 from flashrsi.algorithms.gepa import GEPA
 from flashrsi.algorithms.meta_harness import MetaHarness
+from flashrsi.algorithms.metacorsi import MetaCoRSI
 from flashrsi.algorithms.modular_rsi import ModularRSI
 from flashrsi.algorithms.opro import OPRO
 from flashrsi.algorithms.rrsi import RRSI
@@ -28,6 +29,7 @@ __all__ = [
     "EvoHarness",
     "EvoPrompt",
     "GEPA",
+    "MetaCoRSI",
     "MetaHarness",
     "ModularRSI",
     "OPRO",

@@ -167,6 +167,16 @@ def load_config(
     if not output_dir.is_absolute():
         output_dir = origin / output_dir
     config["run"]["output_dir"] = str(output_dir.resolve())
+    if config["agent"]["name"] == "metacorsi":
+        for section, keys in (
+            ("agent", ("project_dir", "knowledge_dir", "python", "cli_path")),
+            ("benchmark", ("data_path",)),
+        ):
+            for key in keys:
+                value = config[section].get(key)
+                if isinstance(value, (str, Path)) and str(value).strip():
+                    origin = Path.cwd() if key in overrides.get(section, {}) else base_dir
+                    config[section][key] = str((origin / Path(value).expanduser()).absolute())
     return Config(config)
 
 
@@ -255,14 +265,15 @@ def _validate(config: dict) -> None:
         worker = config["algorithm"]["worker"]
         if not isinstance(worker, Mapping):
             raise ValueError("algorithm.worker must be a mapping")
-        if worker["type"] not in ("llm", "agent"):
-            raise ValueError("algorithm.worker.type must be 'llm' or 'agent'")
+        if worker["type"] not in ("llm", "agent", "none"):
+            raise ValueError("algorithm.worker.type must be 'llm', 'agent', or 'none'")
         if worker["type"] == "agent":
             _require_name(worker.get("name"), "algorithm.worker.name")
         elif worker.get("name") is not None:
             raise ValueError("algorithm.worker.name requires type: agent")
 
-        roles.append(("algorithm.worker", worker))
+        if worker["type"] != "none":
+            roles.append(("algorithm.worker", worker))
 
     for section, values in roles:
         _validate_role_config(values, section)

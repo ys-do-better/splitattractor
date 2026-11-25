@@ -1,5 +1,6 @@
 """Use Harbor's native collect/verifier phases with model-only network access."""
 
+import os
 from urllib.parse import urlsplit
 
 from flashrsi.integrations.harbor import _run
@@ -29,7 +30,16 @@ def _model_hosts(config):
 
 
 def bind(agent, benchmark):
-    bind_harbor(agent)
+    from flashrsi.agents.metacorsi import MetaCoRSITarget
+
+    metacorsi = isinstance(agent, MetaCoRSITarget)
+    if metacorsi:
+        if not (agent.config["llm"].get("api_key") or os.environ.get("METACORSI_DSH_API_KEY")):
+            raise ValueError("Set agent.llm.api_key or METACORSI_DSH_API_KEY for MetaCoRSI")
+        if agent.config["llm"].get("side_base_url"):
+            raise ValueError("MetaCoRSI accepts a single DSH provider endpoint")
+    else:
+        bind_harbor(agent)
     _model_hosts(agent.config)
 
     async def run(target, task):
@@ -37,6 +47,9 @@ def bind(agent, benchmark):
             raise ValueError("DeepSWE requires a loaded benchmark Task")
         # config may change between rollouts; derive access from this run's
         # model endpoints, never from a benchmark-wide or Worker credential.
-        return await _run(target, task, agent_allowed_hosts=_model_hosts(target.config))
+        hosts = _model_hosts(target.config)
+        if metacorsi:
+            return await target.run_task(task)
+        return await _run(target, task, agent_allowed_hosts=hosts)
 
     agent._env_runner = run

@@ -5,6 +5,7 @@ from flashrsi.agents.codex import Codex
 from flashrsi.agents.hermes import Hermes
 from flashrsi.agents.jiuwenswarm import JiuwenSwarm
 from flashrsi.agents.llm import LLM
+from flashrsi.agents.metacorsi import MetaCoRSITarget
 from flashrsi.agents.miniagent import MiniAgent
 from flashrsi.agents.openclaw import OpenClaw
 from flashrsi.agents.opencode import OpenCode
@@ -16,6 +17,7 @@ __all__ = [
     "Hermes",
     "JiuwenSwarm",
     "LLM",
+    "MetaCoRSITarget",
     "MiniAgent",
     "OpenClaw",
     "OpenCode",

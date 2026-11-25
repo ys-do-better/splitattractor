@@ -90,7 +90,16 @@ class GenericLauncherTests(unittest.TestCase):
                         }
                         else "llm"
                     )
-                    plan = _launch._plan(config(benchmark, agent, algorithm, worker))
+                    cfg = config(benchmark, agent, algorithm, worker)
+                    if algorithm == "metacorsi":
+                        cfg.algorithm.worker.type = "none"
+                    if agent == "metacorsi" and benchmark != "deepswe":
+                        with self.assertRaisesRegex(
+                            ValueError, "requires benchmark.name: deepswe"
+                        ):
+                            _launch._plan(cfg)
+                        continue
+                    plan = _launch._plan(cfg)
                     self.assertLessEqual(set(plan["extras"]), extras)
                     expected = {"all"}
                     if benchmark in _launch._HARBOR:

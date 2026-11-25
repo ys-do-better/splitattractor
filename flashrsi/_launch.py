@@ -162,7 +162,7 @@ def _plan(config):
     evaluating = config.run.get("mode") == "evaluate"
     worker = (
         None
-        if evaluating
+        if evaluating or config.algorithm.worker.type == "none"
         else (
             "llm"
             if config.algorithm.worker.type == "llm"
@@ -182,24 +182,30 @@ def _plan(config):
         "openclaw",
         "opencode",
         "jiuwenswarm",
+        "metacorsi",
     } or (
-        not evaluating
+        worker is not None
         and (
             worker not in _AGENT_EXTRAS
             or (config.algorithm.worker.type == "agent" and worker == "llm")
         )
     ):
         raise ValueError(
-            "Choose miniagent, claude_code, codex, pi, hermes, openclaw or opencode for either role; jiuwenswarm is Target-only and llm is Worker-only"
+            "Choose miniagent, claude_code, codex, pi, hermes, openclaw or opencode for either role; jiuwenswarm and metacorsi are Target-only and llm is Worker-only"
         )
+    if target == "metacorsi" and benchmark != "deepswe":
+        raise ValueError("The MetaCoRSI Target requires benchmark.name: deepswe")
     if not evaluating:
-        algorithm_names = {
-            getattr(algorithms, name).name for name in algorithms.__all__
+        algorithm_types = {
+            cls.name: cls for cls in (getattr(algorithms, name) for name in algorithms.__all__)
         }
-        if config.algorithm.name not in algorithm_names:
+        if config.algorithm.name not in algorithm_types:
             raise ValueError(
-                "Unsupported algorithm; choose: " + ", ".join(sorted(algorithm_names))
+                "Unsupported algorithm; choose: " + ", ".join(sorted(algorithm_types))
             )
+        algorithm = algorithm_types[config.algorithm.name]
+        if algorithm.requires_worker != (worker is not None):
+            raise ValueError(f"Invalid Worker type for {config.algorithm.name}")
         if (
             config.algorithm.name in _EDITING_ALGORITHMS
             and config.algorithm.worker.type != "agent"
@@ -215,6 +221,8 @@ def _plan(config):
         extras.append("harbor")
     requirements = []
     prerequisites = []
+    if target == "metacorsi":
+        prerequisites.append("Local MetaCoRSI with Harbor 0.24.0 and the DSH CLI")
     if "codex" in {target, worker}:
         prerequisites.append(
             "Codex requires explicit API keys and a streaming Responses API endpoint"
@@ -318,9 +326,10 @@ def _validate_roles(config):
     _role(config.agent, "agent", config.agent.name)
     if config.run.get("mode") != "evaluate":
         worker = config.algorithm.worker
-        _role(
-            worker, "algorithm.worker", "llm" if worker.type == "llm" else worker.name
-        )
+        if worker.type != "none":
+            _role(
+                worker, "algorithm.worker", "llm" if worker.type == "llm" else worker.name
+            )
 
 
 def _validate_host(config):

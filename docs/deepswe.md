@@ -46,3 +46,6 @@ Docker Linux daemon 和 Compose；自动获取数据需要 Git。`--plan` 只显
 
 这是接入现有 Agent 的评测接口，不声称复现官方榜单的模型、预算或 harness 配置。
 原生任务、镜像和真实容器行为尚未验证；离线测试仅确认格式解析、划分、网络策略参数传递和结果映射。
+
+本地 MetaCoRSI 可通过独立 Harbor 进程接入同一 DeepSWE 接口，
+详见 [MetaCoRSI 配置和进化流程](./metacorsi.md)。

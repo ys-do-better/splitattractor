@@ -28,6 +28,7 @@ class Algorithm:
     # harness lays its files out differently, so only the target knows them.
     evolve_scope = frozenset()
     observation_scope = frozenset()
+    requires_worker = True
     _defaults = {}
     _ranges = {}
 
@@ -58,13 +59,16 @@ class Algorithm:
                 **{component: "rw" for component in self._evolve},
             }
         )
+        if self.requires_worker != (worker is not None):
+            raise ValueError("Algorithm Worker does not match the method's requirements")
         for role, agent in (("target", target), ("worker", worker)):
-            if type(agent)._run is Agent._run:
+            if agent is not None and type(agent)._run is Agent._run:
                 raise ValueError(f"Algorithm {role} must implement Agent._run")
         # Every Worker question reaches the experiment's records without the
         # algorithm arranging it, and the error text is redacted against both
         # roles' credentials -- the Worker alone holds only its own.
-        worker._observer = self._observe_worker
+        if worker is not None:
+            worker._observer = self._observe_worker
         splits = self.benchmark.load()
         if (
             type(self.target).rollout is Agent.rollout
@@ -270,7 +274,7 @@ class Algorithm:
             _write_record(
                 self._run_dir / "trajectories" / f"{self._sequence:05d}-{label}.json",
                 payload,
-                {"target": self.target.config, "worker": self.worker.config},
+                {"target": self.target.config, "worker": self.worker.config if self.worker else {}},
             )
 
     def _commit(self, baseline: Snapshot, directory: Path) -> Snapshot:
@@ -302,7 +306,7 @@ class Algorithm:
         return sorted(
             set(
                 _secrets(self.target.config)
-                + _secrets(self.worker.config)
+                + _secrets(self.worker.config if self.worker else {})
                 + _secrets(os.environ)
             ),
             key=len,
