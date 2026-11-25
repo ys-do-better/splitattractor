@@ -1,0 +1,39 @@
+"""Built-in evolution algorithms.
+
+Additional algorithms imported from https://github.com/RUC-NLPIR/FlashRSI
+at d8d5e35e77e1c0360a1df55505db3cfb2b113cd0. Existing local ports are retained.
+"""
+
+from flashrsi.algorithms.ace import ACE
+from flashrsi.algorithms.adas import ADAS
+from flashrsi.algorithms.ahe import AHE
+from flashrsi.algorithms.arbor import Arbor
+from flashrsi.algorithms.darwinx import DarwinX
+from flashrsi.algorithms.evo_harness import EvoHarness
+from flashrsi.algorithms.evoprompt import EvoPrompt
+from flashrsi.algorithms.gepa import GEPA
+from flashrsi.algorithms.meta_harness import MetaHarness
+from flashrsi.algorithms.metacorsi import MetaCoRSI
+from flashrsi.algorithms.modular_rsi import ModularRSI
+from flashrsi.algorithms.opro import OPRO
+from flashrsi.algorithms.rrsi import RRSI
+from flashrsi.algorithms.skilladam import SkillAdam
+from flashrsi.algorithms.skillopt import SkillOpt
+
+__all__ = [
+    "ACE",
+    "ADAS",
+    "AHE",
+    "Arbor",
+    "DarwinX",
+    "EvoHarness",
+    "EvoPrompt",
+    "GEPA",
+    "MetaCoRSI",
+    "MetaHarness",
+    "ModularRSI",
+    "OPRO",
+    "RRSI",
+    "SkillAdam",
+    "SkillOpt",
+]
