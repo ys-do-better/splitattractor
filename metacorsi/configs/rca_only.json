@@ -1,0 +1,45 @@
+{
+  "schema_version": "metacorsi-run/v2",
+  "run_tag": "metacorsi_rca_only_1017_20261105",
+  "result_dir": "result/rca_only",
+  "experiment": {
+    "target_agent": "dsh",
+    "control_mode": "rca_only"
+  },
+  "llm": {
+    "model": "DeepSeek-V4.1-Flash-1017",
+    "provider": "openai-compatible",
+    "dotenv": "../.env",
+    "api_key_field": "key",
+    "base_url_field": "base_url"
+  },
+  "benchmark": {
+    "dataset": "datacurve/deep-swe-1-1",
+    "tasks_file": "data/deepswe20_ids.txt",
+    "limit": 20,
+    "k": 1,
+    "concurrency": 4,
+    "separate_verifier_environment": true
+  },
+  "brain": {
+    "knowledge_version": 15,
+    "architecture_source": "docs/metacorsi_brain_architecture.svg",
+    "rca": {
+      "enabled": true,
+      "upstream": "vendor/rca-repair",
+      "commit": "9d4df4a1dcde02ad5f7bdba8f0e697cfc9df4410",
+      "walk_back_required": true
+    },
+    "regression_gate": {
+      "enabled": false
+    },
+    "candidate_promotion_gate": {
+      "enabled": false
+    }
+  },
+  "agents": ["dsh"],
+  "paths": {
+    "python": "python",
+    "dsh": "/usr/local/bin/dsh"
+  }
+}

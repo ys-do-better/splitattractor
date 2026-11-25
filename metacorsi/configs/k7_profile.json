@@ -1,0 +1,23 @@
+{
+  "profile": "adaptive_v5",
+  "policy_version": "original-7of20-adaptive-v5-failure-routed-repair",
+  "evolution_rounds": 3,
+  "proposals_per_round": 3,
+  "validation_mode": "rca_primary_adaptive_t0_t3",
+  "convergence": {
+    "skeleton_episode": 24,
+    "focused_episode": 50,
+    "delivery_episode": 62,
+    "freeze_episode": 70,
+    "hard_max_turns": 80,
+    "failure_routed_repair": true,
+    "contract_completion": false,
+    "mh_acceptance": false
+  },
+  "decision": {
+    "medium_change_threshold": 3,
+    "full_change_threshold": 5,
+    "full_invalidation_threshold": 2,
+    "promotion": "deterministic"
+  }
+}

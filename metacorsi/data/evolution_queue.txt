@@ -1,0 +1,4 @@
+# Put one DeepSWE task id on each line, then run RUN_EVOLVE_QUEUE.cmd.
+# Evolution is sequential by design; frozen replay can be parallel.
+# Example:
+# cattrs-partial-structuring-recovery

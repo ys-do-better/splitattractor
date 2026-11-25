@@ -1,0 +1,9 @@
+# What the agents know about this system besides its code (the "model M" of the algorithm draft).
+boundary: the peripheral behind the DS28E17 bridge
+sources:           # where data from outside the system enters
+  w1_read_8: {returns: device}                   # one byte from the 1-Wire bus
+  w1_read_block: {writes_arg: 1, origin: device}
+  __i2c_transfer: {writes_arg: 1, origin: device}  # the adapter fills the read buffers of msgs
+sinks:             # calls that write LEN bytes into DST
+  w1_read_block: {dst_arg: 1, len_arg: 2}
+  memcpy: {dst_arg: 0, len_arg: 2}

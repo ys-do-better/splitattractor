@@ -1,0 +1,48 @@
+- id: llm-pi-ai
+  config:
+    providers:
+      metacorsi-autodl:
+        apiKeyEnv: METACORSI_DSH_API_KEY
+        api: openai-completions
+        baseURL: !!js process.env.METACORSI_DSH_BASE_URL
+        # The user's OpenAI-compatible endpoint rejects larger output budgets.
+        # Keep both the adapter default and model route capped so a long-lived
+        # headless session cannot fall back to DSH's 65,536-token default.
+        maxTokens: 4096
+        compat:
+          supportsDeveloperRole: false
+          maxTokensField: max_tokens
+        models:
+          - id: DeepSeek-V4.1-Flash-1017
+            input: [text]
+            maxTokens: 4096
+            compat:
+              thinkingFormat: deepseek
+- id: agent-default-model
+  config:
+    provider: metacorsi-autodl
+    model: DeepSeek-V4.1-Flash-1017
+- id: system-prompt
+  config:
+    personaPrefix: >-
+      You are a command planner for an external Docker executor. You have no local
+      tools. Never inspect or modify the host workspace. For every turn, return one
+      valid JSON object with analysis, commands, and done fields; return no markdown.
+      Keep analysis under 240 characters and return at most three commands. Avoid
+      heredocs and large inline scripts because the provider output cap is 4096 tokens.
+- id: tool-pwsh
+  disabled: true
+- id: tool-bash
+  disabled: true
+- id: tool-jobs
+  disabled: true
+- id: tool-fs
+  disabled: true
+- id: tool-fs-search
+  disabled: true
+- id: tool-skill
+  disabled: true
+- id: tool-web
+  disabled: true
+- id: tool-plugin-manager
+  disabled: true

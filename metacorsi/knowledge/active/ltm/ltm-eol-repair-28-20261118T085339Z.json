@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "reason": "Windows CRLF -> LF normalization during copy; restored to match frozen digests",
+  "knowledge": "/Users/yanshi/软件学院/RSI/MetaCogRSI-main2/knowledge/active",
+  "version": 28,
+  "applied_at": "2026-11-18T08:53:39.817829+00:00",
+  "files_rewritten": 12,
+  "backup": "/Users/yanshi/软件学院/RSI/MetaCogRSI-main2/knowledge/active/ltm/ltm-eol-backup-28-20261118T085339Z",
+  "actions": [
+    {
+      "file": "atoms.jsonl",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "c5161916a47617d1a62625b30b3dd58604f7797ae77d3d610585d9b645fd1011",
+      "after": "5a966b002367caa78467385b1a78a63846bb6168924bc9198ed64c6e2e79c5f4"
+    },
+    {
+      "file": "nodes.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "baa58cf206d1776ec067418773a3db7ee5a0a38f71442639864af85b3a9c69f5",
+      "after": "57ce449e7d9d2f244cbc75e9f6fc8ca4b30c002fd56f2b64408c04bdb1bfda90"
+    },
+    {
+      "file": "edges.jsonl",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "00c585803e25c82e592f81725dfa250915a89cc768cf221d7d902fea5cb38155",
+      "after": "a13357304eb4c944033f0870b85c857a76634062098e4187b50a5ac4905e90b0"
+    },
+    {
+      "file": "abstractions.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "709c2174795a64de1bb37a5352a05cb68a0515eb01bfc70c1e7bb188bdb5df34",
+      "after": "19414eb52338d782c6dcdd575e3c60ee5993172bfbaca7c843284b27d2843f91"
+    },
+    {
+      "file": "groundings.jsonl",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "e044f78d354e71305bcc5ddde6f9db9d438c5989d4fc4a925d49a77fbebe3aaf",
+      "after": "ad8ecf25a15b8bd3926665998e4e4547382b3ceb2ff4c7841662d7c94ad48920"
+    },
+    {
+      "file": "retention_anchors.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "f7daaad8aab326748d1518c81e1d7adeb7baedb1b25a9ead989cbd42e5116970",
+      "after": "e9183de6df52115e5381d1cad912076ac3cea1e85875a01611ced48084eea07b"
+    },
+    {
+      "file": "indexes/task.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "402cfd8c1605a63d770384c7b2ee08008e4c7f47c1ce6c69f51e63ba395252a5",
+      "after": "3e58353a1679a936aaaed17a08b4f756a39cc4c5f8d47b78cf8b06dc060ded33"
+    },
+    {
+      "file": "indexes/repository.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "e5a8b58524f9f39483cdfd63be320f9a5ba5a7b07b2777ba3a781e90eca6f0f7",
+      "after": "5e92b56407dbe29dc5b54f12e40741ff86b4dc47313f5e514117c9edc21fe44b"
+    },
+    {
+      "file": "indexes/capability.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "21b48932ab405f296d948575e747aed776d5db1e464527ea768a75f81f68f125",
+      "after": "d92ea45022c25adb7f5d3bf73c81dcd1e489cdbe3baf51a9fc23cee80ca4148f"
+    },
+    {
+      "file": "indexes/failure_mode.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "fbdcb4e62690b7d928b46d471f763738c69ef2cc875b15805756714f10d3ee1b",
+      "after": "737bc91ee4855d34799e82a37188cd116d28e6c9b22ea147a0bba2d52fad3190"
+    },
+    {
+      "file": "indexes/causal_locus.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "b291830a46e7b8c4e259d9afec5ccf4bfb5b20629a7ebe03903e53afa22ead21",
+      "after": "4ba6b0d44b42375a105b19a27497096c62c9351a7f612f5e2c344ed472bfefba"
+    },
+    {
+      "file": "manifest.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "104dd1f763b378cc2348c1b6d6c784700ade6fc02e44afaf6a0e9a2f6fc0e036",
+      "after": "1b8df7e102f03b9adfccb2606e4d50efd85842656bde3daa20cc62e2bb062243"
+    }
+  ]
+}

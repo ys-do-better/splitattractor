@@ -1,0 +1,3 @@
+# A single read with I2C_M_RECV_LEN (the plain-read path) and a valid length byte.
+slave 0x52 3 0x10 0x20 0x30
+op i2c_read_recv_len 0x52 34

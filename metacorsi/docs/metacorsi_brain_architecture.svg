@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-labelledby="title desc">
+  <title id="title">知识变更驱动的可自进化认知大脑</title>
+  <desc id="desc">A brain-centered Meta-CoRSI architecture with one connected knowledge-change-driven self-evolution loop.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07101f"/><stop offset="1" stop-color="#142744"/></linearGradient>
+    <linearGradient id="leftBrain" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b587b"/><stop offset="1" stop-color="#102941"/></linearGradient>
+    <linearGradient id="rightBrain" x1="1" y1="0" x2="0" y2="1"><stop stop-color="#604276"/><stop offset="1" stop-color="#292846"/></linearGradient>
+    <linearGradient id="ltm" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#58401d"/><stop offset="1" stop-color="#30271a"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#000" flood-opacity=".4"/></filter>
+    <marker id="cyanArrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0 0 L0 8 L11 4 Z" fill="#63dfff"/></marker>
+    <marker id="goldArrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0 0 L0 8 L11 4 Z" fill="#ffc857"/></marker>
+    <marker id="greenArrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0 0 L0 8 L11 4 Z" fill="#65e6ad"/></marker>
+    <style>
+      .title { font: 900 34px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#f5f8ff; letter-spacing:1px; }
+      .subtitle { font: 500 16px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#a8bad4; }
+      .layer { font: 900 13px 'Microsoft YaHei','PingFang SC',sans-serif; letter-spacing:2px; }
+      .head { font: 900 19px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#f4f8ff; }
+      .label { font: 900 16px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#f2f6ff; }
+      .body { font: 500 13px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#c5d3e8; }
+      .tiny { font: 500 11px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#91a7c5; }
+      .stage { font: 900 18px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#ffc857; }
+      .atom { font: 800 11px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#11131b; }
+      .stepnum { font: 900 16px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#07101f; }
+      .steplabel { font: 800 12px 'Microsoft YaHei','PingFang SC',sans-serif; fill:#edf5ff; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1120" fill="url(#bg)"/>
+  <rect x="25" y="25" width="1550" height="1070" rx="30" fill="none" stroke="#2d456b" stroke-width="2"/>
+  <text x="800" y="66" text-anchor="middle" class="title">知识变更驱动的可自进化认知大脑</text>
+  <text x="800" y="97" text-anchor="middle" class="subtitle">Cognitive Target Agent · RSI Meta-Agent · Validated Knowledge Evolution</text>
+
+  <!-- Agent Generator -->
+  <g filter="url(#shadow)">
+    <rect x="610" y="125" width="380" height="92" rx="18" fill="#133a59" stroke="#63dfff" stroke-width="3"/>
+    <text x="800" y="157" text-anchor="middle" class="layer" fill="#63dfff">AGENT GENERATOR</text>
+    <text x="800" y="184" text-anchor="middle" class="head">Knowledge vₖ + Task Spec</text>
+    <text x="800" y="205" text-anchor="middle" class="tiny">Schema + Tools → Agent vₙ₊₁</text>
+  </g>
+
+  <!-- Outer RSI Meta-Agent stages -->
+  <text x="70" y="278" class="layer" fill="#ffc857">OUTER LAYER · RSI META-AGENT</text>
+  <g filter="url(#shadow)">
+    <rect x="70" y="315" width="280" height="135" rx="18" fill="#3a301c" stroke="#ffc857" stroke-width="3"/>
+    <text x="210" y="352" text-anchor="middle" class="stage">B · Analyze / RCA</text>
+    <text x="210" y="385" text-anchor="middle" class="label">定位可干预根因</text>
+    <text x="210" y="414" text-anchor="middle" class="body">Spec–State · 5 Whys · Component</text>
+    <text x="210" y="437" text-anchor="middle" class="tiny">区分知识、推理、工具与环境问题</text>
+
+    <rect x="1250" y="315" width="280" height="135" rx="18" fill="#3a301c" stroke="#ffc857" stroke-width="3"/>
+    <text x="1390" y="352" text-anchor="middle" class="stage">C · Plan</text>
+    <text x="1390" y="385" text-anchor="middle" class="label">形成最小变更 Delta</text>
+    <text x="1390" y="414" text-anchor="middle" class="body">知识原子 · 组件 · 策略 · Schema</text>
+    <text x="1390" y="437" text-anchor="middle" class="tiny">记录假设、影响面与回滚条件</text>
+
+    <rect x="70" y="720" width="280" height="135" rx="18" fill="#3a301c" stroke="#ffc857" stroke-width="3"/>
+    <text x="210" y="757" text-anchor="middle" class="stage">A · Monitor</text>
+    <text x="210" y="790" text-anchor="middle" class="label">固化真实运行证据</text>
+    <text x="210" y="819" text-anchor="middle" class="body">轨迹 · 状态差异 · 测试 · 异常</text>
+    <text x="210" y="842" text-anchor="middle" class="tiny">保留可复查事实，不凭印象总结</text>
+
+    <rect x="1250" y="720" width="280" height="135" rx="18" fill="#3a301c" stroke="#ffc857" stroke-width="3"/>
+    <text x="1390" y="757" text-anchor="middle" class="stage">D · Execute / Validate</text>
+    <text x="1390" y="790" text-anchor="middle" class="label">隔离执行与独立验证</text>
+    <text x="1390" y="819" text-anchor="middle" class="body">Accept · Reject · Rollback</text>
+    <text x="1390" y="842" text-anchor="middle" class="tiny">候选变更不能自行宣布成功</text>
+  </g>
+
+  <!-- Central cognitive brain -->
+  <g filter="url(#shadow)">
+    <path d="M800 270 C705 225 565 245 475 325 C390 400 398 495 438 548 C398 635 458 720 555 750 C620 802 735 775 782 710 C804 680 800 638 800 590 Z" fill="url(#leftBrain)" stroke="#63dfff" stroke-width="4"/>
+    <path d="M800 270 C895 225 1035 245 1125 325 C1210 400 1202 495 1162 548 C1202 635 1142 720 1045 750 C980 802 865 775 818 710 C796 680 800 638 800 590 Z" fill="url(#rightBrain)" stroke="#bd9cff" stroke-width="4"/>
+    <path d="M800 277 C752 358 830 414 778 486 C742 536 832 585 800 650 C780 692 804 730 800 765" fill="none" stroke="#ffc857" stroke-width="4" stroke-dasharray="8 8"/>
+  </g>
+  <text x="800" y="312" text-anchor="middle" class="layer" fill="#65e6ad">COGNITIVE TARGET AGENT vₙ₊₁</text>
+  <text x="800" y="340" text-anchor="middle" class="head">知识驱动的任务执行大脑</text>
+
+  <!-- Brain components -->
+  <g filter="url(#shadow)">
+    <rect x="495" y="370" width="270" height="105" rx="15" fill="#102f49" stroke="#63dfff" stroke-width="3"/>
+    <text x="518" y="404" class="label" style="fill:#63dfff">◉ Perception</text>
+    <text x="518" y="433" class="body">观察策略与活动记忆</text>
+    <text x="518" y="457" class="tiny">Actions · State · Tests · Errors</text>
+
+    <rect x="835" y="370" width="270" height="105" rx="15" fill="#30294c" stroke="#bd9cff" stroke-width="3"/>
+    <text x="858" y="404" class="label" style="fill:#bd9cff">✦ Processor</text>
+    <text x="858" y="433" class="body">推理、规划与行动决策</text>
+    <text x="858" y="457" class="tiny">Deduction · Tool Use · Repair</text>
+
+    <rect x="495" y="515" width="270" height="115" rx="15" fill="#153e3a" stroke="#65e6ad" stroke-width="3"/>
+    <text x="518" y="549" class="label" style="fill:#65e6ad">▣ Working Memory</text>
+    <text x="518" y="578" class="body">当前任务状态与假设</text>
+    <text x="518" y="602" class="tiny">Facts · Hypotheses · Plans</text>
+
+    <rect x="835" y="515" width="270" height="130" rx="15" fill="url(#ltm)" stroke="#ffc857" stroke-width="3"/>
+    <text x="858" y="548" class="label" style="fill:#ffc857">◆ Long-Term Memory vₖ</text>
+    <text x="858" y="576" class="body">已验证知识版本在此生效</text>
+    <rect x="855" y="594" width="44" height="25" rx="9" fill="#63dfff"/><text x="877" y="611" text-anchor="middle" class="atom">P·感知</text>
+    <rect x="902" y="594" width="44" height="25" rx="9" fill="#65e6ad"/><text x="924" y="611" text-anchor="middle" class="atom">M·记忆</text>
+    <rect x="949" y="594" width="44" height="25" rx="9" fill="#bd9cff"/><text x="971" y="611" text-anchor="middle" class="atom">R·推理</text>
+    <rect x="996" y="594" width="44" height="25" rx="9" fill="#ff9d79"/><text x="1018" y="611" text-anchor="middle" class="atom">F·修复</text>
+    <rect x="1043" y="594" width="44" height="25" rx="9" fill="#ff8e9e"/><text x="1065" y="611" text-anchor="middle" class="atom">S·安全</text>
+  </g>
+
+  <!-- Internal brain flow -->
+  <path d="M630 475 V515" fill="none" stroke="#63dfff" stroke-width="3" marker-end="url(#cyanArrow)"/>
+  <path d="M765 573 H835" fill="none" stroke="#65e6ad" stroke-width="3" marker-end="url(#greenArrow)"/>
+  <path d="M970 515 V475" fill="none" stroke="#ffc857" stroke-width="3" marker-end="url(#goldArrow)"/>
+
+  <!-- 1: active knowledge state -->
+  <g><circle cx="1088" cy="530" r="16" fill="#63dfff" stroke="#d8f8ff" stroke-width="2"/><text x="1088" y="536" text-anchor="middle" class="stepnum">1</text><text x="1068" y="497" text-anchor="end" class="steplabel">知识版本生效</text></g>
+
+  <!-- 2: changed LTM drives generator -->
+  <path d="M1105 560 C1190 450 1165 250 990 170" fill="none" stroke="#63dfff" stroke-width="4" marker-end="url(#cyanArrow)"/>
+  <g><circle cx="1045" cy="218" r="16" fill="#63dfff" stroke="#d8f8ff" stroke-width="2"/><text x="1045" y="224" text-anchor="middle" class="stepnum">2</text><text x="1070" y="201" class="steplabel">知识驱动 Generator</text></g>
+
+  <!-- 3: generator instantiates the next cognitive agent -->
+  <path d="M800 217 V270" fill="none" stroke="#65e6ad" stroke-width="4" marker-end="url(#greenArrow)"/>
+  <g><circle cx="800" cy="244" r="16" fill="#65e6ad" stroke="#d7fff0" stroke-width="2"/><text x="800" y="250" text-anchor="middle" class="stepnum">3</text><text x="826" y="248" class="steplabel">生成 Agent vₙ₊₁</text></g>
+
+  <!-- Target runtime -->
+  <path d="M800 775 V858" fill="none" stroke="#65e6ad" stroke-width="4" marker-end="url(#greenArrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="585" y="858" width="430" height="90" rx="18" fill="#153b35" stroke="#65e6ad" stroke-width="3"/>
+    <text x="800" y="891" text-anchor="middle" class="layer" fill="#65e6ad">TASK RUNTIME</text>
+    <text x="800" y="920" text-anchor="middle" class="head">执行任务 · 产生轨迹 · 接收修复</text>
+    <text x="800" y="940" text-anchor="middle" class="tiny">Actions · State · Tests · Verifier · Errors</text>
+  </g>
+
+  <!-- 4: runtime evidence enters A Monitor -->
+  <path d="M585 903 C420 985 210 960 210 855" fill="none" stroke="#65e6ad" stroke-width="4" marker-end="url(#greenArrow)"/>
+  <g><circle cx="420" cy="950" r="16" fill="#65e6ad" stroke="#d7fff0" stroke-width="2"/><text x="420" y="956" text-anchor="middle" class="stepnum">4</text><text x="445" y="954" class="steplabel">轨迹反馈</text></g>
+
+  <!-- 5: Monitor evidence flows to RCA -->
+  <path d="M210 720 V450" fill="none" stroke="#ffc857" stroke-width="4" marker-end="url(#goldArrow)"/>
+  <g><circle cx="210" cy="585" r="16" fill="#ffc857" stroke="#fff0ba" stroke-width="2"/><text x="210" y="591" text-anchor="middle" class="stepnum">5</text><text x="236" y="589" class="steplabel">证据进入 RCA</text></g>
+
+  <!-- 6: RCA produces a change plan -->
+  <path d="M350 355 C515 235 1085 235 1250 355" fill="none" stroke="#ffc857" stroke-width="4" marker-end="url(#goldArrow)"/>
+  <g><circle cx="1190" cy="310" r="16" fill="#ffc857" stroke="#fff0ba" stroke-width="2"/><text x="1190" y="316" text-anchor="middle" class="stepnum">6</text><text x="1165" y="290" text-anchor="end" class="steplabel">形成变更方案</text></g>
+
+  <!-- 7: planned delta is executed and validated -->
+  <path d="M1390 450 V720" fill="none" stroke="#ffc857" stroke-width="4" marker-end="url(#goldArrow)"/>
+  <g><circle cx="1390" cy="585" r="16" fill="#ffc857" stroke="#fff0ba" stroke-width="2"/><text x="1390" y="591" text-anchor="middle" class="stepnum">7</text><text x="1364" y="589" text-anchor="end" class="steplabel">执行候选并验证</text></g>
+
+  <!-- 8: only accepted change is committed into LTM -->
+  <path d="M1250 787 C1180 780 1135 700 1098 645" fill="none" stroke="#65e6ad" stroke-width="4" marker-end="url(#greenArrow)"/>
+  <g><circle cx="1165" cy="735" r="16" fill="#65e6ad" stroke="#d7fff0" stroke-width="2"/><text x="1165" y="741" text-anchor="middle" class="stepnum">8</text><text x="1140" y="715" text-anchor="end" class="steplabel">提交 Knowledge vₖ₊₁</text></g>
+
+  <!-- Loop explanation -->
+  <rect x="300" y="1000" width="1000" height="72" rx="17" fill="#0e1a2e" stroke="#30496e" stroke-width="2"/>
+  <text x="800" y="1028" text-anchor="middle" class="body" style="fill:#63dfff;font-weight:900">一条连续的知识变更驱动闭环</text>
+  <text x="800" y="1054" text-anchor="middle" class="tiny">① LTM vₖ → ② Generator → ③ Cognitive Agent vₙ₊₁ → ④ Runtime/Monitor → ⑤ RCA → ⑥ Plan → ⑦ Validate → ⑧ Commit vₖ₊₁ → 下一轮</text>
+</svg>

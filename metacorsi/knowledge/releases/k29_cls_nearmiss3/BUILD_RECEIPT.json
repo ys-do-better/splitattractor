@@ -1,0 +1,32 @@
+{
+  "status": "built",
+  "release": "K29-CLS-NearMiss3",
+  "parent": {
+    "version": 28,
+    "atoms": 251,
+    "sha256": "136e105dc75a1f00a1df79037df4af54e11c7aad077f695de7d142e923930272"
+  },
+  "current": {
+    "version": 29,
+    "atoms": 263
+  },
+  "fast_store": {
+    "atoms": 12,
+    "tasks": [
+      "aiomonitor-task-snapshots-diff",
+      "bandit-incremental-cache-control",
+      "csstree-shorthand-expansion-compression"
+    ],
+    "by_kind": {
+      "F": 3,
+      "P": 3,
+      "R": 3,
+      "S": 3
+    }
+  },
+  "abstractions": 78,
+  "groundings": 86,
+  "indexed_ltm": "D:\\MetaCogRSI\\knowledge\\releases\\k29_cls_nearmiss3\\ltm\\versions\\v29",
+  "answer_access": false,
+  "reference_patch_access": false
+}

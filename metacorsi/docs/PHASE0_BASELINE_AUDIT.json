@@ -1,0 +1,1489 @@
+{
+  "schema_version": 1,
+  "knowledge_path": "knowledge/releases/k29_cls_nearmiss3",
+  "knowledge_version": 29,
+  "coordinate_audit": {
+    "total_atoms": 263,
+    "by_kind": {
+      "F": 60,
+      "M": 42,
+      "P": 54,
+      "R": 64,
+      "S": 43
+    },
+    "by_outcome": {
+      "fail": 96,
+      "pass": 158,
+      "unknown": 9
+    },
+    "by_capability": {
+      "parsing-schema": 116,
+      "repository-contract": 45,
+      "transformation-roundtrip": 34,
+      "async-lifecycle": 19,
+      "cache-state": 16,
+      "security-analysis": 16,
+      "binding-type": 13,
+      "dependency-policy": 4
+    },
+    "by_causal_locus": {
+      "materialization": 143,
+      "validation-preservation": 80,
+      "dispatch-registration": 64,
+      "boundary-decision": 58,
+      "state-propagation": 43,
+      "unspecified": 37,
+      "normalization": 18
+    },
+    "by_failure_mode": {
+      "verified_success": 113,
+      "unspecified": 78,
+      "patch_materialization_failure": 36,
+      "contract_boundary_gap": 28,
+      "preservation_regression": 8
+    },
+    "default_capability_fallback": {
+      "count": 45,
+      "rate": 0.1711,
+      "sample_atom_ids": [
+        "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+        "deepswe.aiomonitor-task-snapshots-diff.fail.f.64af240a873c",
+        "deepswe.aiomonitor-task-snapshots-diff.fail.p.f4a5b794680c",
+        "deepswe.aiomonitor-task-snapshots-diff.fail.s.9ef6573106b5",
+        "deepswe.aiomonitor-task-snapshots-diff.fail.s.b34acee3c819",
+        "deepswe.arcane-drift-detection-baselines.pass.f.f95864dc51c7",
+        "deepswe.arcane-drift-detection-baselines.pass.m.a5326770ddba",
+        "deepswe.arcane-drift-detection-baselines.pass.p.013762f6394d",
+        "deepswe.arcane-drift-detection-baselines.pass.p.6003eafbcd09",
+        "deepswe.arcane-drift-detection-baselines.pass.r.3cdcd5187be6"
+      ]
+    },
+    "default_causal_locus_fallback": {
+      "count": 37,
+      "rate": 0.1407,
+      "sample_atom_ids": [
+        "deepswe.abs-stepped-slices.pass.r.78775c75ec74",
+        "deepswe.abs-stepped-slices.pass.r.be1bc2f20699",
+        "deepswe.abs-stepped-slices.pass.s.a159eea21fe0",
+        "deepswe.actionlint-action-pinning-lint.fail.s.63ea7c56e61f",
+        "deepswe.actionlint-action-pinning-lint.pass.r.3c02e3657200",
+        "deepswe.actionlint-action-pinning-lint.pass.r.4577b479ca2d",
+        "deepswe.actionlint-action-pinning-lint.pass.r.66c82f35e111",
+        "deepswe.actionlint-action-pinning-lint.pass.r.8b486b5a18c6",
+        "deepswe.actionlint-action-pinning-lint.pass.r.db486708e39d",
+        "deepswe.actionlint-action-pinning-lint.pass.s.9695555966fe"
+      ]
+    }
+  },
+  "abstraction_audit": {
+    "total_abstractions": 78,
+    "by_status": {
+      "provisional": 30,
+      "transferable": 4,
+      "unverified": 33,
+      "validated": 11
+    },
+    "by_template_type": {
+      "generic_fallback_template": 47,
+      "patch_materialization_template": 14,
+      "contract_boundary_gap_template": 13,
+      "parsing_schema_validation_template": 3,
+      "cache_state_propagation_template": 1
+    },
+    "generic_fallback_rate": 0.6026,
+    "abstractions": [
+      {
+        "abstract_id": "abstract.01b9312afc7ac7fe",
+        "key": "cache-state:verified_success:normalization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.05c36bce9a3f1e71",
+        "key": "repository-contract:unspecified:state-propagation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 4,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.07d49d3043739808",
+        "key": "security-analysis:preservation_regression:validation-preservation",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 4,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.091c07f88ff96574",
+        "key": "parsing-schema:unspecified:materialization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.0cc4c1b1396493bf",
+        "key": "async-lifecycle:patch_materialization_failure:dispatch-registration",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.1282210455fba272",
+        "key": "security-analysis:preservation_regression:dispatch-registration",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 3,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.18e62cd6ed2af60e",
+        "key": "parsing-schema:unspecified:boundary-decision",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 4,
+        "trigger_tags": [
+          "ast",
+          "defaults",
+          "parser"
+        ]
+      },
+      {
+        "abstract_id": "abstract.1a259703cd937e7a",
+        "key": "parsing-schema:patch_materialization_failure:dispatch-registration",
+        "status": "validated",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 3,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 8,
+        "trigger_tags": [
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure",
+          "before",
+          "behavior",
+          "inspect",
+          "then"
+        ]
+      },
+      {
+        "abstract_id": "abstract.1b309aa1df034e3e",
+        "key": "async-lifecycle:unspecified:state-propagation",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 3,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.24a244af48a30be4",
+        "key": "binding-type:patch_materialization_failure:dispatch-registration",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 3,
+        "supporting_atoms_count": 6,
+        "trigger_tags": [
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure"
+        ]
+      },
+      {
+        "abstract_id": "abstract.2951aa82e6614567",
+        "key": "parsing-schema:verified_success:boundary-decision",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 9,
+        "trigger_tags": [
+          "command"
+        ]
+      },
+      {
+        "abstract_id": "abstract.2a0c2dc16afade66",
+        "key": "parsing-schema:unspecified:dispatch-registration",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 5,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.2acc196053c1ed7e",
+        "key": "repository-contract:patch_materialization_failure:dispatch-registration",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 2,
+        "trigger_tags": [
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure"
+        ]
+      },
+      {
+        "abstract_id": "abstract.32f5a07b79d5d625",
+        "key": "async-lifecycle:contract_boundary_gap:boundary-decision",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.330b93e8aa62bf49",
+        "key": "transformation-roundtrip:unspecified:boundary-decision",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.34a56999d0c01759",
+        "key": "transformation-roundtrip:verified_success:materialization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 8,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.39beda20cdd117be",
+        "key": "repository-contract:verified_success:validation-preservation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 7,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.3cc7d67a0901c9db",
+        "key": "parsing-schema:contract_boundary_gap:dispatch-registration",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.43990b3a96bc3fff",
+        "key": "repository-contract:verified_success:dispatch-registration",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.44989d8ccdb2c34e",
+        "key": "transformation-roundtrip:contract_boundary_gap:unspecified",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.45a0f6ffa5468222",
+        "key": "parsing-schema:patch_materialization_failure:validation-preservation",
+        "status": "provisional",
+        "template": "parsing_schema_validation_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.462841ec945db1d9",
+        "key": "parsing-schema:unspecified:state-propagation",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 4,
+        "trigger_tags": [
+          "negative-evidence"
+        ]
+      },
+      {
+        "abstract_id": "abstract.4b928de482218a18",
+        "key": "repository-contract:unspecified:validation-preservation",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.4d6512e229adc786",
+        "key": "parsing-schema:patch_materialization_failure:materialization",
+        "status": "provisional",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": [
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure"
+        ]
+      },
+      {
+        "abstract_id": "abstract.4f7d3475a8b523b0",
+        "key": "transformation-roundtrip:verified_success:dispatch-registration",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.5020830c0aeebe25",
+        "key": "async-lifecycle:unspecified:materialization",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.51e5ff3c6b63c463",
+        "key": "transformation-roundtrip:contract_boundary_gap:dispatch-registration",
+        "status": "provisional",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.56dde79da6335299",
+        "key": "binding-type:unspecified:unspecified",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 2,
+        "trigger_tags": [
+          "negative-evidence"
+        ]
+      },
+      {
+        "abstract_id": "abstract.5a09ad4dd8c090c6",
+        "key": "parsing-schema:patch_materialization_failure:state-propagation",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 3,
+        "trigger_tags": [
+          "before",
+          "behavior",
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure"
+        ]
+      },
+      {
+        "abstract_id": "abstract.5a4bcf177be21387",
+        "key": "dependency-policy:verified_success:unspecified",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.5bed182d415411bb",
+        "key": "security-analysis:preservation_regression:state-propagation",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.5fee7684b02a13e1",
+        "key": "binding-type:patch_materialization_failure:materialization",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 2,
+        "trigger_tags": [
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure"
+        ]
+      },
+      {
+        "abstract_id": "abstract.6699054f8f4bc289",
+        "key": "async-lifecycle:contract_boundary_gap:materialization",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.6814c6e2caaf0c76",
+        "key": "repository-contract:unspecified:boundary-decision",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 3,
+        "trigger_tags": [
+          "existing",
+          "only"
+        ]
+      },
+      {
+        "abstract_id": "abstract.6b2dd3684b5d0999",
+        "key": "transformation-roundtrip:patch_materialization_failure:dispatch-registration",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.6c4342d0ac6139fa",
+        "key": "cache-state:contract_boundary_gap:materialization",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.6dcbe328d45eff1f",
+        "key": "parsing-schema:verified_success:unspecified",
+        "status": "transferable",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 3,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 13,
+        "trigger_tags": [
+          "worktree",
+          "existing",
+          "command",
+          "types",
+          "feat",
+          "retained",
+          "snapshot",
+          "local",
+          "probe",
+          "working"
+        ]
+      },
+      {
+        "abstract_id": "abstract.70972b362e221c19",
+        "key": "transformation-roundtrip:verified_success:unspecified",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 5,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.73f8da20d19192cb",
+        "key": "cache-state:unspecified:dispatch-registration",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.76b7b59bd8802465",
+        "key": "transformation-roundtrip:patch_materialization_failure:materialization",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.776af7629413d437",
+        "key": "security-analysis:verified_success:dispatch-registration",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.77c5d280cd1f86ff",
+        "key": "async-lifecycle:verified_success:dispatch-registration",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 3,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.80b135eee6b30d9c",
+        "key": "cache-state:contract_boundary_gap:state-propagation",
+        "status": "unverified",
+        "template": "cache_state_propagation_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 3,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.8384a55166e0d128",
+        "key": "repository-contract:unspecified:materialization",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 4,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.8b73276c7cceedbb",
+        "key": "parsing-schema:contract_boundary_gap:state-propagation",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.8e67c1e9a25b9ed3",
+        "key": "parsing-schema:unspecified:unspecified",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 5,
+        "trigger_tags": [
+          "negative-evidence"
+        ]
+      },
+      {
+        "abstract_id": "abstract.92d749ecc1034867",
+        "key": "parsing-schema:verified_success:state-propagation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 3,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.935f1cd884c37c80",
+        "key": "parsing-schema:contract_boundary_gap:normalization",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 5,
+        "trigger_tags": [
+          "handling",
+          "text",
+          "contract",
+          "contract_boundary_gap",
+          "negative-evidence"
+        ]
+      },
+      {
+        "abstract_id": "abstract.9434d3278a844f8c",
+        "key": "parsing-schema:verified_success:materialization",
+        "status": "transferable",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 3,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 11,
+        "trigger_tags": [
+          "worktree",
+          "existing",
+          "command",
+          "types",
+          "feat",
+          "retained",
+          "snapshot",
+          "local",
+          "probe",
+          "working"
+        ]
+      },
+      {
+        "abstract_id": "abstract.960ea93eb2b65e8e",
+        "key": "async-lifecycle:unspecified:unspecified",
+        "status": "validated",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.96eed290ddb92772",
+        "key": "security-analysis:unspecified:boundary-decision",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 3,
+        "trigger_tags": [
+          "all"
+        ]
+      },
+      {
+        "abstract_id": "abstract.98877688a4780ea8",
+        "key": "cache-state:unspecified:normalization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 5,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.9999465deb243248",
+        "key": "cache-state:patch_materialization_failure:dispatch-registration",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.9ba539ec5ee85329",
+        "key": "dependency-policy:verified_success:validation-preservation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.9c225590bbbbb999",
+        "key": "repository-contract:unspecified:unspecified",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 3,
+        "trigger_tags": [
+          "negative-evidence"
+        ]
+      },
+      {
+        "abstract_id": "abstract.9c96705175429f68",
+        "key": "async-lifecycle:contract_boundary_gap:dispatch-registration",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 4,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.9db83196d0547d8f",
+        "key": "repository-contract:verified_success:unspecified",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.a0754a7b78fd5679",
+        "key": "security-analysis:unspecified:validation-preservation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.a0c992a78d53a12d",
+        "key": "cache-state:contract_boundary_gap:dispatch-registration",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 2,
+        "trigger_tags": [
+          "first"
+        ]
+      },
+      {
+        "abstract_id": "abstract.a1cf3e6b39cce2f6",
+        "key": "parsing-schema:unspecified:validation-preservation",
+        "status": "validated",
+        "template": "parsing_schema_validation_template",
+        "positive_tasks_count": 2,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 6,
+        "trigger_tags": [
+          "ast",
+          "parser"
+        ]
+      },
+      {
+        "abstract_id": "abstract.a52f52f6646bb013",
+        "key": "async-lifecycle:unspecified:validation-preservation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.aa9ce9cada996f3d",
+        "key": "repository-contract:verified_success:state-propagation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.b83eb7659a4e92bd",
+        "key": "repository-contract:patch_materialization_failure:validation-preservation",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.bb04b010b5e6c007",
+        "key": "parsing-schema:patch_materialization_failure:boundary-decision",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.c35def4220f00039",
+        "key": "repository-contract:patch_materialization_failure:materialization",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 2,
+        "trigger_tags": [
+          "execution",
+          "negative-evidence",
+          "patch_materialization_failure"
+        ]
+      },
+      {
+        "abstract_id": "abstract.c36b48b6216ad365",
+        "key": "parsing-schema:verified_success:dispatch-registration",
+        "status": "transferable",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 6,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 13,
+        "trigger_tags": [
+          "types",
+          "command",
+          "ast",
+          "parser",
+          "worktree"
+        ]
+      },
+      {
+        "abstract_id": "abstract.c8aca26d9bb78fa1",
+        "key": "transformation-roundtrip:contract_boundary_gap:materialization",
+        "status": "provisional",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.cd991fd0596f0d5c",
+        "key": "parsing-schema:unspecified:normalization",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.cdafd0d048f7a393",
+        "key": "async-lifecycle:unspecified:boundary-decision",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.cfde94d895ec2fe5",
+        "key": "security-analysis:unspecified:materialization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 3,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.d803a1243c554c41",
+        "key": "repository-contract:verified_success:materialization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 6,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.df8cc840313742d1",
+        "key": "binding-type:unspecified:boundary-decision",
+        "status": "unverified",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 2,
+        "supporting_atoms_count": 2,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.e167cb4415f65f13",
+        "key": "binding-type:patch_materialization_failure:validation-preservation",
+        "status": "unverified",
+        "template": "patch_materialization_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.e3eb13a05b277ea3",
+        "key": "cache-state:contract_boundary_gap:normalization",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.e60c7e628ddb26f1",
+        "key": "transformation-roundtrip:contract_boundary_gap:normalization",
+        "status": "unverified",
+        "template": "contract_boundary_gap_template",
+        "positive_tasks_count": 0,
+        "negative_tasks_count": 1,
+        "supporting_atoms_count": 4,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.e94eaaad12353188",
+        "key": "parsing-schema:verified_success:validation-preservation",
+        "status": "transferable",
+        "template": "parsing_schema_validation_template",
+        "positive_tasks_count": 3,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 14,
+        "trigger_tags": [
+          "worktree",
+          "existing",
+          "command",
+          "types",
+          "feat",
+          "retained",
+          "snapshot",
+          "local",
+          "probe",
+          "working"
+        ]
+      },
+      {
+        "abstract_id": "abstract.ed2756a7a186a7c6",
+        "key": "dependency-policy:verified_success:materialization",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 1,
+        "trigger_tags": []
+      },
+      {
+        "abstract_id": "abstract.f3e1e92e247d33c0",
+        "key": "transformation-roundtrip:verified_success:validation-preservation",
+        "status": "provisional",
+        "template": "generic_fallback_template",
+        "positive_tasks_count": 1,
+        "negative_tasks_count": 0,
+        "supporting_atoms_count": 6,
+        "trigger_tags": []
+      }
+    ]
+  },
+  "graph_edge_audit": {
+    "total_edges": 1866,
+    "by_relation": {
+      "ABSTRACTS_FROM": 282,
+      "BELONGS_TO": 20,
+      "INDEXED_BY": 1486,
+      "SPECIALIZES": 78
+    },
+    "methods_referencing_self_edges": [
+      "__init__",
+      "commit"
+    ],
+    "used_in_retrieve_or_ground": false
+  },
+  "retrieval_and_grounding_audit": {
+    "tasks_audited": 20,
+    "tasks_without_backbone_memory": [
+      "adaptix-name-mapping-aliases",
+      "anko-typed-variable-bindings",
+      "arktype-json-schema-refs-dependencies",
+      "bandit-structured-nosec-directives",
+      "boa-hierarchical-evaluation-cancellation",
+      "claude-code-by-agents-recursive-delegation",
+      "dasel-html-document-format"
+    ],
+    "tasks_without_slow_schema": [
+      "abs-module-cache-flags",
+      "actionlint-action-pinning-lint",
+      "adaptix-name-mapping-aliases",
+      "anko-default-function-arguments",
+      "anko-typed-variable-bindings",
+      "awilix-async-container-initialization",
+      "bandit-interprocedural-taint-checks",
+      "csstree-shorthand-expansion-compression"
+    ],
+    "tasks_with_fallback_P_or_S_only_source_atoms": [
+      "abs-stepped-slices",
+      "aiomonitor-task-snapshots-diff",
+      "bandit-incremental-cache-control",
+      "bandit-structured-nosec-directives",
+      "boa-hierarchical-evaluation-cancellation",
+      "cattrs-partial-structuring-recovery"
+    ],
+    "tasks_with_low_similarity_grounding": [
+      "abs-stepped-slices",
+      "arcane-drift-detection-baselines",
+      "cattrs-partial-structuring-recovery"
+    ],
+    "per_task": [
+      {
+        "task": "abs-module-cache-flags",
+        "routed_capability": "cache-state",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "abs-stepped-slices",
+        "routed_capability": "repository-contract",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.43990b3a96bc3fff",
+            "module": "repository-contract/dispatch-registration",
+            "source_episode": "arcane-drift-detection-baselines",
+            "source_atom_ids": [
+              "deepswe.arcane-drift-detection-baselines.pass.p.6003eafbcd09"
+            ],
+            "source_atom_kinds": [
+              "P"
+            ],
+            "grounding_weight": 0.508,
+            "capability_similarity": 0.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "actionlint-action-pinning-lint",
+        "routed_capability": "dependency-policy",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "adaptix-name-mapping-aliases",
+        "routed_capability": "binding-type",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "aiomonitor-task-snapshots-diff",
+        "routed_capability": "async-lifecycle",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 3,
+        "groundings": [
+          {
+            "abstract_id": "abstract.960ea93eb2b65e8e",
+            "module": "async-lifecycle/unspecified",
+            "source_episode": "awilix-async-container-initialization",
+            "source_atom_ids": [
+              "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff"
+            ],
+            "source_atom_kinds": [
+              "S"
+            ],
+            "grounding_weight": 0.655,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "anko-default-function-arguments",
+        "routed_capability": "binding-type",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "anko-typed-variable-bindings",
+        "routed_capability": "binding-type",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "arcane-drift-detection-baselines",
+        "routed_capability": "repository-contract",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.39beda20cdd117be",
+            "module": "repository-contract/validation-preservation",
+            "source_episode": "cattrs-partial-structuring-recovery",
+            "source_atom_ids": [
+              "deepswe.cattrs-partial-structuring-recovery.pass.r.aeee9f0cf026",
+              "deepswe.cattrs-partial-structuring-recovery.pass.f.9b43cc470d00"
+            ],
+            "source_atom_kinds": [
+              "R",
+              "F"
+            ],
+            "grounding_weight": 0.325,
+            "capability_similarity": 0.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "arktype-json-schema-refs-dependencies",
+        "routed_capability": "parsing-schema",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.e94eaaad12353188",
+            "module": "parsing-schema/validation-preservation",
+            "source_episode": "cliffy-config-file-parsing",
+            "source_atom_ids": [
+              "deepswe.cliffy-config-file-parsing.pass.r.00b63389ffe3",
+              "deepswe.cliffy-config-file-parsing.pass.f.5f2c743d9349"
+            ],
+            "source_atom_kinds": [
+              "R",
+              "F"
+            ],
+            "grounding_weight": 0.537,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "awilix-async-container-initialization",
+        "routed_capability": "async-lifecycle",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "bandit-incremental-cache-control",
+        "routed_capability": "cache-state",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 3,
+        "groundings": [
+          {
+            "abstract_id": "abstract.01b9312afc7ac7fe",
+            "module": "cache-state/normalization",
+            "source_episode": "abs-module-cache-flags",
+            "source_atom_ids": [
+              "deepswe.abs-module-cache-flags.pass.p.966d41ee5f89"
+            ],
+            "source_atom_kinds": [
+              "P"
+            ],
+            "grounding_weight": 0.355,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "bandit-interprocedural-taint-checks",
+        "routed_capability": "security-analysis",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": []
+      },
+      {
+        "task": "bandit-structured-nosec-directives",
+        "routed_capability": "security-analysis",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.776af7629413d437",
+            "module": "security-analysis/dispatch-registration",
+            "source_episode": "bandit-interprocedural-taint-checks",
+            "source_atom_ids": [
+              "deepswe.bandit-interprocedural-taint-checks.pass.p.ee1020d32384"
+            ],
+            "source_atom_kinds": [
+              "P"
+            ],
+            "grounding_weight": 0.355,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "boa-hierarchical-evaluation-cancellation",
+        "routed_capability": "async-lifecycle",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.960ea93eb2b65e8e",
+            "module": "async-lifecycle/unspecified",
+            "source_episode": "awilix-async-container-initialization",
+            "source_atom_ids": [
+              "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff"
+            ],
+            "source_atom_kinds": [
+              "S"
+            ],
+            "grounding_weight": 0.505,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "cattrs-partial-structuring-recovery",
+        "routed_capability": "repository-contract",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.6814c6e2caaf0c76",
+            "module": "repository-contract/boundary-decision",
+            "source_episode": "arcane-drift-detection-baselines",
+            "source_atom_ids": [
+              "deepswe.arcane-drift-detection-baselines.pass.p.013762f6394d"
+            ],
+            "source_atom_kinds": [
+              "P"
+            ],
+            "grounding_weight": 0.435,
+            "capability_similarity": 0.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "clack-async-autocomplete-options",
+        "routed_capability": "async-lifecycle",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.a52f52f6646bb013",
+            "module": "async-lifecycle/validation-preservation",
+            "source_episode": "awilix-async-container-initialization",
+            "source_atom_ids": [
+              "deepswe.awilix-async-container-initialization.pass.f.919483f25358"
+            ],
+            "source_atom_kinds": [
+              "F"
+            ],
+            "grounding_weight": 0.505,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "claude-code-by-agents-recursive-delegation",
+        "routed_capability": "repository-contract",
+        "routed_causal_loci": [
+          "state-propagation"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.05c36bce9a3f1e71",
+            "module": "repository-contract/state-propagation",
+            "source_episode": "cattrs-partial-structuring-recovery",
+            "source_atom_ids": [
+              "deepswe.cattrs-partial-structuring-recovery.pass.r.98adecccdd1d",
+              "deepswe.cattrs-partial-structuring-recovery.pass.f.ae23fb36f19f"
+            ],
+            "source_atom_kinds": [
+              "R",
+              "F"
+            ],
+            "grounding_weight": 0.335,
+            "capability_similarity": 0.0,
+            "causal_similarity": 1.0,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "cliffy-config-file-parsing",
+        "routed_capability": "parsing-schema",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.a1cf3e6b39cce2f6",
+            "module": "parsing-schema/validation-preservation",
+            "source_episode": "anko-default-function-arguments",
+            "source_atom_ids": [
+              "deepswe.anko-default-function-arguments.pass.r.1e7318308110",
+              "deepswe.anko-default-function-arguments.pass.f.a3c4e052be82",
+              "deepswe.anko-default-function-arguments.pass.s.3f08701e3bfb"
+            ],
+            "source_atom_kinds": [
+              "R",
+              "F",
+              "S"
+            ],
+            "grounding_weight": 0.655,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      },
+      {
+        "task": "csstree-shorthand-expansion-compression",
+        "routed_capability": "transformation-roundtrip",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 5,
+        "fast_delta_count": 3,
+        "groundings": []
+      },
+      {
+        "task": "dasel-html-document-format",
+        "routed_capability": "parsing-schema",
+        "routed_causal_loci": [
+          "unspecified"
+        ],
+        "backbone_count": 0,
+        "fast_delta_count": 0,
+        "groundings": [
+          {
+            "abstract_id": "abstract.e94eaaad12353188",
+            "module": "parsing-schema/validation-preservation",
+            "source_episode": "cliffy-config-file-parsing",
+            "source_atom_ids": [
+              "deepswe.cliffy-config-file-parsing.pass.r.00b63389ffe3",
+              "deepswe.cliffy-config-file-parsing.pass.f.5f2c743d9349"
+            ],
+            "source_atom_kinds": [
+              "R",
+              "F"
+            ],
+            "grounding_weight": 0.537,
+            "capability_similarity": 1.0,
+            "causal_similarity": 0.2,
+            "trigger_similarity": 0.0
+          }
+        ]
+      }
+    ]
+  },
+  "rca_five_layer_walk_audit": {
+    "all_five_layers_reachable": true,
+    "probes": {
+      "logic": {
+        "inferred_by_keywords": "logic",
+        "walk_root_step": "logic",
+        "walk_root_kind": "wrong_rule",
+        "confidence": 0.9375,
+        "matched": true
+      },
+      "boundary": {
+        "inferred_by_keywords": "boundary",
+        "walk_root_step": "boundary",
+        "walk_root_kind": "missing_rule",
+        "confidence": 0.98,
+        "matched": true
+      },
+      "schema": {
+        "inferred_by_keywords": "schema",
+        "walk_root_step": "schema",
+        "walk_root_kind": "missing_rule",
+        "confidence": 0.98,
+        "matched": true
+      },
+      "domain": {
+        "inferred_by_keywords": "domain",
+        "walk_root_step": "domain",
+        "walk_root_kind": "missing_rule",
+        "confidence": 0.9675,
+        "matched": true
+      },
+      "fde": {
+        "inferred_by_keywords": "fde",
+        "walk_root_step": "fde",
+        "walk_root_kind": "missing_rule",
+        "confidence": 0.9375,
+        "matched": true
+      }
+    }
+  },
+  "runtime_switch_audit": {
+    "v23_enables_step_gt_1_dynamic_retrieval": false,
+    "evidence_gated_policies_in_harness": [
+      "evidence_gated_v20",
+      "failure_locked_v21"
+    ],
+    "candidate_state_manager_called_in_harness": false,
+    "phase_directive_hardcoded_steps": {
+      "DIAGNOSE": "1..4",
+      "MATERIALIZE": "5..12",
+      "VERIFY": "13..18",
+      "CLOSE": "19..max_steps"
+    }
+  }
+}

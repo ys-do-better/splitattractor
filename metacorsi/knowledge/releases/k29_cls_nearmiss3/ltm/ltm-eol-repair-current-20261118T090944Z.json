@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reason": "CRLF restored for files whose digest is recorded outside the LTM manifest",
+  "applied_at": "2026-11-18T09:09:44.605947+00:00",
+  "files_rewritten": 1,
+  "actions": [
+    {
+      "file": "MetaCogRSI-main2/knowledge/releases/k29_cls_nearmiss3/current.json",
+      "state": "lf-normalized",
+      "action": "rewrite-crlf",
+      "before": "18fdbdb590ca65f7cbdbe1f4010bead28e02b8b50a5c7e67f354fb3e3c359b32",
+      "after": "ef5fe5ded43f12b4a59cbe0fc65778d52d7c1133ee002c708da20088396c5b67"
+    }
+  ]
+}

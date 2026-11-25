@@ -1,0 +1,93 @@
+{
+  "abs-module-cache-flags": [
+    "deepswe.abs-module-cache-flags.pass.p.966d41ee5f89",
+    "deepswe.abs-module-cache-flags.pass.r.9e555c9a69fc",
+    "deepswe.abs-module-cache-flags.pass.f.d96771129fb3",
+    "deepswe.abs-module-cache-flags.pass.s.d6c74f93724d",
+    "deepswe.abs-module-cache-flags.pass.m.aa8ebb7aadd1"
+  ],
+  "abs-stepped-slices": [
+    "deepswe.abs-stepped-slices.pass.p.1686bcf0bc74",
+    "deepswe.abs-stepped-slices.pass.r.78775c75ec74",
+    "deepswe.abs-stepped-slices.pass.f.29e228db755e",
+    "deepswe.abs-stepped-slices.pass.s.a159eea21fe0",
+    "deepswe.abs-stepped-slices.pass.m.463f12f96e2c"
+  ],
+  "anko-default-function-arguments": [
+    "deepswe.anko-default-function-arguments.pass.p.5a501eb5e67a",
+    "deepswe.anko-default-function-arguments.pass.r.1e7318308110",
+    "deepswe.anko-default-function-arguments.pass.f.a3c4e052be82",
+    "deepswe.anko-default-function-arguments.pass.s.3f08701e3bfb",
+    "deepswe.anko-default-function-arguments.pass.m.3949ff82cb8a"
+  ],
+  "arcane-drift-detection-baselines": [
+    "deepswe.arcane-drift-detection-baselines.pass.p.013762f6394d",
+    "deepswe.arcane-drift-detection-baselines.pass.r.3cdcd5187be6",
+    "deepswe.arcane-drift-detection-baselines.pass.f.f95864dc51c7",
+    "deepswe.arcane-drift-detection-baselines.pass.s.340707d82fd4",
+    "deepswe.arcane-drift-detection-baselines.pass.m.a5326770ddba"
+  ],
+  "awilix-async-container-initialization": [
+    "deepswe.awilix-async-container-initialization.pass.p.1bddb5167df7",
+    "deepswe.awilix-async-container-initialization.pass.r.81dba8bd85b1",
+    "deepswe.awilix-async-container-initialization.pass.f.919483f25358",
+    "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff",
+    "deepswe.awilix-async-container-initialization.pass.m.f4df49eae4fe"
+  ],
+  "bandit-incremental-cache-control": [
+    "deepswe.bandit-incremental-cache-control.pass.p.1132044f4ee5",
+    "deepswe.bandit-incremental-cache-control.pass.r.7d6d27a41ee4",
+    "deepswe.bandit-incremental-cache-control.pass.f.48dd7be9e707",
+    "deepswe.bandit-incremental-cache-control.pass.s.c1d308a90b7a",
+    "deepswe.bandit-incremental-cache-control.pass.m.0d4dcd1f5ded"
+  ],
+  "bandit-interprocedural-taint-checks": [
+    "deepswe.bandit-interprocedural-taint-checks.pass.p.782d608c24cd",
+    "deepswe.bandit-interprocedural-taint-checks.pass.r.2ec73c178655",
+    "deepswe.bandit-interprocedural-taint-checks.pass.f.8d7f05fea7ec",
+    "deepswe.bandit-interprocedural-taint-checks.pass.s.208e759eee56",
+    "deepswe.bandit-interprocedural-taint-checks.pass.m.213fdf4d4b88"
+  ],
+  "cattrs-partial-structuring-recovery": [
+    "deepswe.cattrs-partial-structuring-recovery.pass.p.9650c964a6f5",
+    "deepswe.cattrs-partial-structuring-recovery.pass.r.27cbe7020eab",
+    "deepswe.cattrs-partial-structuring-recovery.pass.f.7d8cdca2ccb9",
+    "deepswe.cattrs-partial-structuring-recovery.pass.s.c05a0fb5df8e",
+    "deepswe.cattrs-partial-structuring-recovery.pass.m.1c3d91d057b4"
+  ],
+  "clack-async-autocomplete-options": [
+    "deepswe.clack-async-autocomplete-options.pass.p.556113091859",
+    "deepswe.clack-async-autocomplete-options.pass.r.2bb94b56d3d0",
+    "deepswe.clack-async-autocomplete-options.pass.f.361c5e1ce022",
+    "deepswe.clack-async-autocomplete-options.pass.s.e60e0ce71596",
+    "deepswe.clack-async-autocomplete-options.pass.m.3597c71f21e8"
+  ],
+  "cliffy-config-file-parsing": [
+    "deepswe.cliffy-config-file-parsing.pass.p.1a9f93b93ade",
+    "deepswe.cliffy-config-file-parsing.pass.r.00b63389ffe3",
+    "deepswe.cliffy-config-file-parsing.pass.f.4375563084fe",
+    "deepswe.cliffy-config-file-parsing.pass.s.b02505a820f7",
+    "deepswe.cliffy-config-file-parsing.pass.m.07c8a9fa1bbc"
+  ],
+  "actionlint-action-pinning-lint": [
+    "deepswe.actionlint-action-pinning-lint.pass.p.107ba48b3755",
+    "deepswe.actionlint-action-pinning-lint.pass.r.3c02e3657200",
+    "deepswe.actionlint-action-pinning-lint.pass.f.28c8655cccb1",
+    "deepswe.actionlint-action-pinning-lint.pass.s.9695555966fe",
+    "deepswe.actionlint-action-pinning-lint.pass.m.1b45c830a156"
+  ],
+  "csstree-shorthand-expansion-compression": [
+    "deepswe.csstree-shorthand-expansion-compression.pass.p.9e1a81b372e7",
+    "deepswe.csstree-shorthand-expansion-compression.pass.r.11ed98ef6333",
+    "deepswe.csstree-shorthand-expansion-compression.pass.f.11f5845ca7d4",
+    "deepswe.csstree-shorthand-expansion-compression.pass.s.13eadf390b0d",
+    "deepswe.csstree-shorthand-expansion-compression.pass.m.02125e0a50c4"
+  ],
+  "aiomonitor-task-snapshots-diff": [
+    "deepswe.aiomonitor-task-snapshots-diff.pass.p.7264cfb23ecc",
+    "deepswe.aiomonitor-task-snapshots-diff.pass.r.15550d9c7f45",
+    "deepswe.aiomonitor-task-snapshots-diff.pass.f.0d5fa77f913e",
+    "deepswe.aiomonitor-task-snapshots-diff.pass.s.19f677b3ffdf",
+    "deepswe.aiomonitor-task-snapshots-diff.pass.m.812c43254f5d"
+  ]
+}

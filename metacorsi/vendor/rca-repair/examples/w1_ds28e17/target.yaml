@@ -1,0 +1,35 @@
+# The running system: a 1-Wire bus with a DS28E17 1-Wire-to-I2C bridge and sensors behind it. The driver, the
+# 1-Wire I/O and the I2C SMBus core are Linux 6.18 code copied verbatim (kernel/); shim/ only lets them run as a
+# process (kernel APIs, an emulated bus, the polling program).
+name: w1_ds28e17
+family: linux w1/i2c driver
+root: target
+code:            # what the RCA analyses and the repair may edit
+  - kernel/drivers/w1/slaves/w1_ds28e17.c
+  - kernel/drivers/w1/w1_io.c
+  - kernel/drivers/i2c/i2c-core-smbus.c
+sources:         # everything compiled into the system
+  - kernel/drivers/w1/slaves/w1_ds28e17.c
+  - kernel/drivers/w1/w1_io.c
+  - kernel/drivers/i2c/i2c-core-smbus.c
+  - kernel/lib/crc16.c
+  - shim/i2c_shim.c
+  - shim/fake_w1_bus.c
+  - shim/system.c
+include: [shim/include, shim]
+cc: clang
+cflags: [-g3, -O0, -fsanitize=address, -fno-omit-frame-pointer, -w]
+knowledge: knowledge.yaml
+scenario: scenario.yaml
+tests:
+  reproducer: tests/poc_block_read_len255.scn
+  regression: [tests/regress_normal_ops.scn, tests/regress_recv_len_ok.scn, tests/regress_block_len32.scn]
+  workload: tests/workload_polling.scn
+blackbox:        # what an operator can do to the running system without touching code (user rights)
+  Bl: {how: config, line: "deny {addr}", zh: "不再向这个设备发操作（把它解绑）"}
+  Rs: {how: restart, zh: "重启"}
+testgen:         # input space searched for a test that reaches a given site
+  template: "slave 0x50 {len} 0xab 0xab 0xab 0xab\n{op}\n"
+  ops: ["op smbus_read_block 0x50 0x10", "op i2c_read_recv_len 0x50 34", "op i2c_read 0x50 4"]
+  device_lengths: [255]
+upstream_patch: upstream/169ae5e65e5a.patch

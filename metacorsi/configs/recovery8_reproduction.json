@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "status": "awaiting_user_confirmation",
+  "historical_code_commit": "5cefe6a381322eef6aa8582cd168b3cb14ec4bf8",
+  "historical_result": "result/reflective-brain-recovery8-20261106",
+  "start_knowledge": "knowledge/reconstructed-1107/v11-reconstructed.json",
+  "start_atoms": 149,
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "runtime": "DSH headless in WSL2",
+  "control_mode": "rca_only",
+  "dotenv_windows": "D:\\@MetaCoRSI\\.env",
+  "dotenv_wsl": "/mnt/d/@MetaCoRSI/.env",
+  "concurrency": 2,
+  "dsh_max_steps": 24,
+  "dsh_max_extension": 6,
+  "phases": [
+    {
+      "name": "recovery8",
+      "tasks_file": "data/deepswe_reflective_recovery8.txt",
+      "tasks": 8
+    },
+    {
+      "name": "retry3",
+      "tasks_file": "data/deepswe_reflective_retry3.txt",
+      "tasks": 3
+    },
+    {
+      "name": "final-retry2",
+      "tasks_file": "data/deepswe_reflective_retry2.txt",
+      "tasks": 2
+    }
+  ],
+  "success_definition": {
+    "historical_recovery": "the eight selected baseline failures each reach reward=1 in at least one phase",
+    "not_claimed": "a fresh frozen one-shot score of 16/20"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-17T14:40:00+08:00",
+  "package": "MetaCoRSI-K29-compact",
+  "root": "D:\\MetaCogRSI",
+  "brain": {
+    "profile": "cls-k28-slow-k29-nearmiss-fast-v1",
+    "version": 29,
+    "atoms": 263,
+    "slow_store_atoms": 251,
+    "fast_store_atoms": 12,
+    "full20_pass_at_5": 18,
+    "full20_valid": 20
+  },
+  "hashes": {
+    "k20_current_sha256": "DE58285405AC100780264466E5D1AFD6031574AEE6F5B095FB1911F506C7B84F",
+    "k28_current_sha256": "4C859F53AB88DFB65A2E39C23646076C188EA47A065023BB811CF20DDC3BF4C4",
+    "active_current_sha256": "EF5FE5DED43F12B4A59CBE0FC65778D52D7C1133EE002C708DA20088396C5B67",
+    "active_manifest_sha256": "CF4058BD3DDDB6E68BA9348BDC35C40B6DCED736940ED7931F8EE6AE68CA56B3"
+  },
+  "validation": {
+    "pytest": "74 passed",
+    "local_rebuild": "passed",
+    "retrieval_audit": "20 tasks, 0 violations",
+    "docker": "passed",
+    "pass_at_5": "18/20",
+    "answer_access": false
+  },
+  "external_dependencies": [
+    "Python 3.11+ and Harbor/DSH",
+    "Docker Desktop",
+    "provider dotenv (default D:\\.env)",
+    "DeepSWE container images"
+  ]
+}

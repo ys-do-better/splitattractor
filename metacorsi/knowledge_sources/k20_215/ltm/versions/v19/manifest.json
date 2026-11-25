@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "version": 19,
+  "parent": 18,
+  "profile": "indexed-ltm-abstraction-grounding-v1",
+  "built_at": "2026-11-14T17:01:29.021170+00:00",
+  "snapshot_digest": "02da2fe1fc92db80d6e7addad985fe47ec108c88f5719237bfadccc9275fe32c",
+  "atom_count": 203,
+  "node_count": 131,
+  "edge_count": 1467,
+  "abstraction_count": 74,
+  "grounding_count": 36,
+  "retention_task_count": 13,
+  "files": {
+    "atoms.jsonl": "6b21d0af782a9df983a84203e1ca4a21337215486c2ca327087b9ef5b42b0a90",
+    "nodes.json": "1c1b5ab4f0385d279fb603cf04c36e02c0d4293bee628fcc2690a75605ca3097",
+    "edges.jsonl": "ca41c8ce5f0488889698d42d6617df418558518e81aecde2dbbe923ca3e4a4f1",
+    "abstractions.json": "57bf700f5fb0228d13c5cef5512c499112afc13c199edf9c7bfb4d597fcb0de5",
+    "groundings.jsonl": "aa31dace6b5551f3cc5dbdfda8d8b07a5538c5430bba91021ddb701391733cd9",
+    "retention_anchors.json": "d1cf740ecfab07e33f43fc92f6255407a94c6e70734671aa20cad6aa8fa81e9e",
+    "indexes/task.json": "d41fdffe6a6189d6d223e7a8662d427800ff17f310ac923a56ac259d0b1bdcf6",
+    "indexes/repository.json": "dafaa7650a86da14a00e6afdf16308ef82c71b5fd1a27ffd22096435d41df631",
+    "indexes/capability.json": "307c1f800785982e315808e136042bee59ecdd8a80f539150a620b19c0bda809",
+    "indexes/failure_mode.json": "b20e40377c77c9bc09e3c1d15b42e8f2e3856c8e9910dcb95943ee13e43323fa",
+    "indexes/causal_locus.json": "b8fbea83c1f728c48c27293d96f8d347101206761106a2303caa2e09727324d4"
+  }
+}

@@ -1,0 +1,4 @@
+running: true       # in service: a polling loop reads the sensors behind the bridge
+can_stop: true      # it can be rebuilt and restarted, so no hot patch is needed
+access: white       # developer rights: source code and rebuild
+rerun: replay_only  # the device's behaviour is known only from the recording: RCA can replay it, not vary it

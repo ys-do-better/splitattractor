@@ -1,0 +1,11 @@
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+
+# 冻结知识包：内容以 CRLF 字节落盘，manifest/PACKAGE_MANIFEST 记录了其 SHA-256。
+# 必须按二进制存储，禁止换行符归一化，否则克隆后 IndexedLTM 校验失败。
+knowledge/** -text
+knowledge_sources/** -text

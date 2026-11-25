@@ -1,0 +1,2301 @@
+{
+  "abstract.01b9312afc7ac7fe": {
+    "abstract_id": "abstract.01b9312afc7ac7fe",
+    "capability": "cache-state",
+    "failure_mode": "verified_success",
+    "causal_locus": "normalization",
+    "trigger_tags": [
+      "1f3013b",
+      "bare",
+      "branch",
+      "canonical",
+      "commit",
+      "committed",
+      "complete",
+      "cyclic",
+      "debug",
+      "errors"
+    ],
+    "invariant": "Preserve the verified cache-state contract at normalization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-module-cache-flags.pass.p.966d41ee5f89"
+    ],
+    "positive_tasks": [
+      "abs-module-cache-flags"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.05c36bce9a3f1e71": {
+    "abstract_id": "abstract.05c36bce9a3f1e71",
+    "capability": "repository-contract",
+    "failure_mode": "unspecified",
+    "causal_locus": "state-propagation",
+    "trigger_tags": [
+      "atomic",
+      "baseconverter",
+      "cattr",
+      "checks",
+      "collections",
+      "defaults",
+      "deprecated",
+      "detailed_validation",
+      "errors",
+      "exclusion"
+    ],
+    "invariant": "Preserve the verified repository-contract contract at state-propagation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.cattrs-partial-structuring-recovery.pass.f.ae23fb36f19f",
+      "deepswe.cattrs-partial-structuring-recovery.pass.m.21cde1650e15",
+      "deepswe.cattrs-partial-structuring-recovery.pass.p.c55d74ca1f66",
+      "deepswe.cattrs-partial-structuring-recovery.pass.r.98adecccdd1d",
+      "deepswe.cattrs-partial-structuring-recovery.pass.s.c05a0fb5df8e"
+    ],
+    "positive_tasks": [
+      "cattrs-partial-structuring-recovery"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.07d49d3043739808": {
+    "abstract_id": "abstract.07d49d3043739808",
+    "capability": "security-analysis",
+    "failure_mode": "preservation_regression",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "begin",
+      "end",
+      "line",
+      "negative-evidence",
+      "next",
+      "preservation_regression",
+      "selector",
+      "validation",
+      "all",
+      "amended"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at validation-preservation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-structured-nosec-directives.fail.f.67067f698f27",
+      "deepswe.bandit-structured-nosec-directives.fail.r.6e01cfc56fff",
+      "deepswe.bandit-structured-nosec-directives.fail.r.980574b2b6ec",
+      "deepswe.bandit-structured-nosec-directives.fail.s.f467b4d07a17"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "bandit-structured-nosec-directives"
+    ],
+    "status": "unverified"
+  },
+  "abstract.091c07f88ff96574": {
+    "abstract_id": "abstract.091c07f88ff96574",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "ast",
+      "evaluator",
+      "parser",
+      "8a0ec9d",
+      "accepts",
+      "all",
+      "arrays",
+      "backward",
+      "branch",
+      "committed"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at materialization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-stepped-slices.pass.m.463f12f96e2c",
+      "deepswe.abs-stepped-slices.pass.m.c67c2a026e1b"
+    ],
+    "positive_tasks": [
+      "abs-stepped-slices"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.0cc4c1b1396493bf": {
+    "abstract_id": "abstract.0cc4c1b1396493bf",
+    "capability": "async-lifecycle",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "cli",
+      "existing",
+      "factory",
+      "full",
+      "hook",
+      "pass",
+      "paths",
+      "regressions",
+      "run",
+      "suite"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.aiomonitor-task-snapshots-diff.fail.p.b42fcfce6ec9"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "aiomonitor-task-snapshots-diff"
+    ],
+    "status": "unverified"
+  },
+  "abstract.1282210455fba272": {
+    "abstract_id": "abstract.1282210455fba272",
+    "capability": "security-analysis",
+    "failure_mode": "preservation_regression",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "begin",
+      "end",
+      "line",
+      "next",
+      "selector",
+      "309",
+      "added",
+      "auto",
+      "blanket",
+      "classification"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-structured-nosec-directives.fail.p.1ad3e66c20fe",
+      "deepswe.bandit-structured-nosec-directives.fail.p.cfee3674adf9",
+      "deepswe.bandit-structured-nosec-directives.fail.p.e9af27169fb8"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "bandit-structured-nosec-directives"
+    ],
+    "status": "unverified"
+  },
+  "abstract.18e62cd6ed2af60e": {
+    "abstract_id": "abstract.18e62cd6ed2af60e",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "ast",
+      "branch",
+      "committed",
+      "defaults",
+      "feature",
+      "implemented",
+      "parser",
+      "15ad9a5",
+      "8a0ec9d",
+      "accepts"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at boundary-decision.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-stepped-slices.pass.p.1686bcf0bc74",
+      "deepswe.actionlint-action-pinning-lint.fail.p.d2f3c5476a2b",
+      "deepswe.anko-default-function-arguments.pass.p.5a501eb5e67a",
+      "deepswe.cliffy-config-file-parsing.fail.p.3b7598781d5d"
+    ],
+    "positive_tasks": [
+      "abs-stepped-slices",
+      "anko-default-function-arguments"
+    ],
+    "negative_tasks": [
+      "actionlint-action-pinning-lint",
+      "cliffy-config-file-parsing"
+    ],
+    "status": "validated"
+  },
+  "abstract.1a259703cd937e7a": {
+    "abstract_id": "abstract.1a259703cd937e7a",
+    "capability": "parsing-schema",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "before",
+      "behavior",
+      "execution",
+      "inspect",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "then",
+      "add",
+      "autoclose",
+      "boundaries"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.actionlint-action-pinning-lint.fail.f.6ca365ea21af",
+      "deepswe.actionlint-action-pinning-lint.fail.p.396fb7eb7eb4",
+      "deepswe.arktype-json-schema-refs-dependencies.fail.f.a627e5c67250",
+      "deepswe.arktype-json-schema-refs-dependencies.fail.p.c448e9fb5cf1",
+      "deepswe.cliffy-config-file-parsing.fail.f.daa8bcbf1f31",
+      "deepswe.cliffy-config-file-parsing.fail.p.e18e68e58205",
+      "deepswe.dasel-html-document-format.fail.f.f87641bc73e2",
+      "deepswe.dasel-html-document-format.fail.p.435f2b2cdad5"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "actionlint-action-pinning-lint",
+      "arktype-json-schema-refs-dependencies",
+      "cliffy-config-file-parsing",
+      "dasel-html-document-format"
+    ],
+    "status": "unverified"
+  },
+  "abstract.1b309aa1df034e3e": {
+    "abstract_id": "abstract.1b309aa1df034e3e",
+    "capability": "async-lifecycle",
+    "failure_mode": "unspecified",
+    "causal_locus": "state-propagation",
+    "trigger_tags": [
+      "feature",
+      "implemented",
+      "abortable",
+      "autocompleteprompt",
+      "backoff",
+      "based",
+      "caching",
+      "call",
+      "clearcache",
+      "core"
+    ],
+    "invariant": "Preserve the verified async-lifecycle contract at state-propagation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.awilix-async-container-initialization.pass.r.81dba8bd85b1",
+      "deepswe.clack-async-autocomplete-options.pass.f.361c5e1ce022",
+      "deepswe.clack-async-autocomplete-options.pass.r.2bb94b56d3d0"
+    ],
+    "positive_tasks": [
+      "awilix-async-container-initialization",
+      "clack-async-autocomplete-options"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.24a244af48a30be4": {
+    "abstract_id": "abstract.24a244af48a30be4",
+    "capability": "binding-type",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "alias",
+      "assertions",
+      "becomes",
+      "camel",
+      "correct",
+      "does",
+      "expectation"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.adaptix-name-mapping-aliases.fail.f.f7900194894a",
+      "deepswe.adaptix-name-mapping-aliases.fail.p.39183733cbf6",
+      "deepswe.adaptix-name-mapping-aliases.fail.r.798c602ee672",
+      "deepswe.aiomonitor-task-snapshots-diff.fail.r.5cbf54c03f68",
+      "deepswe.anko-typed-variable-bindings.fail.f.f5511d968083",
+      "deepswe.anko-typed-variable-bindings.fail.p.53f14da97b67"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "adaptix-name-mapping-aliases",
+      "aiomonitor-task-snapshots-diff",
+      "anko-typed-variable-bindings"
+    ],
+    "status": "unverified"
+  },
+  "abstract.2a0c2dc16afade66": {
+    "abstract_id": "abstract.2a0c2dc16afade66",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "added",
+      "all",
+      "analysis",
+      "b2f647c",
+      "branch",
+      "caching",
+      "checked",
+      "clear",
+      "committed",
+      "config"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-incremental-cache-control.pass.f.48dd7be9e707",
+      "deepswe.bandit-incremental-cache-control.pass.m.0d4dcd1f5ded",
+      "deepswe.bandit-incremental-cache-control.pass.p.24629fc1fe3a",
+      "deepswe.bandit-incremental-cache-control.pass.r.7d6d27a41ee4",
+      "deepswe.bandit-incremental-cache-control.pass.s.c1d308a90b7a"
+    ],
+    "positive_tasks": [
+      "bandit-incremental-cache-control"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.2acc196053c1ed7e": {
+    "abstract_id": "abstract.2acc196053c1ed7e",
+    "capability": "repository-contract",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "backup",
+      "benchmark",
+      "can",
+      "cli",
+      "compile",
+      "dependencies",
+      "dev"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.aiomonitor-task-snapshots-diff.fail.f.64af240a873c",
+      "deepswe.boa-hierarchical-evaluation-cancellation.fail.f.70a918abc310"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "aiomonitor-task-snapshots-diff",
+      "boa-hierarchical-evaluation-cancellation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.32f5a07b79d5d625": {
+    "abstract_id": "abstract.32f5a07b79d5d625",
+    "capability": "async-lifecycle",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "9f6b131",
+      "are",
+      "arity",
+      "branch",
+      "checking",
+      "clean",
+      "committed",
+      "complete",
+      "constructor",
+      "contract"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.clack-async-autocomplete-options.fail.f.5ebc5a98cc0b"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "clack-async-autocomplete-options"
+    ],
+    "status": "unverified"
+  },
+  "abstract.330b93e8aa62bf49": {
+    "abstract_id": "abstract.330b93e8aa62bf49",
+    "capability": "transformation-roundtrip",
+    "failure_mode": "unspecified",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "16759",
+      "7f8be87",
+      "backed",
+      "branch",
+      "clean",
+      "commit",
+      "complete",
+      "compressshorthand",
+      "contains",
+      "created"
+    ],
+    "invariant": "Preserve the verified transformation-roundtrip contract at boundary-decision.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.p.74c7a6a6ee2c",
+      "deepswe.csstree-shorthand-expansion-compression.fail.s.b593366675da"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  },
+  "abstract.3cc7d67a0901c9db": {
+    "abstract_id": "abstract.3cc7d67a0901c9db",
+    "capability": "parsing-schema",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "accumulation",
+      "added",
+      "agent",
+      "agent_id",
+      "back",
+      "backend",
+      "committed",
+      "complete",
+      "delegate_task",
+      "execution"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.claude-code-by-agents-recursive-delegation.fail.p.d8468273fb60"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "claude-code-by-agents-recursive-delegation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.43990b3a96bc3fff": {
+    "abstract_id": "abstract.43990b3a96bc3fff",
+    "capability": "repository-contract",
+    "failure_mode": "verified_success",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "__init__",
+      "all",
+      "bootstrap",
+      "branch",
+      "c6e0e3a8",
+      "cattr",
+      "change",
+      "clean",
+      "commit",
+      "committed"
+    ],
+    "invariant": "Preserve the verified repository-contract contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.arcane-drift-detection-baselines.pass.p.6003eafbcd09",
+      "deepswe.cattrs-partial-structuring-recovery.pass.p.9650c964a6f5"
+    ],
+    "positive_tasks": [
+      "arcane-drift-detection-baselines",
+      "cattrs-partial-structuring-recovery"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.44989d8ccdb2c34e": {
+    "abstract_id": "abstract.44989d8ccdb2c34e",
+    "capability": "transformation-roundtrip",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "unspecified",
+    "trigger_tags": [
+      "16759",
+      "7f8be87",
+      "backed",
+      "branch",
+      "clean",
+      "commit",
+      "complete",
+      "compressshorthand",
+      "contains",
+      "contract"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.s.ca96f63980aa"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  },
+  "abstract.45a0f6ffa5468222": {
+    "abstract_id": "abstract.45a0f6ffa5468222",
+    "capability": "parsing-schema",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "convention",
+      "env",
+      "established",
+      "execution",
+      "host",
+      "instead",
+      "mapping",
+      "name",
+      "negative-evidence",
+      "patch_materialization_failure"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.cliffy-config-file-parsing.fail.r.bd9d1248d55c"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "cliffy-config-file-parsing"
+    ],
+    "status": "unverified"
+  },
+  "abstract.462841ec945db1d9": {
+    "abstract_id": "abstract.462841ec945db1d9",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "state-propagation",
+    "trigger_tags": [
+      "accumulation",
+      "added",
+      "agent",
+      "agent_id",
+      "back",
+      "backend",
+      "before",
+      "behavior",
+      "catch",
+      "changes"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at state-propagation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.arktype-json-schema-refs-dependencies.fail.p.dba3232ec774",
+      "deepswe.arktype-json-schema-refs-dependencies.fail.s.0da4dfe1e96c",
+      "deepswe.claude-code-by-agents-recursive-delegation.fail.p.dd997637da2e",
+      "deepswe.claude-code-by-agents-recursive-delegation.fail.s.1dd318da9022"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "arktype-json-schema-refs-dependencies",
+      "claude-code-by-agents-recursive-delegation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.4b928de482218a18": {
+    "abstract_id": "abstract.4b928de482218a18",
+    "capability": "repository-contract",
+    "failure_mode": "unspecified",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "__init__",
+      "all",
+      "bootstrap",
+      "branch",
+      "c6e0e3a8",
+      "cattr",
+      "change",
+      "clean",
+      "commit",
+      "committed"
+    ],
+    "invariant": "Preserve the verified repository-contract contract at validation-preservation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.arcane-drift-detection-baselines.pass.f.f95864dc51c7",
+      "deepswe.cattrs-partial-structuring-recovery.pass.f.7d8cdca2ccb9"
+    ],
+    "positive_tasks": [
+      "arcane-drift-detection-baselines",
+      "cattrs-partial-structuring-recovery"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.4d6512e229adc786": {
+    "abstract_id": "abstract.4d6512e229adc786",
+    "capability": "parsing-schema",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "add",
+      "before",
+      "behavior",
+      "cli",
+      "convention",
+      "core",
+      "deciding"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.actionlint-action-pinning-lint.fail.s.a6d115d5424b",
+      "deepswe.cliffy-config-file-parsing.fail.s.e35645abe678"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "actionlint-action-pinning-lint",
+      "cliffy-config-file-parsing"
+    ],
+    "status": "unverified"
+  },
+  "abstract.5020830c0aeebe25": {
+    "abstract_id": "abstract.5020830c0aeebe25",
+    "capability": "async-lifecycle",
+    "failure_mode": "unspecified",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "feature",
+      "implemented",
+      "abortable",
+      "api",
+      "asclass",
+      "asfunction",
+      "autocompleteprompt",
+      "backoff",
+      "based",
+      "bounded"
+    ],
+    "invariant": "Preserve the verified async-lifecycle contract at materialization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.awilix-async-container-initialization.pass.m.f4df49eae4fe",
+      "deepswe.clack-async-autocomplete-options.pass.m.3597c71f21e8"
+    ],
+    "positive_tasks": [
+      "awilix-async-container-initialization",
+      "clack-async-autocomplete-options"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.51e5ff3c6b63c463": {
+    "abstract_id": "abstract.51e5ff3c6b63c463",
+    "capability": "transformation-roundtrip",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "16759",
+      "7f8be87",
+      "backed",
+      "branch",
+      "clean",
+      "commit",
+      "complete",
+      "compressshorthand",
+      "contains",
+      "created"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.p.379aaf2e8e5e"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  },
+  "abstract.56dde79da6335299": {
+    "abstract_id": "abstract.56dde79da6335299",
+    "capability": "binding-type",
+    "failure_mode": "unspecified",
+    "causal_locus": "unspecified",
+    "trigger_tags": [
+      "negative-evidence",
+      "after",
+      "alias",
+      "assertions",
+      "becomes",
+      "before",
+      "camel",
+      "committing",
+      "complete",
+      "correct"
+    ],
+    "invariant": "Preserve the verified binding-type contract at unspecified.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.adaptix-name-mapping-aliases.fail.s.35a0386362d2",
+      "deepswe.anko-typed-variable-bindings.fail.s.72a9171b52ab"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "adaptix-name-mapping-aliases",
+      "anko-typed-variable-bindings"
+    ],
+    "status": "unverified"
+  },
+  "abstract.5a09ad4dd8c090c6": {
+    "abstract_id": "abstract.5a09ad4dd8c090c6",
+    "capability": "parsing-schema",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "state-propagation",
+    "trigger_tags": [
+      "before",
+      "behavior",
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "catch",
+      "changes",
+      "errors",
+      "jsonschema",
+      "new"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.actionlint-action-pinning-lint.fail.r.bea59ca4dd5e",
+      "deepswe.arktype-json-schema-refs-dependencies.fail.r.13d9fcb4992d",
+      "deepswe.arktype-json-schema-refs-dependencies.fail.s.ff3f5b026aa5"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "actionlint-action-pinning-lint",
+      "arktype-json-schema-refs-dependencies"
+    ],
+    "status": "unverified"
+  },
+  "abstract.5bed182d415411bb": {
+    "abstract_id": "abstract.5bed182d415411bb",
+    "capability": "security-analysis",
+    "failure_mode": "preservation_regression",
+    "causal_locus": "state-propagation",
+    "trigger_tags": [
+      "309",
+      "added",
+      "auto",
+      "begin",
+      "blanket",
+      "classification",
+      "dominance",
+      "end",
+      "expressions",
+      "full"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at state-propagation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-structured-nosec-directives.fail.f.8fdbc188082f"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "bandit-structured-nosec-directives"
+    ],
+    "status": "unverified"
+  },
+  "abstract.5fee7684b02a13e1": {
+    "abstract_id": "abstract.5fee7684b02a13e1",
+    "capability": "binding-type",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "after",
+      "alias",
+      "assertions",
+      "becomes",
+      "before",
+      "camel",
+      "committing"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.adaptix-name-mapping-aliases.fail.s.b59d91e8fe98",
+      "deepswe.anko-typed-variable-bindings.fail.s.21b29e9ed796"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "adaptix-name-mapping-aliases",
+      "anko-typed-variable-bindings"
+    ],
+    "status": "unverified"
+  },
+  "abstract.6699054f8f4bc289": {
+    "abstract_id": "abstract.6699054f8f4bc289",
+    "capability": "async-lifecycle",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "9f6b131",
+      "are",
+      "arity",
+      "branch",
+      "checking",
+      "clean",
+      "committed",
+      "complete",
+      "constructor",
+      "contract"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.clack-async-autocomplete-options.fail.s.07449d316a49"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "clack-async-autocomplete-options"
+    ],
+    "status": "unverified"
+  },
+  "abstract.6814c6e2caaf0c76": {
+    "abstract_id": "abstract.6814c6e2caaf0c76",
+    "capability": "repository-contract",
+    "failure_mode": "unspecified",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "existing",
+      "focused",
+      "only",
+      "pass",
+      "all",
+      "backup",
+      "benchmark",
+      "bootstrap",
+      "branch",
+      "c6e0e3a8"
+    ],
+    "invariant": "Preserve the verified repository-contract contract at boundary-decision.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.aiomonitor-task-snapshots-diff.fail.p.f4a5b794680c",
+      "deepswe.arcane-drift-detection-baselines.pass.p.013762f6394d",
+      "deepswe.boa-hierarchical-evaluation-cancellation.fail.p.63ed3454d0fa"
+    ],
+    "positive_tasks": [
+      "arcane-drift-detection-baselines"
+    ],
+    "negative_tasks": [
+      "aiomonitor-task-snapshots-diff",
+      "boa-hierarchical-evaluation-cancellation"
+    ],
+    "status": "provisional"
+  },
+  "abstract.6b2dd3684b5d0999": {
+    "abstract_id": "abstract.6b2dd3684b5d0999",
+    "capability": "transformation-roundtrip",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "append",
+      "dispatcher",
+      "exported",
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.f.a32f81804f78",
+      "deepswe.csstree-shorthand-expansion-compression.fail.p.e38630982ffb"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  },
+  "abstract.6c4342d0ac6139fa": {
+    "abstract_id": "abstract.6c4342d0ac6139fa",
+    "capability": "cache-state",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "9f6b131",
+      "are",
+      "arity",
+      "branch",
+      "checking",
+      "clean",
+      "committed",
+      "complete",
+      "constructor",
+      "contract"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.clack-async-autocomplete-options.fail.r.685452f0b16d"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "clack-async-autocomplete-options"
+    ],
+    "status": "unverified"
+  },
+  "abstract.73f8da20d19192cb": {
+    "abstract_id": "abstract.73f8da20d19192cb",
+    "capability": "cache-state",
+    "failure_mode": "unspecified",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "abort",
+      "autocompleteprompt",
+      "backoff",
+      "both",
+      "caches",
+      "debounce",
+      "detection",
+      "duration",
+      "fallback",
+      "fetch"
+    ],
+    "invariant": "Preserve the verified cache-state contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.clack-async-autocomplete-options.fail.p.4ca750bbbad9",
+      "deepswe.clack-async-autocomplete-options.fail.s.da2160d8a6dc"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "clack-async-autocomplete-options"
+    ],
+    "status": "unverified"
+  },
+  "abstract.76b7b59bd8802465": {
+    "abstract_id": "abstract.76b7b59bd8802465",
+    "capability": "transformation-roundtrip",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "append",
+      "dispatcher",
+      "execution",
+      "exported",
+      "negative-evidence",
+      "patch_materialization_failure"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.r.31c435e94996",
+      "deepswe.csstree-shorthand-expansion-compression.fail.s.570388066e6b"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  },
+  "abstract.776af7629413d437": {
+    "abstract_id": "abstract.776af7629413d437",
+    "capability": "security-analysis",
+    "failure_mode": "verified_success",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "918",
+      "all",
+      "b620",
+      "b621",
+      "b622",
+      "b623",
+      "b624",
+      "cfg",
+      "complete",
+      "core"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-interprocedural-taint-checks.pass.p.ee1020d32384"
+    ],
+    "positive_tasks": [
+      "bandit-interprocedural-taint-checks"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.77c5d280cd1f86ff": {
+    "abstract_id": "abstract.77c5d280cd1f86ff",
+    "capability": "async-lifecycle",
+    "failure_mode": "verified_success",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "feature",
+      "implemented",
+      "abortable",
+      "autocompleteprompt",
+      "backoff",
+      "based",
+      "caching",
+      "call",
+      "clearcache",
+      "core"
+    ],
+    "invariant": "Preserve the verified async-lifecycle contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.awilix-async-container-initialization.pass.p.1bddb5167df7",
+      "deepswe.clack-async-autocomplete-options.pass.p.556113091859",
+      "deepswe.clack-async-autocomplete-options.pass.p.9d1001b6fdd7"
+    ],
+    "positive_tasks": [
+      "awilix-async-container-initialization",
+      "clack-async-autocomplete-options"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.8384a55166e0d128": {
+    "abstract_id": "abstract.8384a55166e0d128",
+    "capability": "repository-contract",
+    "failure_mode": "unspecified",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "all",
+      "bootstrap",
+      "branch",
+      "c6e0e3a8",
+      "change",
+      "clean",
+      "commit",
+      "committed",
+      "complete",
+      "dist"
+    ],
+    "invariant": "Preserve the verified repository-contract contract at materialization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.arcane-drift-detection-baselines.pass.m.a5326770ddba",
+      "deepswe.arcane-drift-detection-baselines.pass.r.3cdcd5187be6",
+      "deepswe.arcane-drift-detection-baselines.pass.s.340707d82fd4",
+      "deepswe.cattrs-partial-structuring-recovery.pass.m.d6b2905600ec"
+    ],
+    "positive_tasks": [
+      "arcane-drift-detection-baselines",
+      "cattrs-partial-structuring-recovery"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.8b73276c7cceedbb": {
+    "abstract_id": "abstract.8b73276c7cceedbb",
+    "capability": "parsing-schema",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "state-propagation",
+    "trigger_tags": [
+      "accumulation",
+      "added",
+      "agent",
+      "agent_id",
+      "back",
+      "backend",
+      "committed",
+      "complete",
+      "contract",
+      "contract_boundary_gap"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.claude-code-by-agents-recursive-delegation.fail.r.b4b0cd78c706",
+      "deepswe.claude-code-by-agents-recursive-delegation.fail.s.fa263713b7c9"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "claude-code-by-agents-recursive-delegation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.8e67c1e9a25b9ed3": {
+    "abstract_id": "abstract.8e67c1e9a25b9ed3",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "unspecified",
+    "trigger_tags": [
+      "ast",
+      "evaluator",
+      "parser",
+      "8a0ec9d",
+      "accepts",
+      "all",
+      "arrays",
+      "backward",
+      "branch",
+      "committed"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at unspecified.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-stepped-slices.pass.r.78775c75ec74",
+      "deepswe.abs-stepped-slices.pass.r.be1bc2f20699",
+      "deepswe.abs-stepped-slices.pass.s.a159eea21fe0",
+      "deepswe.actionlint-action-pinning-lint.fail.s.63ea7c56e61f",
+      "deepswe.cliffy-config-file-parsing.fail.s.9c0b39a00eff"
+    ],
+    "positive_tasks": [
+      "abs-stepped-slices"
+    ],
+    "negative_tasks": [
+      "actionlint-action-pinning-lint",
+      "cliffy-config-file-parsing"
+    ],
+    "status": "provisional"
+  },
+  "abstract.935f1cd884c37c80": {
+    "abstract_id": "abstract.935f1cd884c37c80",
+    "capability": "parsing-schema",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "normalization",
+    "trigger_tags": [
+      "handling",
+      "text",
+      "attributes",
+      "attrs",
+      "body",
+      "boolean",
+      "branch",
+      "contract",
+      "contract_boundary_gap",
+      "decoding"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.claude-code-by-agents-recursive-delegation.fail.f.38c21ce80a43",
+      "deepswe.dasel-html-document-format.fail.f.9e24febdb98f",
+      "deepswe.dasel-html-document-format.fail.p.5ea596102648",
+      "deepswe.dasel-html-document-format.fail.r.e6828cdb99d4",
+      "deepswe.dasel-html-document-format.fail.s.806004c72c42"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "claude-code-by-agents-recursive-delegation",
+      "dasel-html-document-format"
+    ],
+    "status": "unverified"
+  },
+  "abstract.960ea93eb2b65e8e": {
+    "abstract_id": "abstract.960ea93eb2b65e8e",
+    "capability": "async-lifecycle",
+    "failure_mode": "unspecified",
+    "causal_locus": "unspecified",
+    "trigger_tags": [
+      "feature",
+      "implemented",
+      "abortable",
+      "api",
+      "asclass",
+      "asfunction",
+      "autocompleteprompt",
+      "backoff",
+      "based",
+      "bounded"
+    ],
+    "invariant": "Preserve the verified async-lifecycle contract at unspecified.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff",
+      "deepswe.clack-async-autocomplete-options.pass.s.e60e0ce71596"
+    ],
+    "positive_tasks": [
+      "awilix-async-container-initialization",
+      "clack-async-autocomplete-options"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.96eed290ddb92772": {
+    "abstract_id": "abstract.96eed290ddb92772",
+    "capability": "security-analysis",
+    "failure_mode": "unspecified",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "all",
+      "775dd6d",
+      "added",
+      "auto",
+      "based",
+      "begin",
+      "branch",
+      "case",
+      "commit",
+      "committed"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at boundary-decision.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-interprocedural-taint-checks.pass.p.782d608c24cd",
+      "deepswe.bandit-structured-nosec-directives.fail.p.47f9419a3428",
+      "deepswe.bandit-structured-nosec-directives.fail.s.a2c863bcc882"
+    ],
+    "positive_tasks": [
+      "bandit-interprocedural-taint-checks"
+    ],
+    "negative_tasks": [
+      "bandit-structured-nosec-directives"
+    ],
+    "status": "provisional"
+  },
+  "abstract.98877688a4780ea8": {
+    "abstract_id": "abstract.98877688a4780ea8",
+    "capability": "cache-state",
+    "failure_mode": "unspecified",
+    "causal_locus": "normalization",
+    "trigger_tags": [
+      "1f3013b",
+      "bare",
+      "branch",
+      "canonical",
+      "commit",
+      "committed",
+      "complete",
+      "cyclic",
+      "debug",
+      "errors"
+    ],
+    "invariant": "Preserve the verified cache-state contract at normalization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-module-cache-flags.pass.f.d96771129fb3",
+      "deepswe.abs-module-cache-flags.pass.m.aa8ebb7aadd1",
+      "deepswe.abs-module-cache-flags.pass.p.f683b1b08796",
+      "deepswe.abs-module-cache-flags.pass.r.9e555c9a69fc",
+      "deepswe.abs-module-cache-flags.pass.s.d6c74f93724d"
+    ],
+    "positive_tasks": [
+      "abs-module-cache-flags"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.9999465deb243248": {
+    "abstract_id": "abstract.9999465deb243248",
+    "capability": "cache-state",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "backup",
+      "benchmark",
+      "can",
+      "compile",
+      "dependencies",
+      "dev",
+      "focused",
+      "manifest",
+      "offline",
+      "only"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.boa-hierarchical-evaluation-cancellation.fail.p.8ed82fe19e07"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "boa-hierarchical-evaluation-cancellation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.9c225590bbbbb999": {
+    "abstract_id": "abstract.9c225590bbbbb999",
+    "capability": "repository-contract",
+    "failure_mode": "unspecified",
+    "causal_locus": "unspecified",
+    "trigger_tags": [
+      "negative-evidence",
+      "__init__",
+      "backup",
+      "benchmark",
+      "can",
+      "cattr",
+      "cli",
+      "compile",
+      "converters",
+      "dependencies"
+    ],
+    "invariant": "Preserve the verified repository-contract contract at unspecified.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.aiomonitor-task-snapshots-diff.fail.s.9ef6573106b5",
+      "deepswe.boa-hierarchical-evaluation-cancellation.fail.s.c362bf43a483",
+      "deepswe.cattrs-partial-structuring-recovery.pass.r.b9c523463c78"
+    ],
+    "positive_tasks": [
+      "cattrs-partial-structuring-recovery"
+    ],
+    "negative_tasks": [
+      "aiomonitor-task-snapshots-diff",
+      "boa-hierarchical-evaluation-cancellation"
+    ],
+    "status": "provisional"
+  },
+  "abstract.a0754a7b78fd5679": {
+    "abstract_id": "abstract.a0754a7b78fd5679",
+    "capability": "security-analysis",
+    "failure_mode": "unspecified",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "918",
+      "all",
+      "b620",
+      "b621",
+      "b622",
+      "b623",
+      "b624",
+      "cfg",
+      "complete",
+      "core"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at validation-preservation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-interprocedural-taint-checks.pass.f.8d7f05fea7ec"
+    ],
+    "positive_tasks": [
+      "bandit-interprocedural-taint-checks"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.a0c992a78d53a12d": {
+    "abstract_id": "abstract.a0c992a78d53a12d",
+    "capability": "cache-state",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "9f6b131",
+      "are",
+      "arity",
+      "branch",
+      "checking",
+      "clean",
+      "committed",
+      "complete",
+      "constructor",
+      "core"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.clack-async-autocomplete-options.fail.p.06edf7233f35"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "clack-async-autocomplete-options"
+    ],
+    "status": "unverified"
+  },
+  "abstract.a1cf3e6b39cce2f6": {
+    "abstract_id": "abstract.a1cf3e6b39cce2f6",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "ast",
+      "parser",
+      "branch",
+      "committed",
+      "feature",
+      "implemented",
+      "15ad9a5",
+      "added",
+      "astutil",
+      "call"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at validation-preservation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-stepped-slices.pass.f.29e228db755e",
+      "deepswe.abs-stepped-slices.pass.f.4f84605c2666",
+      "deepswe.anko-default-function-arguments.pass.f.a3c4e052be82",
+      "deepswe.anko-default-function-arguments.pass.m.3949ff82cb8a",
+      "deepswe.anko-default-function-arguments.pass.r.1e7318308110",
+      "deepswe.anko-default-function-arguments.pass.s.3f08701e3bfb"
+    ],
+    "positive_tasks": [
+      "abs-stepped-slices",
+      "anko-default-function-arguments"
+    ],
+    "negative_tasks": [],
+    "status": "validated"
+  },
+  "abstract.a52f52f6646bb013": {
+    "abstract_id": "abstract.a52f52f6646bb013",
+    "capability": "async-lifecycle",
+    "failure_mode": "unspecified",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "api",
+      "asclass",
+      "asfunction",
+      "bounded",
+      "branch",
+      "clean",
+      "commit",
+      "concurrency",
+      "created",
+      "dependency"
+    ],
+    "invariant": "Preserve the verified async-lifecycle contract at validation-preservation.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.awilix-async-container-initialization.pass.f.919483f25358"
+    ],
+    "positive_tasks": [
+      "awilix-async-container-initialization"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.b83eb7659a4e92bd": {
+    "abstract_id": "abstract.b83eb7659a4e92bd",
+    "capability": "repository-contract",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "backup",
+      "benchmark",
+      "can",
+      "compile",
+      "dependencies",
+      "dev",
+      "execution",
+      "focused",
+      "manifest",
+      "negative-evidence"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.boa-hierarchical-evaluation-cancellation.fail.r.61d4394795bb"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "boa-hierarchical-evaluation-cancellation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.bb04b010b5e6c007": {
+    "abstract_id": "abstract.bb04b010b5e6c007",
+    "capability": "parsing-schema",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "autoclose",
+      "boundaries",
+      "bounded",
+      "closure",
+      "containing",
+      "descendants",
+      "execution",
+      "handle",
+      "implementation",
+      "implicit"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.dasel-html-document-format.fail.r.d8cbfd8ceac2",
+      "deepswe.dasel-html-document-format.fail.s.986c75ac61c1"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "dasel-html-document-format"
+    ],
+    "status": "unverified"
+  },
+  "abstract.c35def4220f00039": {
+    "abstract_id": "abstract.c35def4220f00039",
+    "capability": "repository-contract",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "execution",
+      "negative-evidence",
+      "patch_materialization_failure",
+      "backup",
+      "benchmark",
+      "can",
+      "cli",
+      "compile",
+      "dependencies",
+      "dev"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.aiomonitor-task-snapshots-diff.fail.s.b34acee3c819",
+      "deepswe.boa-hierarchical-evaluation-cancellation.fail.s.261842af376a"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "aiomonitor-task-snapshots-diff",
+      "boa-hierarchical-evaluation-cancellation"
+    ],
+    "status": "unverified"
+  },
+  "abstract.c36b48b6216ad365": {
+    "abstract_id": "abstract.c36b48b6216ad365",
+    "capability": "parsing-schema",
+    "failure_mode": "verified_success",
+    "causal_locus": "dispatch-registration",
+    "trigger_tags": [
+      "added",
+      "ast",
+      "branch",
+      "committed",
+      "feature",
+      "implemented",
+      "parser",
+      "15ad9a5",
+      "all",
+      "analysis"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at dispatch-registration.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.abs-stepped-slices.pass.p.51909e553411",
+      "deepswe.anko-default-function-arguments.pass.p.d994783157a9",
+      "deepswe.bandit-incremental-cache-control.pass.p.1132044f4ee5"
+    ],
+    "positive_tasks": [
+      "abs-stepped-slices",
+      "anko-default-function-arguments",
+      "bandit-incremental-cache-control"
+    ],
+    "negative_tasks": [],
+    "status": "transferable"
+  },
+  "abstract.c8aca26d9bb78fa1": {
+    "abstract_id": "abstract.c8aca26d9bb78fa1",
+    "capability": "transformation-roundtrip",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "16759",
+      "7f8be87",
+      "backed",
+      "branch",
+      "clean",
+      "commit",
+      "complete",
+      "compressshorthand",
+      "contains",
+      "contract"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.r.aa7d0156d75f"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  },
+  "abstract.cd991fd0596f0d5c": {
+    "abstract_id": "abstract.cd991fd0596f0d5c",
+    "capability": "parsing-schema",
+    "failure_mode": "unspecified",
+    "causal_locus": "normalization",
+    "trigger_tags": [
+      "attributes",
+      "attrs",
+      "body",
+      "boolean",
+      "branch",
+      "decoding",
+      "elements",
+      "entity",
+      "feature",
+      "grouping"
+    ],
+    "invariant": "Preserve the verified parsing-schema contract at normalization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.dasel-html-document-format.fail.p.bde329f42073",
+      "deepswe.dasel-html-document-format.fail.s.6dbf1290989b"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "dasel-html-document-format"
+    ],
+    "status": "unverified"
+  },
+  "abstract.cdafd0d048f7a393": {
+    "abstract_id": "abstract.cdafd0d048f7a393",
+    "capability": "async-lifecycle",
+    "failure_mode": "unspecified",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "api",
+      "asclass",
+      "asfunction",
+      "bounded",
+      "branch",
+      "clean",
+      "commit",
+      "concurrency",
+      "created",
+      "dependency"
+    ],
+    "invariant": "Preserve the verified async-lifecycle contract at boundary-decision.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.awilix-async-container-initialization.pass.p.97132a632867"
+    ],
+    "positive_tasks": [
+      "awilix-async-container-initialization"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.cfde94d895ec2fe5": {
+    "abstract_id": "abstract.cfde94d895ec2fe5",
+    "capability": "security-analysis",
+    "failure_mode": "unspecified",
+    "causal_locus": "materialization",
+    "trigger_tags": [
+      "918",
+      "all",
+      "b620",
+      "b621",
+      "b622",
+      "b623",
+      "b624",
+      "cfg",
+      "complete",
+      "core"
+    ],
+    "invariant": "Preserve the verified security-analysis contract at materialization.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.bandit-interprocedural-taint-checks.pass.m.213fdf4d4b88",
+      "deepswe.bandit-interprocedural-taint-checks.pass.r.2ec73c178655",
+      "deepswe.bandit-interprocedural-taint-checks.pass.s.208e759eee56"
+    ],
+    "positive_tasks": [
+      "bandit-interprocedural-taint-checks"
+    ],
+    "negative_tasks": [],
+    "status": "provisional"
+  },
+  "abstract.df8cc840313742d1": {
+    "abstract_id": "abstract.df8cc840313742d1",
+    "capability": "binding-type",
+    "failure_mode": "unspecified",
+    "causal_locus": "boundary-decision",
+    "trigger_tags": [
+      "after",
+      "alias",
+      "assertions",
+      "becomes",
+      "before",
+      "camel",
+      "committing",
+      "complete",
+      "correct",
+      "diff"
+    ],
+    "invariant": "Preserve the verified binding-type contract at boundary-decision.",
+    "action_schema": [
+      "Reproduce one focused counterexample for {task}.",
+      "Bind its observed state to the nearest {causal_locus} decision and make one minimal delta.",
+      "Run build or typecheck, focused verification, and retained tests before expanding."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.adaptix-name-mapping-aliases.fail.p.8a73e0a0c0a6",
+      "deepswe.anko-typed-variable-bindings.fail.p.5fd7bed40808"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "adaptix-name-mapping-aliases",
+      "anko-typed-variable-bindings"
+    ],
+    "status": "unverified"
+  },
+  "abstract.e167cb4415f65f13": {
+    "abstract_id": "abstract.e167cb4415f65f13",
+    "capability": "binding-type",
+    "failure_mode": "patch_materialization_failure",
+    "causal_locus": "validation-preservation",
+    "trigger_tags": [
+      "after",
+      "before",
+      "committing",
+      "complete",
+      "diff",
+      "execution",
+      "finalizing",
+      "footprint",
+      "hardening",
+      "inspect"
+    ],
+    "invariant": "A repair is not an established capability until a minimal, compilable vertical slice is materialized and exercised.",
+    "action_schema": [
+      "Bind one failing counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Materialize the smallest compilable delta for {task}; run build or typecheck immediately.",
+      "Run the focused counterexample, then retained tests; expand only after both execute."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.anko-typed-variable-bindings.fail.r.cab700247f66"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "anko-typed-variable-bindings"
+    ],
+    "status": "unverified"
+  },
+  "abstract.e3eb13a05b277ea3": {
+    "abstract_id": "abstract.e3eb13a05b277ea3",
+    "capability": "cache-state",
+    "failure_mode": "contract_boundary_gap",
+    "causal_locus": "normalization",
+    "trigger_tags": [
+      "16759",
+      "7f8be87",
+      "backed",
+      "branch",
+      "clean",
+      "commit",
+      "complete",
+      "compressshorthand",
+      "contains",
+      "contract"
+    ],
+    "invariant": "When a partial repair preserves old behavior, freeze its passing core and change only the nearest decision shared by the remaining counterexamples.",
+    "action_schema": [
+      "Bind one remaining counterexample to the nearest {causal_locus} decision in {repository}.",
+      "Make one minimal boundary delta for {task} without rewriting the passing core.",
+      "Run build or typecheck, the focused counterexample, then retained tests in that order."
+    ],
+    "safety_boundary": [
+      "Do not copy source-task files or patches; bind only the abstract invariant to current evidence.",
+      "Do not broaden implementation while compilation or the focused counterexample is red.",
+      "Independent F2P and P2P results are the promotion boundary."
+    ],
+    "supporting_atom_ids": [
+      "deepswe.csstree-shorthand-expansion-compression.fail.f.1590b7ac6945"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [
+      "csstree-shorthand-expansion-compression"
+    ],
+    "status": "unverified"
+  }
+}

@@ -1,0 +1,46 @@
+- id: llm-pi-ai
+  config:
+    providers:
+      metacorsi-deepseek-official:
+        apiKeyEnv: METACORSI_DSH_API_KEY
+        api: openai-completions
+        baseURL: !!js process.env.METACORSI_DSH_BASE_URL
+        maxTokens: 16384
+        compat:
+          supportsDeveloperRole: false
+          maxTokensField: max_tokens
+        models:
+          - id: deepseek-flash
+            input: [text]
+            maxTokens: 16384
+            compat:
+              thinkingFormat: deepseek
+- id: agent-default-model
+  config:
+    provider: metacorsi-deepseek-official
+    model: deepseek-flash
+- id: system-prompt
+  config:
+    personaPrefix: >-
+      You are a command planner for an external Docker executor. You have no local
+      tools. Never inspect or modify the host workspace. For every turn, return one
+      valid JSON object with analysis, commands, and done fields; return no markdown.
+      Keep analysis concise and return at most three commands. During materialization,
+      execute a direct edit immediately. Compact python -c, printf, sed, or git apply
+      is allowed. Avoid heredocs and do not spend output explaining shell quoting.
+- id: tool-pwsh
+  disabled: true
+- id: tool-bash
+  disabled: true
+- id: tool-jobs
+  disabled: true
+- id: tool-fs
+  disabled: true
+- id: tool-fs-search
+  disabled: true
+- id: tool-skill
+  disabled: true
+- id: tool-web
+  disabled: true
+- id: tool-plugin-manager
+  disabled: true

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "brain": "K29-CLS-NearMiss3",
+  "version": 29,
+  "atoms": 263,
+  "metric": "Pass@5",
+  "tasks": 20,
+  "passed": 18,
+  "pass_rate": 0.9,
+  "knowledge_read_only": true,
+  "candidate_patch_replay": false,
+  "answer_access": false,
+  "reference_patch_access": false,
+  "failed_tasks": {
+    "arktype-json-schema-refs-dependencies": {
+      "best_f2p": "24/25",
+      "stable_f2p": "23/25",
+      "p2p": "1679/1679"
+    },
+    "bandit-structured-nosec-directives": {
+      "f2p": "69/69",
+      "p2p": "281/282"
+    }
+  }
+}

@@ -1,0 +1,1623 @@
+{
+  "schema_version": 1,
+  "nodes": {
+    "deepswe.cliffy-config-file-parsing.pass.p.1a9f93b93ade": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cliffy-config-file-parsing__MM9r2bS"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.m.42653acd03f0": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI_LTM_Index_Experiment\\runs\\indexed_attempt07_20261114_030739\\01_evolve_cliffy\\jobs\\indexed_a7_01_evolve_cliffy_indexed_attempt07_20261114_030739\\cliffy-config-file-parsing__9bgvPqg"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.r.98b8ca99e672": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI_LTM_Index_Experiment\\runs\\indexed_attempt07_20261114_030739\\01_evolve_cliffy\\jobs\\indexed_a7_01_evolve_cliffy_indexed_attempt07_20261114_030739\\cliffy-config-file-parsing__9bgvPqg"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.f.78fe835e194e": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI_LTM_Index_Experiment\\runs\\indexed_attempt07_20261114_030739\\01_evolve_cliffy\\jobs\\indexed_a7_01_evolve_cliffy_indexed_attempt07_20261114_030739\\cliffy-config-file-parsing__9bgvPqg"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.s.b02505a820f7": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cliffy-config-file-parsing__MM9r2bS"
+    },
+    "abstract.parsing-schema.verified_success.4af97de35d27": {
+      "level": "capability",
+      "status": "transferable",
+      "scope": {
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "task and repository evidence match capability family parsing-schema",
+        "a concrete failure or code path supports failure mode verified_success",
+        "reproduce one focused counterexample before editing"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint",
+        "aiomonitor-task-snapshots-diff",
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": []
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.p.107ba48b3755": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\actionlint-action-pinning-lint__4GHwsdB"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.m.91bee6fb30e0": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\actionlint-action-pinning-lint__Qybmdif"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.r.3c02e3657200": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\actionlint-action-pinning-lint__Qybmdif"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.f.2a124082a953": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\actionlint-action-pinning-lint__Qybmdif"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.s.9695555966fe": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\actionlint-action-pinning-lint__4GHwsdB"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.m.0c61cada7c2b": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\cliffy-config-file-parsing__8UyJefr"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.r.fafaa916e7ae": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\cliffy-config-file-parsing__8UyJefr"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.f.4375563084fe": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\cliffy-config-file-parsing__8UyJefr"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.p.9e1a81b372e7": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l1\\jobs\\c11_r2l1_001642\\csstree-shorthand-expansion-comp__q8cm5Ha"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.m.f51b03025180": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\csstree-shorthand-expansion-comp__to7FMPz"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.r.68ec3c2e0bca": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\csstree-shorthand-expansion-comp__to7FMPz"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.f.423644f68b8d": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\s5_20261114_172230\\b\\jobs\\s5_b_172230\\csstree-shorthand-expansion-comp__to7FMPz"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.s.13eadf390b0d": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l1\\jobs\\c11_r2l1_001642\\csstree-shorthand-expansion-comp__q8cm5Ha"
+    },
+    "abstract.transformation-roundtrip.verified_success.e0addb576330": {
+      "level": "capability",
+      "status": "provisional-abstraction",
+      "scope": {
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "task and repository evidence match capability family transformation-roundtrip",
+        "a concrete failure or code path supports failure mode verified_success",
+        "reproduce one focused counterexample before editing"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": []
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.m.8923f746c0ba": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "dependency-policy",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0r\\jobs\\pb_g0r_231622\\actionlint-action-pinning-lint__T5qwbZ4"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.r.db486708e39d": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "dependency-policy",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0r\\jobs\\pb_g0r_231622\\actionlint-action-pinning-lint__T5qwbZ4"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.f.4deb0f4b81d4": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "dependency-policy",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0r\\jobs\\pb_g0r_231622\\actionlint-action-pinning-lint__T5qwbZ4"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.p.9650c964a6f5": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cattrs-partial-structuring-recov__AcESPhg"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.m.92840182687b": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0\\jobs\\pb_g0_231622\\cattrs-partial-structuring-recov__F8WaYNA"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.r.aeee9f0cf026": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0\\jobs\\pb_g0_231622\\cattrs-partial-structuring-recov__F8WaYNA"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.f.d5113753a81d": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0\\jobs\\pb_g0_231622\\cattrs-partial-structuring-recov__F8WaYNA"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.s.c05a0fb5df8e": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cattrs-partial-structuring-recov__AcESPhg"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.m.67b604e2241e": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0r\\jobs\\pb_g0r_231622\\cliffy-config-file-parsing__jmtK7Y9"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.r.6843887953c5": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0r\\jobs\\pb_g0r_231622\\cliffy-config-file-parsing__jmtK7Y9"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.f.f79eca1212ae": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\pb_20261114_231622\\g0r\\jobs\\pb_g0r_231622\\cliffy-config-file-parsing__jmtK7Y9"
+    },
+    "abstract.dependency-policy.verified_success.f58767a1109b": {
+      "level": "capability",
+      "status": "provisional-abstraction",
+      "scope": {
+        "capability": "dependency-policy",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "task and repository evidence match capability family dependency-policy",
+        "a concrete failure or code path supports failure mode verified_success",
+        "reproduce one focused counterexample before editing"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": []
+    },
+    "abstract.repository-contract.verified_success.7c7ff6d95a3b": {
+      "level": "capability",
+      "status": "provisional-abstraction",
+      "scope": {
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "task and repository evidence match capability family repository-contract",
+        "a concrete failure or code path supports failure mode verified_success",
+        "reproduce one focused counterexample before editing"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": []
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.p.7264cfb23ecc": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\aiomonitor-task-snapshots-diff__tnwLyqM"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.m.e6aab48b54a3": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1l1\\jobs\\c11_r1l1_001642\\aiomonitor-task-snapshots-diff__D4CpAeT"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.r.326b79d43847": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1l1\\jobs\\c11_r1l1_001642\\aiomonitor-task-snapshots-diff__D4CpAeT"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.f.11331210a42f": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1l1\\jobs\\c11_r1l1_001642\\aiomonitor-task-snapshots-diff__D4CpAeT"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.s.19f677b3ffdf": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\aiomonitor-task-snapshots-diff__tnwLyqM"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.m.02125e0a50c4": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1l2\\jobs\\c11_r1l2_001642\\csstree-shorthand-expansion-comp__dkiPGh3"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.r.e9e0cbc71359": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1l2\\jobs\\c11_r1l2_001642\\csstree-shorthand-expansion-comp__dkiPGh3"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.f.5e0d0394a4de": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1l2\\jobs\\c11_r1l2_001642\\csstree-shorthand-expansion-comp__dkiPGh3"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.m.8f427329dbc8": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\aiomonitor-task-snapshots-diff__aR2jMNs"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.r.15550d9c7f45": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\aiomonitor-task-snapshots-diff__aR2jMNs"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.f.315227953f5f": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\aiomonitor-task-snapshots-diff__aR2jMNs"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.m.1c3d91d057b4": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\cattrs-partial-structuring-recov__kZXzZ3S"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.r.67a4da268a75": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\cattrs-partial-structuring-recov__kZXzZ3S"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.f.abd20375e4e6": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\cattrs-partial-structuring-recov__kZXzZ3S"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.m.68f6cb386a31": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\cliffy-config-file-parsing__PNEDhNS"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.r.9fa1d37f764d": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\cliffy-config-file-parsing__PNEDhNS"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.f.ee105c8559ed": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r1e\\jobs\\c11_r1e_001642\\cliffy-config-file-parsing__PNEDhNS"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.m.13ba258a4b87": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l1\\jobs\\c11_r2l1_001642\\csstree-shorthand-expansion-comp__q8cm5Ha"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.r.11ed98ef6333": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l1\\jobs\\c11_r2l1_001642\\csstree-shorthand-expansion-comp__q8cm5Ha"
+    },
+    "deepswe.csstree-shorthand-expansion-compression.pass.f.886f07fc8fc5": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "csstree-shorthand-expansion-compression",
+        "repository": "csstree",
+        "capability": "transformation-roundtrip",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is csstree",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "csstree-shorthand-expansion-compression"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l1\\jobs\\c11_r2l1_001642\\csstree-shorthand-expansion-comp__q8cm5Ha"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.m.f31fb77a68c0": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l2\\jobs\\c11_r2l2_001642\\actionlint-action-pinning-lint__HSz3EEY"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.r.4577b479ca2d": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l2\\jobs\\c11_r2l2_001642\\actionlint-action-pinning-lint__HSz3EEY"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.f.29bc125b05bb": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2l2\\jobs\\c11_r2l2_001642\\actionlint-action-pinning-lint__HSz3EEY"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.m.1b45c830a156": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\actionlint-action-pinning-lint__4GHwsdB"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.r.5ac89e05e343": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\actionlint-action-pinning-lint__4GHwsdB"
+    },
+    "deepswe.actionlint-action-pinning-lint.pass.f.5763a6c14fb3": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "actionlint-action-pinning-lint",
+        "repository": "actionlint",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is actionlint",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "actionlint-action-pinning-lint"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\actionlint-action-pinning-lint__4GHwsdB"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.m.d3a8160808d7": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\aiomonitor-task-snapshots-diff__tnwLyqM"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.r.2240a28b8f4c": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\aiomonitor-task-snapshots-diff__tnwLyqM"
+    },
+    "deepswe.aiomonitor-task-snapshots-diff.pass.f.aec718da1d28": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "aiomonitor-task-snapshots-diff",
+        "repository": "aiomonitor",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is aiomonitor",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "aiomonitor-task-snapshots-diff"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\aiomonitor-task-snapshots-diff__tnwLyqM"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.m.e1c7a96c4884": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cattrs-partial-structuring-recov__AcESPhg"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.r.49a9a3e6a6c8": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cattrs-partial-structuring-recov__AcESPhg"
+    },
+    "deepswe.cattrs-partial-structuring-recovery.pass.f.abe4b9b61561": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cattrs-partial-structuring-recovery",
+        "repository": "cattrs",
+        "capability": "repository-contract",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cattrs",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cattrs-partial-structuring-recovery"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cattrs-partial-structuring-recov__AcESPhg"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.m.07c8a9fa1bbc": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cliffy-config-file-parsing__MM9r2bS"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.r.d4862c05bd99": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cliffy-config-file-parsing__MM9r2bS"
+    },
+    "deepswe.cliffy-config-file-parsing.pass.f.5f2c743d9349": {
+      "level": "task",
+      "status": "verified-local",
+      "scope": {
+        "task": "cliffy-config-file-parsing",
+        "repository": "cliffy",
+        "capability": "parsing-schema",
+        "failure_mode": "verified_success"
+      },
+      "preconditions": [
+        "repository family is cliffy",
+        "current evidence matches verified_success"
+      ],
+      "positive_groundings": [
+        "cliffy-config-file-parsing"
+      ],
+      "negative_groundings": [],
+      "source": "D:\\YYJ_MetaCoRSI1114\\runs\\c11_20261115_001642\\r2e\\jobs\\c11_r2e_001642\\cliffy-config-file-parsing__MM9r2bS"
+    }
+  },
+  "edges": [
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.f.78fe835e194e",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.m.42653acd03f0",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.r.98b8ca99e672",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.s.b02505a820f7",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.p.1a9f93b93ade",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.m.91bee6fb30e0",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.f.2a124082a953",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.p.107ba48b3755",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.s.9695555966fe",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.f.4375563084fe",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.r.3c02e3657200",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.r.fafaa916e7ae",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.m.0c61cada7c2b",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.m.f51b03025180",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.p.9e1a81b372e7",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.r.68ec3c2e0bca",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.f.423644f68b8d",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.s.13eadf390b0d",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.f.f79eca1212ae",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.r.6843887953c5",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.m.67b604e2241e",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.dependency-policy.verified_success.f58767a1109b",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.r.db486708e39d",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.dependency-policy.verified_success.f58767a1109b",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.s.9695555966fe",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.dependency-policy.verified_success.f58767a1109b",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.p.107ba48b3755",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.dependency-policy.verified_success.f58767a1109b",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.f.4deb0f4b81d4",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.dependency-policy.verified_success.f58767a1109b",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.m.8923f746c0ba",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.f.d5113753a81d",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.r.aeee9f0cf026",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.m.92840182687b",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.p.9650c964a6f5",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.s.c05a0fb5df8e",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.p.7264cfb23ecc",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.r.326b79d43847",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.m.e6aab48b54a3",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.s.19f677b3ffdf",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.f.11331210a42f",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.f.5e0d0394a4de",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.r.e9e0cbc71359",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.m.02125e0a50c4",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.f.ee105c8559ed",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.r.15550d9c7f45",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.f.315227953f5f",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.m.68f6cb386a31",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.m.8f427329dbc8",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.r.9fa1d37f764d",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.r.67a4da268a75",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.m.1c3d91d057b4",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.f.abd20375e4e6",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.m.13ba258a4b87",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.r.11ed98ef6333",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.transformation-roundtrip.verified_success.e0addb576330",
+      "target": "deepswe.csstree-shorthand-expansion-compression.pass.f.886f07fc8fc5",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.m.f31fb77a68c0",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.r.4577b479ca2d",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.f.29bc125b05bb",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.m.07c8a9fa1bbc",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.r.d4862c05bd99",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.r.2240a28b8f4c",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.m.1b45c830a156",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.m.d3a8160808d7",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.r.5ac89e05e343",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.actionlint-action-pinning-lint.pass.f.5763a6c14fb3",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.aiomonitor-task-snapshots-diff.pass.f.aec718da1d28",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.parsing-schema.verified_success.4af97de35d27",
+      "target": "deepswe.cliffy-config-file-parsing.pass.f.5f2c743d9349",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.f.abe4b9b61561",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.m.e1c7a96c4884",
+      "relation": "ABSTRACTS_FROM"
+    },
+    {
+      "source": "abstract.repository-contract.verified_success.7c7ff6d95a3b",
+      "target": "deepswe.cattrs-partial-structuring-recovery.pass.r.49a9a3e6a6c8",
+      "relation": "ABSTRACTS_FROM"
+    }
+  ]
+}

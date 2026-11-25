@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metacorsi-brain"
+version = "0.16.0"
+description = "MetaCoRSI CLS dual-store self-evolution and DeepSWE runner"
+requires-python = ">=3.11"
+dependencies = [
+  "harbor==0.24.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.2.0"]
+
+[project.scripts]
+metacorsi = "metacorsi.cli:main"
+
+[tool.setuptools.packages.find]
+where = [".", "vendor/rca-repair"]
+include = ["metacorsi*", "rcarepair*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "vendor/rca-repair"]

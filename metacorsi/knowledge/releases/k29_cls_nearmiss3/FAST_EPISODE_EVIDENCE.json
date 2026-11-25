@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source_knowledge": "K28-CLS",
+  "answer_access": false,
+  "reference_patch_access": false,
+  "episodes": [
+    {
+      "task": "aiomonitor-task-snapshots-diff",
+      "observed": "Repeated verifier runs preserve 51/53 F2P and 8/8 P2P; the remaining Web API save/list requests return 404 while CLI and other snapshot operations are already green.",
+      "invariant": "A resource capability is externally complete only when its public route set, handler bindings, and underlying state operations form a closed contract. A repeated 404 with a green core is dispatch-registration evidence, not evidence to rewrite the core model.",
+      "grounding": "Enumerate the snapshot public surface from current repository evidence; bind operation -> route -> handler -> monitor method; add only missing dispatch edges and preserve every already-green CLI, trace, diff, delete, template, and monitor path.",
+      "guard": "Run the two missing Web API operations first, then all 53 focused checks and all 8 preservation checks. Do not broaden the snapshot implementation while only route closure is red.",
+      "capability": "async-lifecycle",
+      "failure_mode": "contract_boundary_gap",
+      "tags": ["snapshot", "webui", "api", "route", "registration", "dispatch", "public", "save", "list", "closure", "boundary"]
+    },
+    {
+      "task": "bandit-incremental-cache-control",
+      "observed": "Repeated runs reach 87/88 F2P and 275/275 P2P. Near-misses move between late CLI output/lifetime behavior and force-rescan not becoming a reusable cache hit, while the cache core remains green.",
+      "invariant": "A CLI mode is complete only when its declared control semantics, persistent state transition, and observable output lifecycle agree. Force-rescan bypasses reads but must still write fresh results; auxiliary actions must emit before their output resource is closed.",
+      "grounding": "Build an action-semantics table for normal incremental, force-rescan, stats, summary, export, and clear. Trace read eligibility, write eligibility, output ownership, and close order; repair the first mismatching transition without rebuilding cache serialization or analysis semantics.",
+      "guard": "Verify the single failing transition, then all 88 incremental checks and 275 preservation checks. Do not suppress exceptions, disable caching, or special-case the assertion without preserving the state-machine invariant.",
+      "capability": "cache-state",
+      "failure_mode": "contract_boundary_gap",
+      "tags": ["bandit", "incremental", "cache", "force-rescan", "writeback", "stats", "stdout", "stream", "lifecycle", "state", "transition", "ownership"]
+    },
+    {
+      "task": "csstree-shorthand-expansion-compression",
+      "observed": "The latest verifier preserves 73/79 F2P and 16715/16715 P2P; prior runs reached 78/79. Remaining counterexamples combine reordered ambiguous list-style tokens with background-size canonicalization and round-trip mismatches.",
+      "invariant": "Shorthand parsing requires a globally consistent one-to-one role assignment and canonical component cardinality. Greedy first-match classification is not permutation invariant, and defaults may be materialized only after a complete assignment succeeds.",
+      "grounding": "Represent each token's candidate roles, bind unambiguous roles first, then use bounded backtracking for ambiguous roles. Normalize background-size to its canonical two-component representation at the shared expansion/compression boundary; preserve the existing core and change only the nearest shared decision.",
+      "guard": "Verify reordered role ambiguity, background single/multi-layer expansion, and expand-compress round trips together, followed by 79 focused and 16715 preservation checks. Reject fixes that introduce non-own-property or unrelated background regressions.",
+      "capability": "transformation-roundtrip",
+      "failure_mode": "contract_boundary_gap",
+      "tags": ["csstree", "shorthand", "role", "binding", "ambiguous", "permutation", "backtracking", "background-size", "canonical", "roundtrip", "boundary"]
+    }
+  ]
+}

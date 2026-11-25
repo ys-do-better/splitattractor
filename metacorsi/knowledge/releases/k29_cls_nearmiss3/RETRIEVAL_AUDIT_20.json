@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "profile": "cls-k28-slow-k29-nearmiss-fast-v1",
+  "memory_strategy": "cls_dual_store",
+  "backbone_atoms": 251,
+  "delta_atoms": 12,
+  "delta_tasks": [
+    "aiomonitor-task-snapshots-diff",
+    "bandit-incremental-cache-control",
+    "csstree-shorthand-expansion-compression"
+  ],
+  "rows": [
+    {
+      "task": "abs-module-cache-flags",
+      "backbone_atoms": [
+        "deepswe.abs-module-cache-flags.pass.f.d96771129fb3",
+        "deepswe.abs-module-cache-flags.pass.m.aa8ebb7aadd1",
+        "deepswe.abs-module-cache-flags.pass.p.966d41ee5f89",
+        "deepswe.abs-module-cache-flags.pass.r.9e555c9a69fc",
+        "deepswe.abs-module-cache-flags.pass.s.d6c74f93724d"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "abs-stepped-slices",
+      "backbone_atoms": [
+        "deepswe.abs-stepped-slices.pass.f.29e228db755e",
+        "deepswe.abs-stepped-slices.pass.m.463f12f96e2c",
+        "deepswe.abs-stepped-slices.pass.p.51909e553411",
+        "deepswe.abs-stepped-slices.pass.r.be1bc2f20699",
+        "deepswe.abs-stepped-slices.pass.s.a159eea21fe0"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.43990b3a96bc3fff"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.arcane-drift-detection-baselines.pass.p.6003eafbcd09"
+        ]
+      ]
+    },
+    {
+      "task": "actionlint-action-pinning-lint",
+      "backbone_atoms": [
+        "deepswe.actionlint-action-pinning-lint.pass.f.4deb0f4b81d4",
+        "deepswe.actionlint-action-pinning-lint.pass.m.91bee6fb30e0",
+        "deepswe.actionlint-action-pinning-lint.pass.p.107ba48b3755",
+        "deepswe.actionlint-action-pinning-lint.pass.r.db486708e39d",
+        "deepswe.actionlint-action-pinning-lint.pass.s.9695555966fe"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "adaptix-name-mapping-aliases",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "aiomonitor-task-snapshots-diff",
+      "backbone_atoms": [
+        "deepswe.aiomonitor-task-snapshots-diff.pass.f.2b5d0e18407b",
+        "deepswe.aiomonitor-task-snapshots-diff.pass.m.812c43254f5d",
+        "deepswe.aiomonitor-task-snapshots-diff.pass.p.7264cfb23ecc",
+        "deepswe.aiomonitor-task-snapshots-diff.pass.r.326b79d43847",
+        "deepswe.aiomonitor-task-snapshots-diff.pass.s.19f677b3ffdf"
+      ],
+      "fast_delta_atoms": [
+        "deepswe.aiomonitor-task-snapshots-diff.fail.f.9c367f487fea",
+        "deepswe.aiomonitor-task-snapshots-diff.fail.r.872f9d3b27f9",
+        "deepswe.aiomonitor-task-snapshots-diff.fail.s.c681897262ee"
+      ],
+      "slow_schema_ids": [
+        "abstract.960ea93eb2b65e8e"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff"
+        ]
+      ]
+    },
+    {
+      "task": "anko-default-function-arguments",
+      "backbone_atoms": [
+        "deepswe.anko-default-function-arguments.pass.f.a3c4e052be82",
+        "deepswe.anko-default-function-arguments.pass.m.3949ff82cb8a",
+        "deepswe.anko-default-function-arguments.pass.p.d994783157a9",
+        "deepswe.anko-default-function-arguments.pass.r.1e7318308110",
+        "deepswe.anko-default-function-arguments.pass.s.3f08701e3bfb"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "anko-typed-variable-bindings",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "arcane-drift-detection-baselines",
+      "backbone_atoms": [
+        "deepswe.arcane-drift-detection-baselines.pass.f.f95864dc51c7",
+        "deepswe.arcane-drift-detection-baselines.pass.m.a5326770ddba",
+        "deepswe.arcane-drift-detection-baselines.pass.p.6003eafbcd09",
+        "deepswe.arcane-drift-detection-baselines.pass.r.3cdcd5187be6",
+        "deepswe.arcane-drift-detection-baselines.pass.s.340707d82fd4"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.39beda20cdd117be"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.cattrs-partial-structuring-recovery.pass.r.aeee9f0cf026",
+          "deepswe.cattrs-partial-structuring-recovery.pass.f.9b43cc470d00"
+        ]
+      ]
+    },
+    {
+      "task": "arktype-json-schema-refs-dependencies",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.e94eaaad12353188"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.cliffy-config-file-parsing.pass.r.00b63389ffe3",
+          "deepswe.cliffy-config-file-parsing.pass.f.5f2c743d9349"
+        ]
+      ]
+    },
+    {
+      "task": "awilix-async-container-initialization",
+      "backbone_atoms": [
+        "deepswe.awilix-async-container-initialization.pass.f.919483f25358",
+        "deepswe.awilix-async-container-initialization.pass.m.f4df49eae4fe",
+        "deepswe.awilix-async-container-initialization.pass.p.1bddb5167df7",
+        "deepswe.awilix-async-container-initialization.pass.r.81dba8bd85b1",
+        "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "bandit-incremental-cache-control",
+      "backbone_atoms": [
+        "deepswe.bandit-incremental-cache-control.pass.f.48dd7be9e707",
+        "deepswe.bandit-incremental-cache-control.pass.m.0d4dcd1f5ded",
+        "deepswe.bandit-incremental-cache-control.pass.p.1132044f4ee5",
+        "deepswe.bandit-incremental-cache-control.pass.r.7d6d27a41ee4",
+        "deepswe.bandit-incremental-cache-control.pass.s.c1d308a90b7a"
+      ],
+      "fast_delta_atoms": [
+        "deepswe.bandit-incremental-cache-control.fail.f.f6948490141d",
+        "deepswe.bandit-incremental-cache-control.fail.r.b8b1f40cca67",
+        "deepswe.bandit-incremental-cache-control.fail.s.8061afc70ccf"
+      ],
+      "slow_schema_ids": [
+        "abstract.01b9312afc7ac7fe"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.abs-module-cache-flags.pass.p.966d41ee5f89"
+        ]
+      ]
+    },
+    {
+      "task": "bandit-interprocedural-taint-checks",
+      "backbone_atoms": [
+        "deepswe.bandit-interprocedural-taint-checks.pass.f.8d7f05fea7ec",
+        "deepswe.bandit-interprocedural-taint-checks.pass.m.213fdf4d4b88",
+        "deepswe.bandit-interprocedural-taint-checks.pass.p.ee1020d32384",
+        "deepswe.bandit-interprocedural-taint-checks.pass.r.2ec73c178655",
+        "deepswe.bandit-interprocedural-taint-checks.pass.s.208e759eee56"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "bandit-structured-nosec-directives",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.776af7629413d437"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.bandit-interprocedural-taint-checks.pass.p.ee1020d32384"
+        ]
+      ]
+    },
+    {
+      "task": "boa-hierarchical-evaluation-cancellation",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.960ea93eb2b65e8e"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.awilix-async-container-initialization.pass.s.a28f3ae166ff"
+        ]
+      ]
+    },
+    {
+      "task": "cattrs-partial-structuring-recovery",
+      "backbone_atoms": [
+        "deepswe.cattrs-partial-structuring-recovery.pass.f.ae23fb36f19f",
+        "deepswe.cattrs-partial-structuring-recovery.pass.m.92840182687b",
+        "deepswe.cattrs-partial-structuring-recovery.pass.p.9650c964a6f5",
+        "deepswe.cattrs-partial-structuring-recovery.pass.r.98adecccdd1d",
+        "deepswe.cattrs-partial-structuring-recovery.pass.s.c05a0fb5df8e"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.6814c6e2caaf0c76"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.arcane-drift-detection-baselines.pass.p.013762f6394d"
+        ]
+      ]
+    },
+    {
+      "task": "clack-async-autocomplete-options",
+      "backbone_atoms": [
+        "deepswe.clack-async-autocomplete-options.pass.f.361c5e1ce022",
+        "deepswe.clack-async-autocomplete-options.pass.m.3597c71f21e8",
+        "deepswe.clack-async-autocomplete-options.pass.p.9d1001b6fdd7",
+        "deepswe.clack-async-autocomplete-options.pass.r.2bb94b56d3d0",
+        "deepswe.clack-async-autocomplete-options.pass.s.e60e0ce71596"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.a52f52f6646bb013"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.awilix-async-container-initialization.pass.f.919483f25358"
+        ]
+      ]
+    },
+    {
+      "task": "claude-code-by-agents-recursive-delegation",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.05c36bce9a3f1e71"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.cattrs-partial-structuring-recovery.pass.r.98adecccdd1d",
+          "deepswe.cattrs-partial-structuring-recovery.pass.f.ae23fb36f19f"
+        ]
+      ]
+    },
+    {
+      "task": "cliffy-config-file-parsing",
+      "backbone_atoms": [
+        "deepswe.cliffy-config-file-parsing.pass.f.cfdb575bb251",
+        "deepswe.cliffy-config-file-parsing.pass.m.07c8a9fa1bbc",
+        "deepswe.cliffy-config-file-parsing.pass.p.1a9f93b93ade",
+        "deepswe.cliffy-config-file-parsing.pass.r.a16c4775bc31",
+        "deepswe.cliffy-config-file-parsing.pass.s.b02505a820f7"
+      ],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.a1cf3e6b39cce2f6"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.anko-default-function-arguments.pass.r.1e7318308110",
+          "deepswe.anko-default-function-arguments.pass.f.a3c4e052be82",
+          "deepswe.anko-default-function-arguments.pass.s.3f08701e3bfb"
+        ]
+      ]
+    },
+    {
+      "task": "csstree-shorthand-expansion-compression",
+      "backbone_atoms": [
+        "deepswe.csstree-shorthand-expansion-compression.pass.f.5e0d0394a4de",
+        "deepswe.csstree-shorthand-expansion-compression.pass.m.02125e0a50c4",
+        "deepswe.csstree-shorthand-expansion-compression.pass.p.9e1a81b372e7",
+        "deepswe.csstree-shorthand-expansion-compression.pass.r.e9e0cbc71359",
+        "deepswe.csstree-shorthand-expansion-compression.pass.s.13eadf390b0d"
+      ],
+      "fast_delta_atoms": [
+        "deepswe.csstree-shorthand-expansion-compression.fail.f.7b3e9ad6b86f",
+        "deepswe.csstree-shorthand-expansion-compression.fail.r.cb42b7055ac7",
+        "deepswe.csstree-shorthand-expansion-compression.fail.s.9ecffc5dc5c3"
+      ],
+      "slow_schema_ids": [],
+      "slow_schema_sources": []
+    },
+    {
+      "task": "dasel-html-document-format",
+      "backbone_atoms": [],
+      "fast_delta_atoms": [],
+      "slow_schema_ids": [
+        "abstract.e94eaaad12353188"
+      ],
+      "slow_schema_sources": [
+        [
+          "deepswe.cliffy-config-file-parsing.pass.r.00b63389ffe3",
+          "deepswe.cliffy-config-file-parsing.pass.f.5f2c743d9349"
+        ]
+      ]
+    }
+  ],
+  "violations": []
+}
