@@ -1,30 +1,36 @@
 # MetaCoRSI on DeepSWE
 
-Use `agent.name: metacorsi` for the local DSH harness and
+Use `agent.name: metacorsi` for the local DeepSeek Harness (DSH) and
 `algorithm.name: metacorsi` for verifier-guided knowledge evolution. FlashRSI
 owns task splitting, Snapshot selection, test evaluation and experiment records.
 The sibling MetaCoRSI project supplies DSH execution, RCA, grounding and knowledge
 distillation. Its native Harbor runs in a separate process.
 
 Install FlashRSI with the `harbor` extra (Harbor 0.23.0) on Python 3.12
-or newer. Set `agent.python` to a separate environment with MetaCoRSI's
-Harbor 0.24.0 and `agent.project_dir` to its checkout. Set `agent.cli_path` or
+or newer. Set `agent.python` or `METACORSI_PYTHON` to a separate Python
+environment with MetaCoRSI's Harbor 0.24.0. Set `agent.cli_path` or
 `METACORSI_DSH_EXE` if DSH is outside PATH and its standard macOS install.
 A running Docker Linux daemon and Compose are required. DSH calls the specified
 model provider from the host. The agent and verifier containers retain the native
 DeepSWE network restrictions.
 
 The [example configuration](../examples/quickstarts/deepswe_metacorsi.yaml)
-references the sibling workspace's MetaCoRSI source, Python environment and
-local dev5 tasks. Adapt those paths and `agent.llm` to your installation.
+uses the sibling MetaCoRSI source in this monorepo and the pinned DeepSWE
+revision. Set `--agent.project_dir` for a separate checkout and
+`--benchmark.data_path` for local native tasks.
 Export `METACORSI_DSH_API_KEY` or configure `agent.llm.api_key` locally.
 The native evolution routine uses verifier evidence and requires
 `algorithm.worker.type: none`.
 
 ```bash
-flashrsi run --config examples/quickstarts/deepswe_metacorsi.yaml --check-only
-flashrsi run --config examples/quickstarts/deepswe_metacorsi.yaml
+cd flashrsi
+export METACORSI_PYTHON=/path/to/metacorsi/.venv/bin/python
+flashrsi run --config examples/quickstarts/deepswe_metacorsi.yaml \
+  --benchmark.data_path /path/to/deep-swe/tasks --check-only
+flashrsi run --config examples/quickstarts/deepswe_metacorsi.yaml \
+  --benchmark.data_path /path/to/deep-swe/tasks
 flashrsi evaluate --config examples/quickstarts/deepswe_metacorsi.yaml \
+  --benchmark.data_path /path/to/deep-swe/tasks \
   --snapshot /path/to/run/snapshots/SNAPSHOT_ID.json
 ```
 
@@ -43,8 +49,8 @@ The runner evaluates the selected Snapshot on test after all rounds.
 Native logs, verifier results and patch artifacts are in the run's
 `artifacts/harbor/` directory. Use `flashrsi evaluate` for a frozen run.
 
-The bundled panel is a smoke configuration: the tasks overlap historical
-K29 experience. For a generalization experiment, use test tasks independent
+The configuration selects one task per role for a development smoke. The
+local dev5 panel overlaps historical K29 experience. Use test tasks independent
 of the seed's history. FlashRSI reports one native verifier reward per task
 and does not reproduce the historical K29 Pass@5 schedule.
 

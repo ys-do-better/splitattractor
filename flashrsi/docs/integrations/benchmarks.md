@@ -58,7 +58,7 @@ link to the corresponding integration or configuration guide.
 
 ## Check coverage before a large run
 
-DeepSWE currently has an interface adapter; official downloads and real execution remain unverified. SpreadsheetBench 2 covers its first three task categories and excludes Visualization. Check each guide for the supported track and validation status.
+DeepSWE execution and independent scoring were verified on one local native task using DeepSeek Harness. SpreadsheetBench 2 covers its first three task categories and excludes Visualization. Check each guide for the supported track and validation status.
 
 A registered benchmark is not evidence of a completed model run. Inspect task failures and trajectories alongside its aggregate metric. Report custom experimental splits separately from official leaderboard settings.
 

@@ -38,7 +38,7 @@ SearchQA、MuSiQue、TriviaQA、NQ、2WikiMultiHopQA、MATH、AIME、BBEH、Supe
 | Coding | `swe_bench` | [swe_bench_verified_opro.yaml](../examples/quickstarts/swe_bench_verified_opro.yaml) | 独立原生 SWE-bench Docker verifier，不走 Harbor |
 | Coding | `swe_bench_pro` | [swe_bench_pro_opro.yaml](../examples/quickstarts/swe_bench_pro_opro.yaml) | Docker + Harbor；独立原生 verifier |
 | Coding | `terminal_bench` | [terminal_bench21_opro.yaml](../examples/quickstarts/terminal_bench21_opro.yaml) | Docker + Harbor；支持 2.0 / 2.1 |
-| Coding | `deepswe` | [deepswe_opro.yaml](../examples/quickstarts/deepswe_opro.yaml) | Docker + Harbor；接口适配，未下载官方任务或开展实验 |
+| Coding | `deepswe` | [deepswe_opro.yaml](../examples/quickstarts/deepswe_opro.yaml) · [DeepSeek Harness](../examples/quickstarts/deepswe_metacorsi.yaml) | Docker + Harbor；已验证真实单题执行和独立评分 |
 | Knowledge / Reasoning | `bbeh` | [bbeh_opro.yaml](../examples/quickstarts/bbeh_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Knowledge / Reasoning | `supergpqa` | [supergpqa_opro.yaml](../examples/quickstarts/supergpqa_opro.yaml) | 本地或原生数据；按示例设置实验划分 |
 | Knowledge / Reasoning | `hle` | [hle_opro.yaml](../examples/quickstarts/hle_opro.yaml) | 官方 HF `cais/hle`；固定版本的纯文本子集，自动排除带图题；HF 授权及独立 Judge |

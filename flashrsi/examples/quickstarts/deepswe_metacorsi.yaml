@@ -1,15 +1,14 @@
-# Local integration smoke panel. This panel overlaps the historical K29 data.
+# Development smoke with DeepSeek Harness. Set benchmark.data_path for local tasks.
 run:
   output_dir: ../../runs
 benchmark:
   name: deepswe
-  data_path: ../../../baseline/ahe/datasets/deepswe-dev5
   seed: 42
   split_counts: {train: 1, dev: 1, test: 1}
 agent:
   name: metacorsi
-  project_dir: ../../../MetaCogRSI-main
-  python: ../../../baseline/metacorsi/.venv/bin/python
+  project_dir: ../../../metacorsi
+  # Set agent.python or METACORSI_PYTHON to a Python with Harbor 0.24.0.
   timeout: 5400
   max_turns: 24
   max_extension: 6
