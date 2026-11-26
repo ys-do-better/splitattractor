@@ -8,7 +8,7 @@ SpreadsheetBench 2 的配置与执行边界。
 | Terminal-Bench 2.1 | `name: terminal_bench`, `version: "2.1"` | Harbor，原生任务 verifier | [Terminal 2.1](../examples/quickstarts/terminal_bench21_opro.yaml) |
 | SWE-bench Verified | `name: swe_bench` | 官方 SWE-bench harness + Docker，`resolved` | [Verified](../examples/quickstarts/swe_bench_verified_opro.yaml) |
 | SWE-bench Pro V2 | `name: swe_bench_pro`, `subset: all` / `hard` | Harbor 执行，官方 fresh-sandbox 评分，`resolved` | [Pro](../examples/quickstarts/swe_bench_pro_opro.yaml) |
-| DeepSWE v1.1 | `name: deepswe` | Harbor 原生 collect + 独立 verifier，`reward`；仅离线接口验证 | [DeepSWE](../examples/quickstarts/deepswe_opro.yaml) |
+| DeepSWE v1.1 | `name: deepswe` | Harbor 原生 collect + 独立 verifier，`reward`；已用 DeepSeek Harness 验证真实单题 | [DeepSWE](../examples/quickstarts/deepswe_opro.yaml) |
 | SpreadsheetBench 2 | `name: spreadsheetbench2`, `category: all` | Harbor 独立评分容器，官方 LibreOffice 重算与 workbook 评分 | [SpreadsheetBench 2](../examples/quickstarts/spreadsheetbench2_opro.yaml) |
 
 不是所有 Docker 基准都由 Harbor 管理：Verified 保留官方 harness；AppWorld / BFCL 也保留各自 Docker 接入。

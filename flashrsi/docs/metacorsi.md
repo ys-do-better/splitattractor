@@ -23,6 +23,7 @@ The native evolution routine uses verifier evidence and requires
 `algorithm.worker.type: none`.
 
 ```bash
+cd flashrsi
 export METACORSI_PYTHON=/path/to/metacorsi/.venv/bin/python
 flashrsi run --config examples/quickstarts/deepswe_metacorsi.yaml \
   --benchmark.data_path /path/to/deep-swe/tasks --check-only
