@@ -851,6 +851,8 @@ async def run(
     web_config: dict | None = None,
     debug_llm_io: bool = False,
     system_prompt_append: str = "",
+    bundle_transform=None,
+    force_answer: bool = True,
 ) -> dict[str, Any]:
     llm.configure(llm_config or {})
     web_settings.configure(web_config or {})
@@ -869,6 +871,9 @@ async def run(
         from .editor import attach
 
         attach(bundle, Path(working_dir))
+
+    if bundle_transform is not None:
+        bundle_transform(bundle)
 
     if system_prompt_append:
         bundle.system_prompt += "\n\n" + system_prompt_append
@@ -932,7 +937,8 @@ async def run(
     ]
 
     last_turn = 0
-    for turn in range(1, max_turns + 1):
+    while last_turn < ctx.max_turns:
+        turn = last_turn + 1
         last_turn = turn
         ctx._current_turn = turn
         ctx.current_turn_calls = []
@@ -1313,7 +1319,7 @@ async def run(
     # ------------------------------------------------------------------
     # Forced answer for non-normal exits
     # ------------------------------------------------------------------
-    if needs_forced_answer:
+    if needs_forced_answer and force_answer:
         forced_prompt = (
             "You have used all available turns. No more tool calls are allowed. "
             "Do not request or simulate further tool calls. "
@@ -1387,11 +1393,15 @@ async def run(
                 if _attempt < llm.LLM_MAX_RETRIES:
                     await asyncio.sleep(2**_attempt)
 
+    if not force_answer and stop_reason == "max_turns":
+        # In a repository task the collected commit, not final prose, is evaluated.
+        answer = answer or "Model turn budget reached."
     if not answer:
         answer = "(no answer produced)"
         if not stop_reason.startswith("llm_error"):
             stop_reason = "llm_error: model returned no final answer text"
 
+    termination_reason = stop_reason
     if not stop_reason.startswith("llm_error"):
         stop_reason = "completed"
 
@@ -1400,6 +1410,7 @@ async def run(
         "question": question,
         "llm_config": llm_config,
         "stop_reason": stop_reason,
+        "termination_reason": termination_reason,
         "turns": last_turn,
         "search_calls": ctx.search_calls,
         "read_calls": ctx.read_calls,
@@ -1409,6 +1420,7 @@ async def run(
         "unique_urls_searched": len(set(u for sr in ctx.searches for u in sr.urls)),
         "unique_urls_read": len(set(r.url for r in ctx.reads)),
         "read_failures": sum(1 for r in ctx.reads if not r.success),
+        "tool_calls": len(ctx.tool_history),
         "tool_skips": ctx._tool_skips,
         "tool_redirects": ctx._tool_redirects,
         "injections_count": ctx._injections_count,

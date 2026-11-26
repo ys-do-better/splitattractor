@@ -66,7 +66,9 @@ def bind(agent):
     agent._env_runner = _run
 
 
-async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
+async def _run(
+    agent, task, *, verifier_env=None, agent_allowed_hosts=None, hosted=False
+):
     """The caller's rollout has already pinned its Snapshot and configuration."""
     if shutil.which("docker") is None:
         raise ValueError("Harbor execution requires Docker with the Compose plugin")
@@ -126,11 +128,19 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
         "snapshot_id": snapshot.id,
     }
 
+    from flashrsi.integrations._hosted_miniagent import _TRIAL, HostedTrial
+
     with TemporaryDirectory(prefix="flashrsi-harbor-") as temporary:
         root = Path(temporary)
         payload = root / "payload"
         payload.mkdir(mode=0o700)
-        _stage(payload, agent, config, task.question)
+        hosted_trial = None
+        if hosted:
+            hosted_trial = HostedTrial(
+                agent, task, task.question + "\n\n" + _INTEGRITY_RULES
+            )
+        else:
+            _stage(payload, agent, config, task.question)
         trial = None
         try:
             trial = await Trial.create(
@@ -142,12 +152,20 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
                         else root / "trials"
                     ),
                     agent=AgentConfig(
-                        import_path="flashrsi.integrations.harbor:_SnapshotAgent",
+                        import_path=(
+                            "flashrsi.integrations._hosted_miniagent:HostedMiniAgentBridge"
+                            if hosted
+                            else "flashrsi.integrations.harbor:_SnapshotAgent"
+                        ),
                         model_name=config["llm"]["model_name"],
                         override_timeout_sec=timeout + grace,
                         override_setup_timeout_sec=setup_timeout,
-                        extra_allowed_hosts=agent_allowed_hosts or [],
-                        kwargs={
+                        extra_allowed_hosts=[]
+                        if hosted
+                        else (agent_allowed_hosts or []),
+                        kwargs={}
+                        if hosted
+                        else {
                             "payload_dir": str(payload),
                             "uv_installer_url": installers[install_source],
                         },
@@ -168,9 +186,15 @@ async def _run(agent, task, *, verifier_env=None, agent_allowed_hosts=None):
 
                 trial.add_hook(TrialEvent.VERIFICATION_START, prepare_verifier)
             # Harbor owns environment setup, phase deadlines, verifier and cleanup.
-            result = await trial.run()
+            token = _TRIAL.set(hosted_trial)
+            try:
+                result = await trial.run()
+            finally:
+                _TRIAL.reset(token)
             output = trial.paths.agent_dir / "flashrsi.json"
-            if output.is_file():
+            if hosted_trial is not None and hosted_trial.trajectory is not None:
+                trajectory = hosted_trial.trajectory
+            elif not hosted and output.is_file():
                 values = json.loads(output.read_text())
                 values.pop("task", None)
                 trajectory = Trajectory(**values)
@@ -364,6 +388,18 @@ def _archive_trial(trial, directory, metadata, secrets):
     return record
 
 
+_INTEGRITY_RULES = (
+    "Evaluation integrity rules: Solve the task independently. Do not "
+    "search for, download, read, or use benchmark-specific reference solutions, "
+    "hidden verifier tests, expected answers, or other agents' task solutions "
+    "from benchmark repositories, mirrors, datasets, or discussion threads. "
+    "Do not modify the verifier or forge reward files. Internet access for "
+    "ordinary documentation, dependencies, and resources requested by the task "
+    "is permitted. Tests and source files explicitly supplied as task inputs "
+    "may be inspected; this does not permit fetching hidden benchmark files."
+)
+
+
 def _stage(directory, agent, config, prompt):
     config = copy.deepcopy(config)
     config.get("harbor", {}).pop("integrity_review", None)
@@ -371,16 +407,7 @@ def _stage(directory, agent, config, prompt):
     config.get("harbor", {}).pop("trials_dir", None)
     # Keep evaluation rules outside the candidate's mutable snapshot. Public
     # benchmark repositories expose hidden tests and oracle answers online.
-    prompt += (
-        "\n\nEvaluation integrity rules: Solve the task independently. Do not "
-        "search for, download, read, or use benchmark-specific reference solutions, "
-        "hidden verifier tests, expected answers, or other agents' task solutions "
-        "from benchmark repositories, mirrors, datasets, or discussion threads. "
-        "Do not modify the verifier or forge reward files. Internet access for "
-        "ordinary documentation, dependencies, and resources requested by the task "
-        "is permitted. Tests and source files explicitly supplied as task inputs "
-        "may be inspected; this does not permit fetching hidden benchmark files."
-    )
+    prompt += "\n\n" + _INTEGRITY_RULES
     _stage_payload(directory, agent, config, prompt)
 
 

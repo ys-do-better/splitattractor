@@ -47,3 +47,37 @@ The bundled panel is a smoke configuration: the tasks overlap historical
 K29 experience. For a generalization experiment, use test tasks independent
 of the seed's history. FlashRSI reports one native verifier reward per task
 and does not reproduce the historical K29 Pass@5 schedule.
+
+## Common MiniAgent comparison runtime
+
+Use [the MiniAgent configuration](../examples/quickstarts/deepswe_metacorsi_miniagent.yaml)
+for common-harness experiments and [the pilot launcher](../scripts/run_metacorsi_miniagent.py)
+to prepare B0 through B3. The committed configuration points to the native source
+in the sibling MetaCoRSI repository. Hosted MiniAgent uses the same Harbor
+DeepSWE task and independent verifier for both targets. The MiniAgent process
+and credential stay on the host, shells run in Docker, and the task's native
+Git submission requirement applies to both targets.
+
+B0 uses MiniAgent alone. B1 adds MetaCoRSI with the five native K7 priors and
+no historical task episodes. B2 freezes an explicit historical seed. B3 starts
+from K0 and updates only from its training split. The historical dev5 fixture
+is for development. Use disjoint, audited task data for a generalization claim.
+
+```bash
+.venv/bin/python scripts/run_metacorsi_miniagent.py \
+  --config examples/quickstarts/deepswe_metacorsi_miniagent.yaml \
+  --arm B1 --data ../baseline/ahe/datasets/deepswe-dev5/abs-stepped-slices \
+  --check-only
+```
+
+Real runs require `FLASHRSI_AGENT_API_KEY` or the local
+`METACORSI_DSH_API_KEY` environment variable. Review
+[benchmark evidence](../reports/02_benchmark_smoke_test.md),
+[the runtime integration](../reports/04_runtime_integration.md),
+and [evolution validation](../reports/05_evolution_validation.md) for the
+scope of the completed checks.
+
+For paired B3 tests, pass `--use-config-test-split` for the frozen arms and
+keep the same data path and split seed. An audited warm seed can be used for
+B2 and B3 with `--heldout-warm-seed`. Historical K29 cannot bypass that guard
+for test tasks already found in its memory.

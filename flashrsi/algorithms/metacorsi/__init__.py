@@ -1,10 +1,13 @@
 """MetaCoRSI's verifier-guided memory evolution over FlashRSI Snapshots."""
 
+import json
 import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from flashrsi.agents.metacorsi import MetaCoRSITarget, copy_active_memory
+from flashrsi.agents.metacorsi.miniagent import MetaCoRSIMiniAgent
+from flashrsi.algorithms.metacorsi.episode_adapter import verified_episode
 from flashrsi.benchmarks import DeepSWE
 from flashrsi.core import Algorithm
 
@@ -17,16 +20,24 @@ class MetaCoRSI(Algorithm):
     requires_worker = False
     evolve_scope = {"memory"}
     observation_scope = {"config"}
-    _defaults = {"max_steps": 1}
+    _defaults = {"max_steps": 1, "evolution_policy": "grounding_feedback"}
+    _policies = {
+        "standard",
+        "positive_only",
+        "quarantine_negative",
+        "grounding_feedback",
+    }
     _ranges = {"max_steps": (int, 1)}
 
     def _check(self):
-        if not isinstance(self.target, MetaCoRSITarget) or not isinstance(
-            self.benchmark, DeepSWE
-        ):
+        if not isinstance(
+            self.target, (MetaCoRSITarget, MetaCoRSIMiniAgent)
+        ) or not isinstance(self.benchmark, DeepSWE):
             raise ValueError(
-                "MetaCoRSI requires agent.name: metacorsi and benchmark.name: deepswe"
+                "MetaCoRSI requires a MetaCoRSI Target and benchmark.name: deepswe"
             )
+        if self.config.evolution_policy not in self._policies:
+            raise ValueError("Unsupported native MetaCoRSI evolution policy")
         if not all((self.benchmark.train, self.benchmark.dev, self.benchmark.test)):
             raise ValueError("MetaCoRSI requires non-empty train, dev and test splits")
 
@@ -45,31 +56,80 @@ class MetaCoRSI(Algorithm):
 
     async def _evolve_memory(self):
         current = self.target.snapshot
+        miniagent = isinstance(self.target, MetaCoRSIMiniAgent)
+        if miniagent:
+            await self.target.check_native(
+                forbidden_tasks=(*self.benchmark.dev, *self.benchmark.test)
+            )
         baseline = None
         for step in range(1, self.config.max_steps + 1):
             training = await self._evaluate(
                 current, self.benchmark.train, label="train"
             )
-            trials = [
-                item.messages[-1]["trial_dir"]
-                for item in training
-                if item.status == "finished"
-                and item.messages[-1]["type"] == "HarborVerifier"
-            ]
-            if not trials:
+            if miniagent:
+                evidence = {
+                    "episodes": [
+                        episode
+                        for item in training
+                        if (episode := verified_episode(item, current.id)) is not None
+                    ],
+                    "policy": self.config.evolution_policy,
+                }
+                has_evidence = bool(evidence["episodes"])
+            else:
+                evidence = {
+                    "trials": [
+                        item.messages[-1]["trial_dir"]
+                        for item in training
+                        if item.status == "finished"
+                        and item.messages
+                        and item.messages[-1]["type"] == "HarborVerifier"
+                    ]
+                }
+                has_evidence = bool(evidence["trials"])
+            if not has_evidence:
                 raise ValueError(
-                    "No independently verified training episodes; inspect native trial logs"
+                    "No independently verified training episodes with complete evidence"
                 )
             with current.check_out() as checkout, TemporaryDirectory() as temporary:
                 memory = checkout / "memory"
                 receipt = await self.target.native(
-                    "evolve", {"memory": str(memory), "trials": trials}
+                    "evolve", {"memory": str(memory), **evidence}
+                )
+                quarantine_path = memory / "candidates.json"
+                quarantine = (
+                    json.loads(quarantine_path.read_bytes())
+                    if miniagent and quarantine_path.is_file()
+                    else {}
                 )
                 staged = Path(temporary) / "memory"
                 copy_active_memory(memory, staged)
                 shutil.rmtree(memory)
                 shutil.copytree(staged, memory)
                 candidate = self._commit(current, checkout)
+            if miniagent:
+                receipt["memory"] = await self.target.check_native(
+                    snapshot=candidate,
+                    forbidden_tasks=(*self.benchmark.dev, *self.benchmark.test),
+                )
+                if quarantine and self._run_dir is not None:
+                    directory = self._run_dir / "quarantine"
+                    directory.mkdir(mode=0o700, exist_ok=True)
+                    file = directory / f"{step:04d}.json"
+                    file.touch(mode=0o600, exist_ok=False)
+                    # These patches never enter Snapshot resources or the tool container.
+                    file.write_text(
+                        json.dumps(
+                            {
+                                "parent_snapshot_id": current.id,
+                                "candidate_snapshot_id": candidate.id,
+                                "memory_version": receipt["memory"]["version"],
+                                "task_candidates": quarantine,
+                            },
+                            ensure_ascii=False,
+                            indent=2,
+                        )
+                    )
             self._record(
                 "memory-evolution",
                 {"step": step, "receipt": receipt, "candidate_id": candidate.id},

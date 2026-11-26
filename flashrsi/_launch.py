@@ -183,6 +183,7 @@ def _plan(config):
         "opencode",
         "jiuwenswarm",
         "metacorsi",
+        "metacorsi_miniagent",
     } or (
         worker is not None
         and (
@@ -193,7 +194,7 @@ def _plan(config):
         raise ValueError(
             "Choose miniagent, claude_code, codex, pi, hermes, openclaw or opencode for either role; jiuwenswarm and metacorsi are Target-only and llm is Worker-only"
         )
-    if target == "metacorsi" and benchmark != "deepswe":
+    if target in {"metacorsi", "metacorsi_miniagent"} and benchmark != "deepswe":
         raise ValueError("The MetaCoRSI Target requires benchmark.name: deepswe")
     if not evaluating:
         algorithm_types = {
