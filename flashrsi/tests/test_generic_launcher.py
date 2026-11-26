@@ -93,7 +93,10 @@ class GenericLauncherTests(unittest.TestCase):
                     cfg = config(benchmark, agent, algorithm, worker)
                     if algorithm == "metacorsi":
                         cfg.algorithm.worker.type = "none"
-                    if agent == "metacorsi" and benchmark != "deepswe":
+                    if (
+                        agent in {"metacorsi", "metacorsi_miniagent"}
+                        and benchmark != "deepswe"
+                    ):
                         with self.assertRaisesRegex(
                             ValueError, "requires benchmark.name: deepswe"
                         ):
