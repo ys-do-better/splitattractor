@@ -336,7 +336,15 @@ EvolutionPolicy = Literal[
 def evolve(store_path: Path, result_roots: Iterable[Path],
            policy: EvolutionPolicy = "standard") -> dict:
     roots = tuple(result_roots)
-    collected = collect_episodes(roots)
+    return evolve_from_episodes(store_path, collect_episodes(roots), policy=policy,
+                                sources=tuple(str(root) for root in roots))
+
+
+def evolve_from_episodes(store_path: Path, episodes: Iterable[VerifiedEpisode],
+                         policy: EvolutionPolicy = "standard",
+                         *, sources: tuple[str, ...] = ()) -> dict:
+    """Apply the original update to independently verified, harness-neutral evidence."""
+    collected = tuple(episodes)
     if not collected:
         raise RuntimeError("no independently verified DeepSWE episodes found")
     if policy not in {
@@ -468,7 +476,7 @@ def evolve(store_path: Path, result_roots: Iterable[Path],
         "episodes": len(collected),
         "passes": sum(ep.reward == 1 for ep in episodes),
         "new_atoms": len(new_atoms),
-        "sources": [str(root) for root in roots],
+        "sources": list(sources),
         "committed_at": datetime.now(timezone.utc).isoformat(),
     })
     store.save_active(store_path)
