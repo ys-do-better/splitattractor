@@ -31,9 +31,31 @@ class WorkingMemory:
     hypotheses: list[str] = field(default_factory=list)
     plans: list[str] = field(default_factory=list)
     observations: list[dict[str, Any]] = field(default_factory=list)
+    pfg_state: dict[str, Any] = field(default_factory=dict)
+    hdk_state: dict[str, Any] = field(default_factory=dict)
+    gate: int = 0
+    active_abstract_id: str | None = None
+    sa_transitions: list[dict[str, Any]] = field(default_factory=list)
 
     def observe(self, kind: str, content: str, evidence_id: str) -> None:
         self.observations.append({"kind": kind, "content": content, "evidence_id": evidence_id})
+
+    def update_split_attractor(self, step_snapshot: dict[str, Any]) -> None:
+        """Record PFG tracking layer and hDeltaK maintenance layer state for V24 SA-WM."""
+        self.pfg_state = dict(step_snapshot.get("pfg") or {})
+        self.hdk_state = dict(step_snapshot.get("hdk") or {})
+        self.gate = int(step_snapshot.get("gate", 0))
+        self.active_abstract_id = step_snapshot.get("active_abstract_id")
+        transition = step_snapshot.get("transition")
+        if transition:
+            self.sa_transitions.append({
+                "step": step_snapshot.get("step", len(self.sa_transitions)),
+                "transition": transition,
+                "state": step_snapshot.get("state", "TRACKING"),
+                "gate": self.gate,
+                "active_abstract_id": self.active_abstract_id,
+                "reason": step_snapshot.get("reason", ""),
+            })
 
     def receipt(self) -> dict[str, Any]:
         return asdict(self)

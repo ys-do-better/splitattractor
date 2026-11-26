@@ -52,8 +52,22 @@ class MetaCoRSITarget(Agent):
     def __init__(self, config):
         root = config.get("project_dir") or os.environ.get("METACORSI_PROJECT_DIR")
         if not root:
+            here = Path(__file__).resolve()
+            for parent in here.parents:
+                for candidate in (parent / "metacorsi", parent / "metacorsi/metacorsi"):
+                    if (candidate / "metacorsi_dsh_agent/__init__.py").is_file():
+                        root = str(candidate)
+                        break
+                if root:
+                    break
+        if not root:
             raise ValueError("Set agent.project_dir to the local MetaCoRSI repository")
         self.project = Path(root).expanduser().resolve()
+        if (
+            not (self.project / "metacorsi_dsh_agent/__init__.py").is_file()
+            and (self.project / "metacorsi/metacorsi_dsh_agent/__init__.py").is_file()
+        ):
+            self.project = (self.project / "metacorsi").resolve()
         if not (self.project / "metacorsi_dsh_agent/__init__.py").is_file():
             raise ValueError(
                 "agent.project_dir does not contain the MetaCoRSI DSH harness"
@@ -209,6 +223,8 @@ class MetaCoRSITarget(Agent):
                     "max_steps": self.config.get("max_turns", 24),
                     "max_extension": self.config.get("max_extension", 6),
                     "timeout": self.config.get("timeout", 5400),
+                    "ltm_policy": self.config.get("ltm_policy", "modular_reverse_v23"),
+                    "memory_strategy": self.config.get("memory_strategy", "cls_dual_store"),
                 }
                 try:
                     with (output / "native.log").open("wb") as log:
@@ -249,4 +265,11 @@ def verifier_trajectory(report, task, snapshot_id, *messages):
         "rewards": rewards,
         "trial_dir": report["trial_dir"],
     }
-    return Trajectory(messages=(*messages, event))
+    trace_messages = tuple(report.get("messages") or ())
+    output = str(report.get("output") or "")
+    usage = report.get("usage") if isinstance(report.get("usage"), dict) else {}
+    return Trajectory(
+        output=output,
+        messages=(*messages, *trace_messages, event),
+        usage=usage,
+    )

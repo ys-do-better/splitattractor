@@ -1,0 +1,33 @@
+# DeepSeek Harness (dsh) on DeepSWE with FlashRSI algorithms (skillopt, opro, ace, rrsi, metacorsi, etc.).
+run:
+  output_dir: ../../runs/deepswe-dsh
+benchmark:
+  name: deepswe
+  # Optional: local DeepSWE repository root, tasks/ directory, or a single task directory.
+  # data_path: ./data/deep-swe
+  seed: 42
+  split_counts: {train: 1, dev: 1, test: 1}
+agent:
+  name: dsh
+  max_turns: 24
+  max_extension: 6
+  timeout: 5400
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com/v1
+    max_tokens: 4096
+    # Set FLASHRSI_AGENT_API_KEY or METACORSI_DSH_API_KEY before running.
+algorithm:
+  name: skillopt
+  num_epochs: 1
+  batch_size: 1
+  max_steps: 1
+  use_slow_update: false
+  use_meta_skill: false
+  worker:
+    type: llm
+    llm:
+      model_name: deepseek-flash
+      base_url: https://api.deepseek.com/v1
+      max_tokens: 4096
+      # Set FLASHRSI_WORKER_API_KEY before running.

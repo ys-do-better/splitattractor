@@ -68,6 +68,8 @@ _AGENT_EXTRAS = {
     "miniagent": "miniagent",
     "claude_code": "claude-code",
     "codex": "codex",
+    "deepseek_harness": "deepseek-harness",
+    "dsh": "dsh",
     "pi": "pi",
     "hermes": "hermes",
     "openclaw": "openclaw",
@@ -177,6 +179,8 @@ def _plan(config):
         "miniagent",
         "claude_code",
         "codex",
+        "deepseek_harness",
+        "dsh",
         "pi",
         "hermes",
         "openclaw",
@@ -192,7 +196,7 @@ def _plan(config):
         )
     ):
         raise ValueError(
-            "Choose miniagent, claude_code, codex, pi, hermes, openclaw or opencode for either role; jiuwenswarm and metacorsi are Target-only and llm is Worker-only"
+            "Choose miniagent, claude_code, codex, deepseek_harness, dsh, pi, hermes, openclaw or opencode for either role; jiuwenswarm and metacorsi are Target-only and llm is Worker-only"
         )
     if target in {"metacorsi", "metacorsi_miniagent"} and benchmark != "deepswe":
         raise ValueError("The MetaCoRSI Target requires benchmark.name: deepswe")
@@ -224,6 +228,8 @@ def _plan(config):
     prerequisites = []
     if target == "metacorsi":
         prerequisites.append("Local MetaCoRSI with Harbor 0.24.0 and the DSH CLI")
+    if target in {"deepseek_harness", "dsh"} or worker in {"deepseek_harness", "dsh"}:
+        prerequisites.append("DeepSeek Harness (dsh) CLI")
     if "codex" in {target, worker}:
         prerequisites.append(
             "Codex requires explicit API keys and a streaming Responses API endpoint"

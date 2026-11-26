@@ -1,0 +1,16 @@
+{
+  "dispatch-registration": [
+    "k7.perception.contract-tests-impact"
+  ],
+  "state-propagation": [
+    "k7.reasoning.rca-first"
+  ],
+  "unspecified": [
+    "k7.fix.failure-routed",
+    "k7.memory.best-candidate",
+    "k7.safety.deterministic-promotion"
+  ],
+  "validation-preservation": [
+    "k7.reasoning.rca-first"
+  ]
+}

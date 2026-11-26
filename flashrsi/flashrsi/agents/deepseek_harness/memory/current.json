@@ -1,0 +1,51 @@
+{
+  "version": 0,
+  "parent": null,
+  "atoms": [
+    {
+      "atom_id": "k7.perception.contract-tests-impact",
+      "kind": "P",
+      "content": "Observe the public task contract, failing tests, and changed-file impact before repair.",
+      "provenance": "K7 frozen handoff",
+      "confidence": 1.0,
+      "tags": []
+    },
+    {
+      "atom_id": "k7.memory.best-candidate",
+      "kind": "M",
+      "content": "Persist the best focused-green candidate and its evidence digest before late repair.",
+      "provenance": "K7 frozen handoff",
+      "confidence": 1.0,
+      "tags": []
+    },
+    {
+      "atom_id": "k7.reasoning.rca-first",
+      "kind": "R",
+      "content": "Use the five-layer RCA construction walk before choosing regression scope.",
+      "provenance": "maoyixie/rca-repair",
+      "confidence": 1.0,
+      "tags": []
+    },
+    {
+      "atom_id": "k7.fix.failure-routed",
+      "kind": "F",
+      "content": "Activate only task-relevant repair procedures; do not apply global contract completion.",
+      "provenance": "K7 frozen handoff",
+      "confidence": 1.0,
+      "tags": []
+    },
+    {
+      "atom_id": "k7.safety.deterministic-promotion",
+      "kind": "S",
+      "content": "Promotion requires independent RCA-selected gates; rollback on degradation; no MH acceptance.",
+      "provenance": "K7 frozen handoff",
+      "confidence": 1.0,
+      "tags": []
+    }
+  ],
+  "committed_at": "1970-01-01T00:00:00+00:00",
+  "evidence_digest": "f7efb143ed297553d4fc9a8aa33a23d6430130bb19dcaeb0d34c2d4e90e6c91f",
+  "metadata": {
+    "profile": "native-K7-priors-no-episodes"
+  }
+}

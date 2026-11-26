@@ -12,9 +12,11 @@ from types import MappingProxyType
 from flashrsi._records import _trajectory_record, _write_record
 from flashrsi._run_summary import _finish_summary
 from flashrsi.agents import (
+    DSH,
     LLM,
     ClaudeCode,
     Codex,
+    DeepSeekHarness,
     Hermes,
     JiuwenSwarm,
     MetaCoRSIMiniAgent,
@@ -80,6 +82,8 @@ from flashrsi.config import prepare_run_dir
 from flashrsi.core import Agent, Snapshot
 
 _AGENTS = {
+    "deepseek_harness": DeepSeekHarness,
+    "dsh": DSH,
     "metacorsi": MetaCoRSITarget,
     "metacorsi_miniagent": MetaCoRSIMiniAgent,
     "jiuwenswarm": JiuwenSwarm,
@@ -153,6 +157,8 @@ def _make_agent(cls, section, label):
         MiniAgent: (("openai", "requests"), "all"),
         ClaudeCode: (("claude_agent_sdk",), "all"),
         Codex: (("httpx", "PIL", "tree_sitter", "tree_sitter_bash"), "all"),
+        DeepSeekHarness: (("yaml",), "all"),
+        DSH: (("yaml",), "all"),
         Hermes: (("httpx",), "all"),
         OpenClaw: (("httpx",), "all"),
         OpenCode: (("httpx",), "all"),
@@ -287,7 +293,9 @@ async def _prepare_target(config, *, snapshot=None):
         from flashrsi.integrations.deepswe import bind
 
         bind(target, benchmark)
-        if isinstance(target, (MetaCoRSITarget, MetaCoRSIMiniAgent)):
+        if isinstance(target, (MetaCoRSITarget, MetaCoRSIMiniAgent)) or (
+            isinstance(target, DeepSeekHarness) and target.memory_enabled()
+        ):
             await target.check_native()
     if isinstance(benchmark, JobBench):
         from flashrsi.integrations.jobbench import bind
@@ -342,7 +350,9 @@ async def _prepare(config):
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )
-    if isinstance(target, MetaCoRSIMiniAgent):
+    if isinstance(target, MetaCoRSIMiniAgent) or (
+        isinstance(target, DeepSeekHarness) and target.memory_enabled()
+    ):
         await target.check_native(forbidden_tasks=(*benchmark.dev, *benchmark.test))
     return algorithm
 
@@ -418,7 +428,9 @@ async def _prepare_evaluation(config):
     target, benchmark = await _prepare_target(config, snapshot=snapshot)
     target.set_scope({name: "r" for name in target.component_rules})
     benchmark.load()
-    if isinstance(target, MetaCoRSIMiniAgent):
+    if isinstance(target, MetaCoRSIMiniAgent) or (
+        isinstance(target, DeepSeekHarness) and target.memory_enabled()
+    ):
         await target.check_native(forbidden_tasks=benchmark.test)
     if not benchmark.test:
         raise ValueError(

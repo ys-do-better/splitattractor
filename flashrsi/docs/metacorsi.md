@@ -1,21 +1,45 @@
-# MetaCoRSI on DeepSWE
+# MetaCoRSI and DeepSeek Harness on DeepSWE
 
-Use `agent.name: metacorsi` for the local DeepSeek Harness (DSH) and
-`algorithm.name: metacorsi` for verifier-guided knowledge evolution. FlashRSI
-owns task splitting, Snapshot selection, test evaluation and experiment records.
-The sibling MetaCoRSI project supplies DSH execution, RCA, grounding and knowledge
-distillation. Its native Harbor runs in a separate process.
+FlashRSI supports two ways to run DeepSeek Harness (DSH) on DeepSWE:
 
-Install FlashRSI with the `harbor` extra (Harbor 0.23.0) on Python 3.12
-or newer. Set `agent.python` or `METACORSI_PYTHON` to a separate Python
-environment with MetaCoRSI's Harbor 0.24.0. Set `agent.cli_path` or
-`METACORSI_DSH_EXE` if DSH is outside PATH and its standard macOS install.
+1. **General Target Harness (`agent.name: dsh` or `agent.name: deepseek_harness`)**:
+   Maps DSH's instructions (`AGENTS.md`, `prompts/system.md`), skills (`skills/**`),
+   configuration (`config.yaml`), and optional MetaCoRSI memory (`memory/**`) into
+   standard FlashRSI Snapshots. It runs through FlashRSI's hosted Harbor bridge,
+   records full turn-by-turn trajectories and DSH token usage (`input_tokens`,
+   `output_tokens`, `cache_read_input_tokens`, `total_tokens`), and works with
+   **all FlashRSI algorithms** (`opro`, `gepa`, `evoprompt`, `skillopt`, `skilladam`,
+   `evo_harness`, `ace`, `ahe`, `adas`, `darwinx`, `meta_harness`, `rrsi`,
+   `modular_rsi`, `arbor`, and `metacorsi`) as well as `flashrsi evaluate`.
+2. **Legacy Native MetaCoRSI Target (`agent.name: metacorsi`)**:
+   Runs MetaCoRSI's native `metacorsi_dsh_agent:AgentHarness` child process for
+   historical K29 reproduction and verifier-guided knowledge evolution.
+
+Install FlashRSI with the `harbor` extra on Python 3.12 or newer. Both Harbor
+0.23.x and 0.24.x are supported. Set `agent.cli_path` or `METACORSI_DSH_EXE` if
+DSH is outside `PATH` and its standard macOS/Linux/Windows install location.
 A running Docker Linux daemon and Compose are required. DSH calls the specified
-model provider from the host. The agent and verifier containers retain the native
-DeepSWE network restrictions.
+model provider from the host while the agent and verifier containers retain the
+native DeepSWE `no-network` restrictions.
 
-The [example configuration](../examples/quickstarts/deepswe_metacorsi.yaml)
-uses the sibling MetaCoRSI source in this monorepo and the pinned DeepSWE
+```bash
+cd flashrsi
+export FLASHRSI_AGENT_API_KEY="..."
+export FLASHRSI_WORKER_API_KEY="..."
+
+# Run any FlashRSI algorithm (e.g. skillopt, opro, ace, rrsi, metacorsi) with DeepSeek Harness on DeepSWE:
+flashrsi run --config examples/quickstarts/deepswe_dsh.yaml \
+  --benchmark.data_path /path/to/deep-swe/tasks --check-only
+
+# Run MetaCoRSI evolution with the general DeepSeek Harness adapter:
+flashrsi run --config examples/quickstarts/deepswe_dsh.yaml \
+  --algorithm metacorsi --set algorithm.worker.type=none \
+  --benchmark.data_path /path/to/deep-swe/tasks --check-only
+```
+
+The [legacy native configuration](../examples/quickstarts/deepswe_metacorsi.yaml)
+and [general DSH configuration](../examples/quickstarts/deepswe_dsh.yaml)
+use the sibling MetaCoRSI source in this monorepo and the pinned DeepSWE
 revision. Set `--agent.project_dir` for a separate checkout and
 `--benchmark.data_path` for local native tasks.
 Export `METACORSI_DSH_API_KEY` or configure `agent.llm.api_key` locally.

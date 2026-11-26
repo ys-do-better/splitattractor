@@ -30,23 +30,27 @@ def _model_hosts(config):
 
 
 def bind(agent, benchmark):
+    from flashrsi.agents.deepseek_harness import DeepSeekHarness
     from flashrsi.agents.metacorsi import MetaCoRSITarget
 
     metacorsi = isinstance(agent, MetaCoRSITarget)
-    if metacorsi:
+    dsh_target = isinstance(agent, DeepSeekHarness)
+    if metacorsi or dsh_target:
         if not (
             agent.config["llm"].get("api_key")
             or os.environ.get("METACORSI_DSH_API_KEY")
+            or os.environ.get("FLASHRSI_DSH_API_KEY")
         ):
             raise ValueError(
-                "Set agent.llm.api_key or METACORSI_DSH_API_KEY for MetaCoRSI"
+                "Set agent.llm.api_key or METACORSI_DSH_API_KEY for DeepSeek Harness / MetaCoRSI"
             )
         if agent.config["llm"].get("side_base_url"):
-            raise ValueError("MetaCoRSI accepts a single DSH provider endpoint")
+            raise ValueError("DeepSeek Harness accepts a single DSH provider endpoint")
     else:
         bind_harbor(agent)
-    hosted = agent.config.get("harbor", {}).get("hosted_miniagent", False)
-    if hosted:
+    hosted_mini = agent.config.get("harbor", {}).get("hosted_miniagent", False)
+    hosted_dsh = dsh_target or agent.config.get("harbor", {}).get("hosted_dsh", False)
+    if hosted_mini:
         from flashrsi.agents import MetaCoRSIMiniAgent, MiniAgent
         from flashrsi.integrations._hosted_miniagent import validate_resources
 
@@ -63,10 +67,8 @@ def bind(agent, benchmark):
         hosts = _model_hosts(target.config)
         if metacorsi:
             return await target.run_task(task)
-        return (
-            await _run(target, task, agent_allowed_hosts=hosts, hosted=True)
-            if hosted
-            else await _run(target, task, agent_allowed_hosts=hosts)
-        )
+        if hosted_dsh or hosted_mini:
+            return await _run(target, task, agent_allowed_hosts=hosts, hosted=True)
+        return await _run(target, task, agent_allowed_hosts=hosts)
 
     agent._env_runner = run

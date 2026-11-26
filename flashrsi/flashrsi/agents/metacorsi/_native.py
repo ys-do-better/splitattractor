@@ -28,6 +28,152 @@ def load_memory(memory):
     return index
 
 
+def _extract_trial_evidence(agent_dir: Path) -> tuple[str, list[dict], dict]:
+    messages: list[dict] = []
+    model_calls: list[dict] = []
+    session_id: str | None = None
+    output = ""
+    tool_calls = 0
+    turns = 0
+
+    raw_path = agent_dir / "dsh_raw.jsonl"
+    if raw_path.is_file():
+        for line_idx, line in enumerate(
+            raw_path.read_text(encoding="utf-8", errors="replace").splitlines(), 1
+        ):
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if record.get("session_id"):
+                session_id = str(record["session_id"])
+            for att in record.get("attempts") or ():
+                att_no = att.get("attempt", 1)
+                for ev in att.get("events") or ():
+                    if not isinstance(ev, dict):
+                        continue
+                    if ev.get("type") == "session" and ev.get("sessionId"):
+                        session_id = str(ev["sessionId"])
+                    elif (
+                        ev.get("type") == "status"
+                        and ev.get("phase") == "step_end"
+                        and isinstance(ev.get("usage"), dict)
+                    ):
+                        u = ev["usage"]
+                        inp = int(u.get("inputTokens", u.get("input_tokens", 0)) or 0)
+                        out = int(u.get("outputTokens", u.get("output_tokens", 0)) or 0)
+                        cache_read = int(
+                            u.get(
+                                "cacheReadTokens",
+                                u.get(
+                                    "cacheReadInputTokens",
+                                    u.get("cache_read_input_tokens", 0),
+                                ),
+                            )
+                            or 0
+                        )
+                        cache_write = int(
+                            u.get(
+                                "cacheWriteTokens",
+                                u.get(
+                                    "cacheCreationInputTokens",
+                                    u.get("cache_creation_input_tokens", 0),
+                                ),
+                            )
+                            or 0
+                        )
+                        total = int(
+                            u.get(
+                                "totalTokens",
+                                u.get(
+                                    "total_tokens",
+                                    inp + out + cache_read + cache_write,
+                                ),
+                            )
+                            or (inp + out + cache_read + cache_write)
+                        )
+                        model_calls.append(
+                            {
+                                "call_id": f"{session_id or 'dsh'}:L{line_idx}:A{att_no}:{len(model_calls) + 1}",
+                                "usage": {
+                                    "input_tokens": inp,
+                                    "output_tokens": out,
+                                    "cache_read_input_tokens": cache_read,
+                                    "cache_creation_input_tokens": cache_write,
+                                    "total_tokens": total,
+                                },
+                            }
+                        )
+
+    bridge_path = agent_dir / "dsh_bridge.json"
+    if bridge_path.is_file():
+        try:
+            bridge = json.loads(
+                bridge_path.read_text(encoding="utf-8", errors="replace")
+            )
+        except json.JSONDecodeError:
+            bridge = {}
+        history = bridge.get("history") or []
+        turns = len(history)
+        for item in history:
+            if not isinstance(item, dict):
+                continue
+            cmds = item.get("commands") or []
+            tool_calls += len(cmds)
+            if item.get("analysis"):
+                output = str(item["analysis"])
+            messages.append(
+                {
+                    "role": "assistant",
+                    "step": item.get("step"),
+                    "analysis": item.get("analysis", ""),
+                    "commands": cmds,
+                    "return_codes": item.get("return_codes", []),
+                    "rca": item.get("rca"),
+                }
+            )
+        messages.append(
+            {
+                "type": "MetaCoRSIMemory",
+                "strategy": bridge.get("memory_strategy", "cls_dual_store"),
+                "policy": bridge.get("ltm_policy", "modular_reverse_v23"),
+                "version": (bridge.get("brain") or {})
+                .get("indexed_ltm", {})
+                .get("version"),
+                "groundings": bridge.get("grounding") or [],
+                "split_attractor_metrics": bridge.get("split_attractor_metrics"),
+                "initial_retrieval": bridge.get("evolved_knowledge") or "",
+                "rca": [
+                    {"step": h.get("step"), "diagnosis": h.get("rca")}
+                    for h in history
+                    if isinstance(h, dict) and h.get("rca")
+                ],
+            }
+        )
+
+    inp_sum = sum(c["usage"]["input_tokens"] for c in model_calls)
+    out_sum = sum(c["usage"]["output_tokens"] for c in model_calls)
+    cr_sum = sum(c["usage"]["cache_read_input_tokens"] for c in model_calls)
+    cw_sum = sum(c["usage"]["cache_creation_input_tokens"] for c in model_calls)
+    tot_sum = sum(c["usage"]["total_tokens"] for c in model_calls)
+    usage = (
+        {
+            "model_calls": model_calls,
+            "turns": turns or len(model_calls),
+            "tool_calls": tool_calls,
+            "input_tokens": inp_sum,
+            "output_tokens": out_sum,
+            "cache_read_input_tokens": cr_sum,
+            "cache_creation_input_tokens": cw_sum,
+            "total_tokens": tot_sum,
+            **({"session_id": session_id} if session_id else {}),
+        }
+        if (model_calls or turns)
+        else {}
+    )
+    return output, messages, usage
+
+
 async def run(data):
     from harbor.models.task.task import Task
     from harbor.models.trial.config import (
@@ -41,11 +187,12 @@ async def run(data):
     task = Task(Path(data["task_path"]))
     with warnings.catch_warnings(action="ignore", category=DeprecationWarning):
         checksum = task.checksum
+    has_steps = bool(getattr(task, "has_steps", getattr(task.config, "steps", None)))
     if (
         task.name != data["task_id"]
         or checksum != data["checksum"]
         or task.instruction != data["instruction"]
-        or task.has_steps
+        or has_steps
         or task.config.environment.os.value != "linux"
         or task.config.verifier.environment_mode != "separate"
         or not task.config.verifier.collect
@@ -68,9 +215,9 @@ async def run(data):
             "METACORSI_DSH_MAX_EXTENSION": str(data["max_extension"]),
             "METACORSI_KNOWLEDGE_STORE": str(snapshot / "memory/current.json"),
             "METACORSI_DISABLE_CANDIDATE_REPLAY": "1",
-            "METACORSI_CONTROL_MODE": "rca_only",
-            "METACORSI_LTM_POLICY": "modular_reverse_v23",
-            "METACORSI_MEMORY_STRATEGY": "cls_dual_store",
+            "METACORSI_CONTROL_MODE": data.get("control_mode", "rca_only"),
+            "METACORSI_LTM_POLICY": data.get("ltm_policy", "modular_reverse_v23"),
+            "METACORSI_MEMORY_STRATEGY": data.get("memory_strategy", "cls_dual_store"),
             "DSH_TELEMETRY_MODE": "DISABLED",
         }
     )
@@ -91,6 +238,9 @@ async def run(data):
         result = await trial.run()
     finally:
         shutil.rmtree(output / "dsh-runtime", ignore_errors=True)
+    final_output, trace_messages, usage = _extract_trial_evidence(
+        trial.paths.agent_dir
+    )
     return {
         "task_id": result.task_name,
         "task_checksum": result.task_checksum,
@@ -100,6 +250,9 @@ async def run(data):
             else None
         ),
         "trial_dir": str(trial.paths.trial_dir),
+        "output": final_output,
+        "messages": trace_messages,
+        "usage": usage,
     }
 
 
@@ -142,7 +295,7 @@ def evolve(data):
         receipt = native_evolve(
             memory / "current.json",
             [Path(path) for path in data["trials"]],
-            policy="grounding_feedback",
+            policy=data.get("policy", "grounding_feedback"),
         )
     after = load_memory(memory)
     if layers:
@@ -291,8 +444,8 @@ def memory_operation(operation, data):
     from metacorsi.contracts import FailureEvidence
 
     os.environ.update(
-        METACORSI_LTM_POLICY="modular_reverse_v23",
-        METACORSI_MEMORY_STRATEGY="cls_dual_store",
+        METACORSI_LTM_POLICY=data.get("ltm_policy", "modular_reverse_v23"),
+        METACORSI_MEMORY_STRATEGY=data.get("memory_strategy", "cls_dual_store"),
     )
     brain = MetaCoRSIBrain(
         control_mode="rca_only", knowledge_path=memory / "current.json"
@@ -332,8 +485,12 @@ def memory_operation(operation, data):
 def main(operation, data):
     if operation in {"seed", "normalize_seed", "inspect", "ground", "analyze"}:
         return memory_operation(operation, data)
-    if operation in {"check", "run"} and version("harbor") != "0.24.0":
-        raise ValueError("Set agent.python to a Python environment with Harbor 0.24.0")
+    if operation in {"check", "run"} and not version("harbor").startswith(
+        ("0.23.", "0.24.")
+    ):
+        raise ValueError(
+            "Set agent.python to a Python environment with Harbor 0.23.x or 0.24.x"
+        )
     if operation == "check":
         from metacorsi_dsh_agent import AgentHarness
 

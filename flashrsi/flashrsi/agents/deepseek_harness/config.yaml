@@ -1,0 +1,15 @@
+profile: headless
+max_turns: 24
+max_extension: 6
+call_timeout: 360
+command_max_chars: 1600
+max_tokens: 4096
+materialize_max_tokens: 8192
+stateless_compiler: false
+phase_directives: true
+auto_commit: true
+memory:
+  enabled: false
+  control_mode: rca_only
+  ltm_policy: modular_reverse_v23
+  memory_strategy: cls_dual_store

@@ -128,7 +128,15 @@ async def _run(
         "snapshot_id": snapshot.id,
     }
 
+    from flashrsi.agents.deepseek_harness import DeepSeekHarness
     from flashrsi.integrations._hosted_miniagent import _TRIAL, HostedTrial
+
+    hosted_dsh = hosted and isinstance(agent, DeepSeekHarness)
+    hosted_import = (
+        "flashrsi.integrations._hosted_dsh:HostedDSHBridge"
+        if hosted_dsh
+        else "flashrsi.integrations._hosted_miniagent:HostedMiniAgentBridge"
+    )
 
     with TemporaryDirectory(prefix="flashrsi-harbor-") as temporary:
         root = Path(temporary)
@@ -153,7 +161,7 @@ async def _run(
                     ),
                     agent=AgentConfig(
                         import_path=(
-                            "flashrsi.integrations._hosted_miniagent:HostedMiniAgentBridge"
+                            hosted_import
                             if hosted
                             else "flashrsi.integrations.harbor:_SnapshotAgent"
                         ),

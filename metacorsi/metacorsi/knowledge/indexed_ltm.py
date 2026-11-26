@@ -57,7 +57,36 @@ _MEMORY_STRATEGIES = {
     "art_resonance",
     "hippocampal_index",
     "event_segmentation",
+    "split_attractor",
 }
+
+_V24_POLICIES = {"split_attractor_v24", "naive_latch_v24"}
+
+
+def _extract_live_symbols(evidence: str, limit: int = 6) -> tuple[str, ...]:
+    """Extract concrete repository files or code symbols observed in live evidence."""
+    if not evidence.strip():
+        return ()
+    found: list[str] = []
+    file_matches = re.findall(
+        r"\b[\w@.-]+(?:/[\w@.{}-]+)+\.(?:py|go|rs|ts|tsx|js|jsx|java|c|cc|cpp|h|hpp)\b",
+        evidence,
+    )
+    for item in file_matches:
+        if item not in found:
+            found.append(item)
+        if len(found) >= limit:
+            return tuple(found)
+    symbol_matches = re.findall(
+        r"\b(?:def|class|func|function|interface|type)\s+([A-Za-z_][\w$]{2,40})\b",
+        evidence,
+    )
+    for sym in symbol_matches:
+        if sym not in found:
+            found.append(sym)
+        if len(found) >= limit:
+            break
+    return tuple(found)
 
 
 def _memory_strategy() -> str:
@@ -100,6 +129,9 @@ def _strategy_score(strategy: str, *, capability: float, causal: float,
     elif strategy == "event_segmentation":
         # Prediction-error boundaries (causal locus) dominate whole-episode similarity.
         score = .20 * capability + .38 * causal + .22 * trigger + .08 * source + .07 * feedback + .05 * specificity
+    elif strategy == "split_attractor":
+        # Balance live causal/trigger resonance with slow verification reliability.
+        score = .26 * capability + .30 * causal + .22 * trigger + .08 * source + .09 * feedback + .05 * specificity
     else:  # v23_modular
         score = .28 * capability + .27 * causal + .20 * trigger + .10 * source + .08 * feedback + .05 * episodic + .10 * specificity
     if not status_ok:
@@ -966,7 +998,7 @@ class IndexedLTM:
         capability_affinities = _situation_capability_affinities(task_id, task_text)
         task_key = self._matching_task_key(task_id)
         repo = repository_family(task_id)
-        if policy in {"soft_grounding_v22", "modular_reverse_v23"}:
+        if policy in {"soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}:
             capability = max(
                 capability_affinities,
                 key=lambda name: capability_affinities[name],
@@ -1009,6 +1041,7 @@ class IndexedLTM:
             "isolated_v15", "layered_v15", "consensus_v15",
             "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19",
             "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23",
+            *_V24_POLICIES,
         }
         if policy in {"situation_v13", "experience_v14", *relational_policies} and task_key:
             capsule, situation = (self._layered_capsule(task_key)
@@ -1078,6 +1111,329 @@ class IndexedLTM:
              ]},
         )
 
+    def score_candidates(
+        self,
+        *,
+        task_id: str,
+        task_text: str,
+        repository_evidence: str = "",
+        limit: int = 14,
+        policy: str = "split_attractor_v24",
+    ) -> tuple[RetrievalBundle, tuple[Any, ...], dict[str, Any]]:
+        """Compute PFG candidate signals u_i(t) and condition-matched late groundings for V24."""
+        from .split_attractor import CandidateSignal
+
+        bundle = self.retrieve(
+            task_id=task_id,
+            task_text=task_text,
+            repository_evidence=repository_evidence,
+            limit=limit,
+            policy=policy,
+        )
+        live_text = repository_evidence.strip()
+        task_material = f"{task_id} {task_text}"
+        full_material = f"{task_material} {live_text}".strip()
+        task_query = set(knowledge_tags(task_material))
+        evidence_query = set(knowledge_tags(live_text)) if live_text else set()
+        task_affinities = _situation_capability_affinities(task_id, task_text)
+        live_affinities = _capability_affinities(live_text) if live_text else {}
+        has_live_cap = max(live_affinities.values(), default=0.0) > 0.0
+        if has_live_cap:
+            blended_affinities = {
+                name: min(
+                    1.0,
+                    0.65 * live_affinities.get(name, 0.0)
+                    + 0.35 * task_affinities.get(name, 0.0),
+                )
+                for name, _ in CAPABILITY_PATTERNS
+            }
+        else:
+            blended_affinities = dict(task_affinities)
+
+        evidence_loci = set(_causal_loci(live_text)) if live_text else set()
+        task_loci = set(_causal_loci(task_material))
+        live_symbols = _extract_live_symbols(live_text)
+        confirmed_failure = "METACORSI_CONFIRMED_FAILURE_EVIDENCE" in live_text
+        has_rca_directive = "METACORSI RCA" in live_text
+
+        task_key = self._matching_task_key(task_id)
+        task_records = tuple(
+            self.records[atom_id]
+            for atom_id in self.indexes["task"].get(task_key, ())
+            if atom_id in self.records
+        )
+        has_verified_task_memory = any(record.outcome == "pass" for record in task_records)
+        verified_task_loci = {
+            locus
+            for record in task_records
+            if record.outcome == "pass"
+            for locus in record.causal_loci
+        }
+        grounding_evidence: dict[str, tuple[int, int]] = {}
+        for record in self.groundings:
+            verified, rejected = grounding_evidence.get(record.abstract_id, (0, 0))
+            if record.status == "verified":
+                verified += 1
+            elif record.status == "rejected":
+                rejected += 1
+            grounding_evidence[record.abstract_id] = (verified, rejected)
+
+        context_digest = hashlib.sha256(full_material.encode()).hexdigest()
+        repository = repository_family(task_id)
+        capability = bundle.audit["capability"]
+        signals: list[CandidateSignal] = []
+
+        for abstract in sorted(self.abstractions.values(), key=lambda a: a.abstract_id):
+            support_tasks = {
+                self.records[atom_id].task
+                for atom_id in abstract.supporting_atom_ids
+                if atom_id in self.records and self.records[atom_id].task
+            }
+            passing_support_tasks = {
+                self.records[atom_id].task
+                for atom_id in abstract.supporting_atom_ids
+                if atom_id in self.records
+                and self.records[atom_id].task
+                and self.records[atom_id].outcome == "pass"
+            }
+            if not passing_support_tasks:
+                continue
+            if any(task_matches(task, task_id) for task in support_tasks):
+                continue
+
+            verified, rejected = grounding_evidence.get(abstract.abstract_id, (0, 0))
+            cap_score = blended_affinities.get(abstract.capability, 0.0)
+            live_cap_score = live_affinities.get(abstract.capability, 0.0) if live_text else 0.0
+
+            # Causal and trigger scores are driven by live repository evidence so
+            # Step 0 prose alone cannot prematurely open the disinhibitory gate.
+            locus_in_live = (
+                bool(live_text)
+                and abstract.causal_locus != "unspecified"
+                and abstract.causal_locus in evidence_loci
+            )
+            locus_in_task = (
+                abstract.causal_locus != "unspecified"
+                and abstract.causal_locus in task_loci
+            )
+            if locus_in_live:
+                causal_score = 1.0
+            elif bool(live_text) and locus_in_task:
+                causal_score = 0.35
+            elif not live_text and locus_in_task:
+                causal_score = 0.15
+            else:
+                causal_score = 0.0
+
+            matched_cues = tuple(sorted(evidence_query.intersection(abstract.trigger_tags)))
+            trigger_denominator = max(1, min(3, len(abstract.trigger_tags)))
+            if live_text:
+                trigger_score = min(1.0, len(matched_cues) / trigger_denominator)
+            else:
+                trigger_score = 0.0
+
+            source_score = min(1.0, len(support_tasks) / 2.0)
+            feedback_score = (verified + 1.0) / (verified + rejected + 2.0)
+            episodic_score = 0.0
+            if has_verified_task_memory:
+                episodic_score = (
+                    1.0 if abstract.causal_locus in verified_task_loci else -0.5
+                )
+            specificity = min(1.0, len(abstract.trigger_tags) / 4.0)
+            if abstract.invariant.startswith("Preserve the verified"):
+                specificity *= 0.35
+
+            u_score = _strategy_score(
+                "v23_modular",
+                capability=cap_score,
+                causal=causal_score,
+                trigger=trigger_score,
+                source=source_score,
+                feedback=feedback_score,
+                episodic=episodic_score,
+                specificity=specificity,
+                status_ok=abstract.status in {"validated", "transferable"},
+            )
+            if not live_text:
+                # Without live repository evidence, scale down static prior so
+                # u_i(0) stays sub-threshold while preserving candidate ordering.
+                u_score = min(0.35, u_score * 0.65)
+
+            # Applicability condition matching: trigger signal in live evidence
+            # must match the candidate schema's causal locus and/or trigger cues.
+            cap_aligned = (
+                live_cap_score >= 0.35
+                or (not has_live_cap and task_affinities.get(abstract.capability, 0.0) >= 0.5)
+            )
+            condition_matched = bool(live_text) and cap_aligned and (
+                (locus_in_live and (bool(matched_cues) or confirmed_failure or has_rca_directive or bool(live_symbols)))
+                or (len(matched_cues) >= 1 and (locus_in_live or locus_in_task or confirmed_failure))
+            )
+
+            # Reverse-ground to Top-1 target-disjoint passing source episode
+            by_task: dict[str, list[AtomRecord]] = {}
+            for atom_id in abstract.supporting_atom_ids:
+                source_record = self.records.get(atom_id)
+                if source_record and source_record.task and source_record.outcome == "pass":
+                    by_task.setdefault(source_record.task, []).append(source_record)
+
+            combined_query = evidence_query | task_query
+
+            def source_rank(item: tuple[str, list[AtomRecord]]) -> tuple[float, int, str]:
+                source_task, source_records = item
+                semantic = max(
+                    (
+                        len(
+                            combined_query.intersection(
+                                record.atom.tags or knowledge_tags(record.atom.content)
+                            )
+                        )
+                        for record in source_records
+                    ),
+                    default=0,
+                )
+                role_coverage = len(
+                    {record.atom.kind for record in source_records}.intersection({"R", "F", "S"})
+                )
+                leaf_score = 0.60 * semantic + 0.35 * role_coverage + 0.05 * len(source_records)
+                return (-leaf_score, -role_coverage, source_task)
+
+            source_task, source_records = sorted(by_task.items(), key=source_rank)[0]
+            source_semantic_overlap = max(
+                (
+                    len(
+                        combined_query.intersection(
+                            record.atom.tags or knowledge_tags(record.atom.content)
+                        )
+                    )
+                    for record in source_records
+                ),
+                default=0,
+            )
+            source_match_score = min(1.0, source_semantic_overlap / 3.0)
+            role_order = {"R": 0, "F": 1, "S": 2, "P": 3, "M": 4}
+            source_records = sorted(
+                source_records,
+                key=lambda record: (
+                    role_order.get(record.atom.kind, 9),
+                    -record.atom.confidence,
+                    record.atom.atom_id,
+                ),
+            )
+            chosen: list[AtomRecord] = []
+            for kind in ("R", "F", "S"):
+                match = next((record for record in source_records if record.atom.kind == kind), None)
+                if match:
+                    chosen.append(match)
+            if not chosen:
+                chosen = source_records[:2]
+            selected_source_atoms = tuple(record.atom.atom_id for record in chosen)
+            episode_roles = "; ".join(
+                f"{record.atom.kind}={_semantic_episode_projection(record.atom.content)}"
+                for record in chosen
+            )
+            symbol_clause = (
+                f" Bind directly to observed repository objects: {', '.join(live_symbols)}."
+                if live_symbols
+                else ""
+            )
+            actions = (
+                f"SPLIT-ATTRACTOR MODULE: {abstract.invariant}",
+                f"SOURCE EPISODE {source_task}: {episode_roles}",
+                (
+                    "TARGET ROLE BINDING: bind state, boundary, and consumer roles to current evidence;"
+                    f"{symbol_clause} never copy source files or symbols unless independently present here."
+                ),
+            )
+            actions = tuple(re.sub(r"\s+", " ", item).strip()[:240] for item in actions)
+            base_residual = 0.25 if has_verified_task_memory else 0.65
+            residual_weight = base_residual * (0.25 + 0.75 * source_match_score)
+            local_weight = 1.0 - residual_weight
+            bindings = {
+                "task": task_id,
+                "repository": repository,
+                "capability": abstract.capability,
+                "causal_locus": abstract.causal_locus,
+                "failure_mode": abstract.failure_mode,
+                "grounding_weight": f"{u_score:.3f}",
+                "capability_similarity": f"{cap_score:.3f}",
+                "causal_similarity": f"{causal_score:.3f}",
+                "trigger_similarity": f"{trigger_score:.3f}",
+                "feedback_reliability": f"{feedback_score:.3f}",
+                "target_roles": ",".join(matched_cues) or "structural-analogy",
+                "live_symbols": ",".join(live_symbols) or "pending-observation",
+                "source_situations": ",".join(sorted(support_tasks)),
+                "counterevidence": str(rejected),
+                "module": f"{abstract.capability}/{abstract.causal_locus}",
+                "memory_strategy": "split_attractor",
+                "source_episode": source_task,
+                "source_episode_match": f"{source_match_score:.3f}",
+                "local_episode_weight": f"{local_weight:.3f}",
+                "abstract_residual_weight": f"{residual_weight:.3f}",
+                "grounded_atom_ids": ",".join(selected_source_atoms),
+                "condition_matched": "true" if condition_matched else "false",
+            }
+            scope_guard = tuple(
+                item.format(**bindings)[:240] for item in abstract.safety_boundary[:2]
+            )
+            verification_plan = (
+                "build/typecheck succeeds",
+                "one focused counterexample turns green",
+                "independent F2P and P2P verifier decides promotion",
+            )
+            materialization_protocol = (
+                "Use a direct edit command; do not spend a turn planning shell quoting.",
+                "A command may be up to 1600 characters; compact python -c, printf, sed, or git apply is allowed.",
+                "After each edit run git diff --check plus repository build or typecheck before expanding.",
+            )
+            activation = matched_cues[:3] if matched_cues else (
+                f"capability={abstract.capability}",
+                f"causal_locus={abstract.causal_locus}",
+            )
+            signature = f"{abstract.abstract_id}|{task_id}|{context_digest}"
+            grounding_id = "grounding." + hashlib.sha256(signature.encode()).hexdigest()[:20]
+            grounding = GroundingRecord(
+                grounding_id=grounding_id,
+                abstract_id=abstract.abstract_id,
+                task=task_id,
+                repository=repository,
+                capability=abstract.capability,
+                context_digest=context_digest,
+                activation_evidence=activation,
+                bindings=bindings,
+                instantiated_action=actions,
+                source_atom_ids=selected_source_atoms,
+                scope_guard=scope_guard,
+                verification_plan=verification_plan,
+                materialization_protocol=materialization_protocol,
+            )
+            signals.append(
+                CandidateSignal(
+                    abstract_id=abstract.abstract_id,
+                    u_score=u_score,
+                    capability_match=cap_score,
+                    causal_match=causal_score,
+                    trigger_match=trigger_score,
+                    condition_matched=condition_matched,
+                    grounding=grounding,
+                    matched_cues=matched_cues,
+                    causal_locus=abstract.causal_locus,
+                    capability=abstract.capability,
+                )
+            )
+
+        signals.sort(
+            key=lambda s: (-1 if s.condition_matched else 0, -s.u_score, s.abstract_id)
+        )
+        pfg_summary = {
+            "has_live_evidence": bool(live_text),
+            "evidence_loci": sorted(evidence_loci),
+            "live_symbols": list(live_symbols),
+            "confirmed_failure": confirmed_failure,
+            "candidate_count": len(signals),
+        }
+        return bundle, tuple(signals), pfg_summary
+
     def ground(self, *, task_id: str, task_text: str, repository_evidence: str = "",
                limit: int = 14, abstraction_limit: int = 3,
                policy: str = "full_v1",
@@ -1088,6 +1444,26 @@ class IndexedLTM:
         persists them with the episode; post-verifier evolution marks each
         receipt verified or rejected and consolidates that evidence next turn.
         """
+        if policy in _V24_POLICIES:
+            from .split_attractor import SplitAttractorWM
+
+            mode = "naive" if policy == "naive_latch_v24" else "sa"
+            bundle, signals, pfg_summary = self.score_candidates(
+                task_id=task_id,
+                task_text=task_text,
+                repository_evidence=repository_evidence,
+                limit=limit,
+                policy=policy,
+            )
+            wm = SplitAttractorWM(mode=mode)
+            step_res = wm.step(
+                signals,
+                has_live_evidence=bool(repository_evidence.strip()),
+                pfg_summary=pfg_summary,
+            )
+            groundings = (step_res.active_grounding,) if step_res.active_grounding else ()
+            return bundle, groundings
+
         memory_strategy = _memory_strategy() if policy == "modular_reverse_v23" else "v23_modular"
         bundle = self.retrieve(
             task_id=task_id, task_text=task_text,
@@ -1442,6 +1818,7 @@ class IndexedLTM:
                     "art_resonance": "RESONANT CATEGORY PROTOTYPE",
                     "hippocampal_index": "SPARSE EPISODIC INDEX",
                     "event_segmentation": "EVENT-BOUNDARY SEGMENT",
+                    "split_attractor": "SPLIT-ATTRACTOR MODULE",
                 }[memory_strategy]
                 target_instruction = (
                     "TARGET ROLE BINDING: bind state, boundary, and consumer roles to current evidence; "
@@ -1623,7 +2000,7 @@ def render_indexed_bundle(bundle: RetrievalBundle, policy: str = "full_v1") -> s
             )
             grouped.extend(residual[:2])
         atoms = grouped
-    elif policy in {"situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}:
+    elif policy in {"situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}:
         capsule_ids = set(bundle.audit["buckets"].get("situation_capsule") or ())
         capsule_ids.update(bundle.audit["buckets"].get("layered_capsule") or ())
         capsule = [atom for atom in atoms if atom.atom_id in capsule_ids]
@@ -1634,7 +2011,7 @@ def render_indexed_bundle(bundle: RetrievalBundle, policy: str = "full_v1") -> s
         situation = bundle.audit.get("situation") or {}
         relation_line = ("- RELATIONAL MEMORY: the frozen champion is the stable trunk; "
                          "the exact-task delta is an adaptation branch and cannot evict it."
-                         if policy in {"isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}
+                         if policy in {"isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}
                          else "- SITUATION GRAPH: one verified episode family is bound into working memory.")
         lines.extend((
             relation_line,
@@ -1648,22 +2025,22 @@ def render_indexed_bundle(bundle: RetrievalBundle, policy: str = "full_v1") -> s
     for atom in atoms:
         role = "RETENTION ANCHOR" if atom.atom_id in anchor_ids else labels[atom.kind]
         if (policy in {"retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11",
-                       "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}
+                       "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}
                 and atom.atom_id in anchor_ids):
             role = f"RETENTION ANCHOR/{labels[atom.kind]}"
         if (policy == "feedback_weighted_v10"
                 and atom.atom_id in set(bundle.audit.get("provisional_task") or ())):
             role = f"RESIDUAL COUNTEREXAMPLE/{labels[atom.kind]}"
-        if policy in {"isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}:
+        if policy in {"isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}:
             delta_ids = set(bundle.audit["buckets"].get("delta_branch") or ())
             layer = "DELTA BRANCH" if atom.atom_id in delta_ids else "STABLE BACKBONE"
             role = f"{layer}/{labels[atom.kind]}"
         compact_policy = policy in {"capsule_v2", "boundary_v3", "executable_v4",
                                     "retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11",
-                                    "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}
+                                    "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}
         content_limit = 1500 if policy == "experience_v14" else (
             520 if policy in {"retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11", "situation_v13",
-                              "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"} else 260
+                              "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES} else 260
         )
         content = atom.content if not compact_policy else re.sub(r"\s+", " ", atom.content).strip()[:content_limit]
         lines.append(f"- {role}: {atom.content} [id={atom.atom_id}; confidence={atom.confidence:.2f}]")
@@ -1671,7 +2048,7 @@ def render_indexed_bundle(bundle: RetrievalBundle, policy: str = "full_v1") -> s
             lines[-1] = f"- {role}: {content} [id={atom.atom_id}]"
     if policy in {"capsule_v2", "boundary_v3", "executable_v4",
                   "retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11",
-                  "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}:
+                  "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}:
         counts = {key: len(value) for key, value in bundle.audit["buckets"].items()}
         lines.append("- RETRIEVAL AUDIT: " + json.dumps({
             "task": bundle.audit["task_key"], "capability": bundle.audit["capability"],
@@ -1699,12 +2076,17 @@ def render_grounded_application(bundle: RetrievalBundle,
                 f"  scope_guard={list(record.scope_guard)}",
                 f"  verify={list(record.verification_plan)}",
             ))
-        elif policy == "modular_reverse_v23":
+        elif policy in {"modular_reverse_v23", *_V24_POLICIES}:
+            header_tag = (
+                "SPLIT-ATTRACTOR LATCHED GROUNDING"
+                if policy in _V24_POLICIES
+                else "MODULAR REVERSE GROUNDING"
+            )
             lines.extend((
-                f"- MODULAR REVERSE GROUNDING {record.grounding_id}: strategy={record.bindings.get('memory_strategy')}; module={record.bindings.get('module')}; abstract={record.abstract_id}",
+                f"- {header_tag} {record.grounding_id}: strategy={record.bindings.get('memory_strategy')}; module={record.bindings.get('module')}; abstract={record.abstract_id}",
                 f"  mixture=local_episode:{record.bindings.get('local_episode_weight')} + abstract_residual:{record.bindings.get('abstract_residual_weight')}",
                 f"  source_episode={record.bindings.get('source_episode')}; grounded_atoms={record.bindings.get('grounded_atom_ids')}",
-                f"  target_roles={record.bindings.get('target_roles')}; reverse_grounded_knowledge={list(record.instantiated_action)}",
+                f"  target_roles={record.bindings.get('target_roles')}; live_symbols={record.bindings.get('live_symbols', 'n/a')}; reverse_grounded_knowledge={list(record.instantiated_action)}",
                 "  authority=ROLE_BOUND_RESIDUAL: preserve the local episode; apply only the mapped mechanism, never source-specific files or symbols.",
                 f"  verify={list(record.verification_plan)}",
             ))
@@ -1748,6 +2130,33 @@ def render_grounded_application(bundle: RetrievalBundle,
     if policy in {"boundary_v3", "executable_v4"}:
         return rendered[:4600]
     if policy in {"retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11",
-                  "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"}:
+                  "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}:
         return rendered[:6800]
     return rendered
+
+
+def render_split_attractor_directive(
+    bundle: RetrievalBundle,
+    step_result: Any,
+    policy: str = "split_attractor_v24",
+) -> str:
+    """Render dynamic V24 SA-WM knowledge injection or re-inhibitory retraction directive."""
+    if step_result.transition == "reinhibitory_erase":
+        retracted = step_result.previous_abstract_id or "previous-schema"
+        return (
+            "\n\n[SPLIT-ATTRACTOR RE-INHIBITORY RESET]:\n"
+            f"Gate g_t=0 (state={step_result.state}; reason={step_result.reason}). "
+            f"The previously latched cross-task hypothesis ({retracted}) is refuted or stagnant "
+            "under current repository evidence and has been retracted into short-term refractory inhibition. "
+            "Do NOT continue editing along that premise; re-anchor on current task-local RCA and live code evidence."
+        )
+    if step_result.gate == 1 and step_result.active_grounding is not None:
+        h_val = step_result.h_scores.get(step_result.active_abstract_id or "", 0.0)
+        p_val = step_result.p_scores.get(step_result.active_abstract_id or "", 0.0)
+        body = render_grounded_application(bundle, (step_result.active_grounding,), policy)
+        return (
+            f"\n\n[SPLIT-ATTRACTOR DISINHIBITORY WRITE (mode={step_result.mode}; "
+            f"gate=1; transition={step_result.transition}; p={p_val:.3f}; h={h_val:.3f})]:\n"
+            + body
+        )
+    return ""

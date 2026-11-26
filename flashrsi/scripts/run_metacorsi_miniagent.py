@@ -5,7 +5,7 @@ import asyncio
 import os
 from pathlib import Path
 
-from flashrsi.agents import MetaCoRSIMiniAgent, MiniAgent
+from flashrsi.agents import DSH, DeepSeekHarness, MetaCoRSIMiniAgent, MiniAgent
 from flashrsi.config import load_config
 from flashrsi.runner import _evaluate, _prepare, _prepare_evaluation, _run
 
@@ -14,6 +14,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--arm", choices=("B0", "B1", "B2", "B3"), required=True)
+    parser.add_argument(
+        "--harness",
+        choices=("miniagent", "dsh", "deepseek_harness"),
+        help="Select common execution harness (defaults to config agent)",
+    )
     parser.add_argument(
         "--data", type=Path, help="Override the local DeepSWE data path"
     )
@@ -55,6 +60,15 @@ def main():
         cfg.agent.evaluation_scope = (
             "heldout" if args.heldout_warm_seed else "historical"
         )
+    use_dsh = args.harness in {"dsh", "deepseek_harness"} or cfg.agent.name in {
+        "dsh",
+        "deepseek_harness",
+        "metacorsi",
+    }
+    if use_dsh:
+        cfg.agent.name = args.harness if args.harness in {"dsh", "deepseek_harness"} else "dsh"
+        cfg.agent.pop("harbor", None)
+        cfg.agent["enable_memory"] = args.arm != "B0"
     if args.arm == "B3":
         if args.check_only:
             asyncio.run(_prepare(cfg))
@@ -67,7 +81,10 @@ def main():
     if not args.use_config_test_split:
         cfg.benchmark.pop("split_counts", None)
         cfg.benchmark.split = "auto"
-    if args.arm == "B0":
+    if use_dsh:
+        cls = DSH if cfg.agent.name == "dsh" else DeepSeekHarness
+        target = cls(cfg.agent)
+    elif args.arm == "B0":
         cfg.agent.name = "miniagent"
         target = MiniAgent(cfg.agent)
     else:

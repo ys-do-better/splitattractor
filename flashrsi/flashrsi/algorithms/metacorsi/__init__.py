@@ -5,6 +5,7 @@ import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from flashrsi.agents.deepseek_harness import DeepSeekHarness
 from flashrsi.agents.metacorsi import MetaCoRSITarget, copy_active_memory
 from flashrsi.agents.metacorsi.miniagent import MetaCoRSIMiniAgent
 from flashrsi.algorithms.metacorsi.episode_adapter import verified_episode
@@ -31,11 +32,13 @@ class MetaCoRSI(Algorithm):
 
     def _check(self):
         if not isinstance(
-            self.target, (MetaCoRSITarget, MetaCoRSIMiniAgent)
+            self.target, (MetaCoRSITarget, MetaCoRSIMiniAgent, DeepSeekHarness)
         ) or not isinstance(self.benchmark, DeepSWE):
             raise ValueError(
-                "MetaCoRSI requires a MetaCoRSI Target and benchmark.name: deepswe"
+                "MetaCoRSI requires a MetaCoRSI or DeepSeek Harness Target and benchmark.name: deepswe"
             )
+        if isinstance(self.target, DeepSeekHarness):
+            self.target.config["enable_memory"] = True
         if self.config.evolution_policy not in self._policies:
             raise ValueError("Unsupported native MetaCoRSI evolution policy")
         if not all((self.benchmark.train, self.benchmark.dev, self.benchmark.test)):
@@ -56,8 +59,8 @@ class MetaCoRSI(Algorithm):
 
     async def _evolve_memory(self):
         current = self.target.snapshot
-        miniagent = isinstance(self.target, MetaCoRSIMiniAgent)
-        if miniagent:
+        hosted = isinstance(self.target, (MetaCoRSIMiniAgent, DeepSeekHarness))
+        if hosted:
             await self.target.check_native(
                 forbidden_tasks=(*self.benchmark.dev, *self.benchmark.test)
             )
@@ -66,7 +69,7 @@ class MetaCoRSI(Algorithm):
             training = await self._evaluate(
                 current, self.benchmark.train, label="train"
             )
-            if miniagent:
+            if hosted:
                 evidence = {
                     "episodes": [
                         episode
@@ -99,7 +102,7 @@ class MetaCoRSI(Algorithm):
                 quarantine_path = memory / "candidates.json"
                 quarantine = (
                     json.loads(quarantine_path.read_bytes())
-                    if miniagent and quarantine_path.is_file()
+                    if hosted and quarantine_path.is_file()
                     else {}
                 )
                 staged = Path(temporary) / "memory"
@@ -107,7 +110,7 @@ class MetaCoRSI(Algorithm):
                 shutil.rmtree(memory)
                 shutil.copytree(staged, memory)
                 candidate = self._commit(current, checkout)
-            if miniagent:
+            if hosted:
                 receipt["memory"] = await self.target.check_native(
                     snapshot=candidate,
                     forbidden_tasks=(*self.benchmark.dev, *self.benchmark.test),

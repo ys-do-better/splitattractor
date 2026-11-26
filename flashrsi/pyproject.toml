@@ -88,6 +88,7 @@ exclude = [
 "flashrsi.agents.hermes" = ["components.yaml", "SOUL.md", "AGENTS.md", "config.yaml", "prompts/**/*", "skills/**/*", "runtime/hermes_native/**/*"]
 "flashrsi.agents.openclaw" = ["components.yaml", "SOUL.md", "AGENTS.md", "config.yaml", "prompts/**/*", "skills/**/*", "runtime/openclaw_native/**/*"]
 "flashrsi.agents.opencode" = ["components.yaml", "SOUL.md", "AGENTS.md", "config.yaml", "prompts/**/*", "skills/**/*", "runtime/opencode_native/**/*"]
+"flashrsi.agents.deepseek_harness" = ["components.yaml", "AGENTS.md", "config.yaml", "prompts/**/*", "skills/**/*", "memory/**/*"]
 
 [tool.setuptools.exclude-package-data]
 "flashrsi.agents.codex" = ["**/__pycache__/*", "**/*.pyc", "**/*.pyo"]

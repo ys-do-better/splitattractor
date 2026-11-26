@@ -2,6 +2,7 @@
 
 from flashrsi.agents.claude_code import ClaudeCode
 from flashrsi.agents.codex import Codex
+from flashrsi.agents.deepseek_harness import DSH, DeepSeekHarness
 from flashrsi.agents.hermes import Hermes
 from flashrsi.agents.jiuwenswarm import JiuwenSwarm
 from flashrsi.agents.llm import LLM
@@ -15,6 +16,8 @@ from flashrsi.agents.pi_agent import Pi, PiAgent
 __all__ = [
     "ClaudeCode",
     "Codex",
+    "DSH",
+    "DeepSeekHarness",
     "Hermes",
     "JiuwenSwarm",
     "LLM",

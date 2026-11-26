@@ -1,0 +1,9 @@
+{
+  "unspecified": [
+    "k7.fix.failure-routed",
+    "k7.memory.best-candidate",
+    "k7.perception.contract-tests-impact",
+    "k7.reasoning.rca-first",
+    "k7.safety.deterministic-promotion"
+  ]
+}

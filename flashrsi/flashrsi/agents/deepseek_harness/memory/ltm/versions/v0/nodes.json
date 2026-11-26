@@ -1,0 +1,100 @@
+{
+  "repository:general": {
+    "node_id": "repository:general",
+    "node_type": "repository",
+    "key": "general",
+    "status": "indexed",
+    "atom_ids": [
+      "k7.fix.failure-routed",
+      "k7.memory.best-candidate",
+      "k7.perception.contract-tests-impact",
+      "k7.reasoning.rca-first",
+      "k7.safety.deterministic-promotion"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "repository knowledge branch 'general' with 5 atoms, 0 positive and 0 unresolved task groundings."
+  },
+  "capability:repository-contract": {
+    "node_id": "capability:repository-contract",
+    "node_type": "capability",
+    "key": "repository-contract",
+    "status": "unverified",
+    "atom_ids": [
+      "k7.fix.failure-routed",
+      "k7.memory.best-candidate",
+      "k7.perception.contract-tests-impact",
+      "k7.reasoning.rca-first",
+      "k7.safety.deterministic-promotion"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "capability knowledge branch 'repository-contract' with 5 atoms, 0 positive and 0 unresolved task groundings."
+  },
+  "failure_mode:unspecified": {
+    "node_id": "failure_mode:unspecified",
+    "node_type": "failure_mode",
+    "key": "unspecified",
+    "status": "indexed",
+    "atom_ids": [
+      "k7.fix.failure-routed",
+      "k7.memory.best-candidate",
+      "k7.perception.contract-tests-impact",
+      "k7.reasoning.rca-first",
+      "k7.safety.deterministic-promotion"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "failure_mode knowledge branch 'unspecified' with 5 atoms, 0 positive and 0 unresolved task groundings."
+  },
+  "causal_locus:dispatch-registration": {
+    "node_id": "causal_locus:dispatch-registration",
+    "node_type": "causal_locus",
+    "key": "dispatch-registration",
+    "status": "indexed",
+    "atom_ids": [
+      "k7.perception.contract-tests-impact"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "causal_locus knowledge branch 'dispatch-registration' with 1 atoms, 0 positive and 0 unresolved task groundings."
+  },
+  "causal_locus:state-propagation": {
+    "node_id": "causal_locus:state-propagation",
+    "node_type": "causal_locus",
+    "key": "state-propagation",
+    "status": "indexed",
+    "atom_ids": [
+      "k7.reasoning.rca-first"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "causal_locus knowledge branch 'state-propagation' with 1 atoms, 0 positive and 0 unresolved task groundings."
+  },
+  "causal_locus:unspecified": {
+    "node_id": "causal_locus:unspecified",
+    "node_type": "causal_locus",
+    "key": "unspecified",
+    "status": "indexed",
+    "atom_ids": [
+      "k7.fix.failure-routed",
+      "k7.memory.best-candidate",
+      "k7.safety.deterministic-promotion"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "causal_locus knowledge branch 'unspecified' with 3 atoms, 0 positive and 0 unresolved task groundings."
+  },
+  "causal_locus:validation-preservation": {
+    "node_id": "causal_locus:validation-preservation",
+    "node_type": "causal_locus",
+    "key": "validation-preservation",
+    "status": "indexed",
+    "atom_ids": [
+      "k7.reasoning.rca-first"
+    ],
+    "positive_tasks": [],
+    "negative_tasks": [],
+    "summary": "causal_locus knowledge branch 'validation-preservation' with 1 atoms, 0 positive and 0 unresolved task groundings."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "version": 0,
+  "parent": null,
+  "profile": "indexed-ltm-abstraction-grounding-v1",
+  "built_at": "1970-01-01T00:00:00+00:00",
+  "memory_layers": {
+    "profile": "native-K7-priors-no-episodes",
+    "backbone_version": 0,
+    "backbone_atom_ids": [
+      "k7.fix.failure-routed",
+      "k7.memory.best-candidate",
+      "k7.perception.contract-tests-impact",
+      "k7.reasoning.rca-first",
+      "k7.safety.deterministic-promotion"
+    ],
+    "backbone_atom_count": 5,
+    "delta_atom_ids": [],
+    "delta_atom_count": 0,
+    "delta_tasks": []
+  },
+  "snapshot_digest": "ba2acde98c86f428a6c79d52043b57d3f52e036ce8fcece0b3d7ea7de2ed07d2",
+  "atom_count": 5,
+  "node_count": 7,
+  "edge_count": 21,
+  "abstraction_count": 0,
+  "grounding_count": 0,
+  "retention_task_count": 0,
+  "files": {
+    "atoms.jsonl": "55bee9cdeb4c3dafc1dca2bde3351c570977d3b61a108130e80acaffc631329b",
+    "nodes.json": "71587e87b358dba33723f519d5ea49faabadbead84ac2bed7386a96632a72576",
+    "edges.jsonl": "9a8dcfb64cd88f7ac08892de8058690ff7082ad56494f679b914a6a2e2f6cfd7",
+    "abstractions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "groundings.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retention_anchors.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "indexes/task.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "indexes/repository.json": "8b324b1505b1cce36369eaf3dedff63876a9fd9b7e4acc4497056bcbe88fd5df",
+    "indexes/capability.json": "59540a05953ff1be12fe5f2f7a46900e257440cd59f9002a807eeaa9859cc9bb",
+    "indexes/failure_mode.json": "95371035b1ce643b0d8d12bbd123173927414b25c30ae33fa6cb3c34401a63a8",
+    "indexes/causal_locus.json": "0964f342043d9ddc398e239b609394e4991bfefe14c9e2b8b2c40d0dd597fcb7"
+  }
+}

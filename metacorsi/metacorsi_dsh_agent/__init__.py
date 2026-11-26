@@ -72,6 +72,47 @@ def _confirmed_focused_failure(commands: list[str], return_codes: list[int]) -> 
     )
 
 
+_EDIT_COMMAND = re.compile(
+    r"(?:\bgit\s+apply\b|\bsed\s+-i\b|\bpython3?\s+-c\b.*(?:write_text|open\s*\(|replace)|"
+    r"\bcat\s+<<|\bprintf\b.*>\s*\S+|\bpatch\b)",
+    re.I | re.S,
+)
+
+
+def _classify_step_feedback(
+    commands: list[str],
+    return_codes: list[int],
+    *,
+    gate_Active: bool = False,
+    edited_since_latch: bool = False,
+    rca_gate_blocked: bool = False,
+) -> dict[str, bool]:
+    """Distinguish ordinary shell command errors from test counterevidence in V24."""
+    has_test = any(bool(_TEST_PROBE.search(cmd)) for cmd in commands)
+    test_failed = _confirmed_focused_failure(commands, return_codes)
+    test_passed = any(
+        code == 0 and bool(_TEST_PROBE.search(cmd))
+        for cmd, code in zip(commands, return_codes)
+    )
+    edited = any(bool(_EDIT_COMMAND.search(cmd)) for cmd in commands)
+    any_failed = any(code != 0 for code in return_codes)
+    ordinary_failure = any_failed and not test_failed
+    # Explicit counterevidence occurs when the RCA completion gate rejects the
+    # candidate, or when an edit made under a latched hypothesis is tested and
+    # the focused test still fails.
+    explicit_counterevidence = rca_gate_blocked or (
+        gate_Active and (edited_since_latch or edited) and test_failed
+    )
+    return {
+        "has_test": has_test,
+        "test_failed": test_failed,
+        "test_passed": test_passed,
+        "edited": edited,
+        "ordinary_failure": ordinary_failure,
+        "explicit_counterevidence": explicit_counterevidence,
+    }
+
+
 def _lock_grounding_receipt(
     receipt: list[dict], locked_abstract_id: str | None,
 ) -> tuple[list[dict], str | None, list[str]]:
@@ -479,29 +520,47 @@ class AgentHarness(BaseAgent):
         candidate_seed = await self._resume_candidate(environment)
         initial = await environment.exec("pwd && find . -maxdepth 2 -type f | head -80", timeout_sec=60)
         observation = (initial.stdout or "") + (initial.stderr or "")
+        v24_split_attractor = brain.ltm_policy in {"split_attractor_v24", "naive_latch_v24"}
         failure_locked = brain.ltm_policy == "failure_locked_v21"
         evidence_gated = brain.ltm_policy in {"evidence_gated_v20", "failure_locked_v21"}
-        evolved_context = brain.evolved_knowledge_prompt(
-            instruction,
-            task_id=self.session_id or "deepswe",
-            # V20 must not ground cross-task knowledge from a task statement or
-            # a shallow file listing.  It starts with the local episode only and
-            # re-runs grounding after the agent has collected repository evidence.
-            repository_evidence="" if evidence_gated else observation,
-        )
-        grounding_history: list[dict] = [{
-            "step": 0,
-            "stage": "initial",
-            "evidence_digest": hashlib.sha256(b"").hexdigest(),
-            "evidence_excerpt": "",
-            "grounding": brain.grounding_receipt(),
-        }]
+        if v24_split_attractor:
+            # Step 0 starts with PFG-hDeltaK gate closed (g_0 = 0): task-local
+            # Slow Backbone anchors remain available, while cross-task schemas
+            # are held in background tracking until live evidence matches.
+            evolved_context, sa_step0 = brain.step_working_memory(
+                instruction,
+                task_id=self.session_id or "deepswe",
+                repository_evidence="",
+                has_live_evidence=False,
+            )
+            grounding_history: list[dict] = [sa_step0.json()]
+        else:
+            evolved_context = brain.evolved_knowledge_prompt(
+                instruction,
+                task_id=self.session_id or "deepswe",
+                # V20 must not ground cross-task knowledge from a task statement or
+                # a shallow file listing.  It starts with the local episode only and
+                # re-runs grounding after the agent has collected repository evidence.
+                repository_evidence="" if evidence_gated else observation,
+            )
+            grounding_history = [{
+                "step": 0,
+                "stage": "initial",
+                "evidence_digest": hashlib.sha256(b"").hexdigest(),
+                "evidence_excerpt": "",
+                "grounding": brain.grounding_receipt(),
+            }]
         last_abstract_ids = {
-            item["abstract_id"] for item in grounding_history[-1]["grounding"]
+            item["abstract_id"] for item in grounding_history[-1].get("grounding", ())
         }
         repository_evidence_window = ""
+        sa_recent_observations: list[str] = []
+        sa_stagnation_steps = 0
+        sa_edited_since_latch = False
+        sa_pending_counterevidence = False
+        sa_ordinary_failure = False
         locked_abstract_id: str | None = None
-        active_grounding_receipt: list[dict] = list(grounding_history[-1]["grounding"])
+        active_grounding_receipt: list[dict] = list(grounding_history[-1].get("grounding", ()))
         if candidate_seed:
             observation += "\n\nMETACORSI QUARANTINED CANDIDATE SEED:\n" + json.dumps(
                 candidate_seed, ensure_ascii=False
@@ -528,7 +587,36 @@ class AgentHarness(BaseAgent):
             if step in {6, 12, 18, 22, max_steps}:
                 observation += "\n\n" + await self._audit_candidate(environment)
             knowledge_update = ""
-            if evidence_gated and step > 1:
+            if v24_split_attractor and step > 1:
+                live_window = "\n".join(sa_recent_observations[-2:])[-16000:]
+                sa_directive, sa_step = brain.step_working_memory(
+                    instruction,
+                    task_id=self.session_id or "deepswe",
+                    repository_evidence=live_window,
+                    has_live_evidence=bool(live_window.strip()),
+                    explicit_counterevidence=sa_pending_counterevidence,
+                    stagnation_steps=sa_stagnation_steps,
+                    ordinary_command_failure=sa_ordinary_failure,
+                )
+                sa_pending_counterevidence = False
+                grounding_history.append(sa_step.json())
+                if sa_step.transition == "disinhibitory_write":
+                    sa_edited_since_latch = False
+                    sa_stagnation_steps = 0
+                elif sa_step.transition == "reinhibitory_erase":
+                    sa_edited_since_latch = False
+                    sa_stagnation_steps = 0
+                if sa_step.active_grounding is not None:
+                    active_grounding_receipt = [sa_step.active_grounding.json()]
+                elif sa_step.transition == "reinhibitory_erase":
+                    active_grounding_receipt = []
+                if sa_step.transition in {
+                    "disinhibitory_write",
+                    "attractor_switch",
+                    "reinhibitory_erase",
+                }:
+                    knowledge_update = sa_directive
+            elif evidence_gated and step > 1:
                 repository_evidence = (repository_evidence_window + "\n" + observation)[-32000:]
                 refreshed_context = brain.evolved_knowledge_prompt(
                     instruction,
@@ -701,7 +789,30 @@ RECENT ACTION SUMMARY:
                     observation += "\n\nMETACORSI RCA/REGRESSION DIRECTIVE:\n" + json.dumps(
                         rca_record, ensure_ascii=False
                     )
-            if failure_locked:
+            if v24_split_attractor:
+                feedback = _classify_step_feedback(
+                    commands,
+                    return_codes,
+                    gate_Active=brain.split_attractor.gate == 1,
+                    edited_since_latch=sa_edited_since_latch,
+                    rca_gate_blocked=False,
+                )
+                if feedback["edited"] and brain.split_attractor.gate == 1:
+                    sa_edited_since_latch = True
+                if feedback["test_passed"]:
+                    sa_stagnation_steps = 0
+                    sa_pending_counterevidence = False
+                elif feedback["explicit_counterevidence"]:
+                    sa_pending_counterevidence = True
+                    sa_stagnation_steps += 1
+                elif feedback["test_failed"] and brain.split_attractor.gate == 1:
+                    sa_stagnation_steps += 1
+                sa_ordinary_failure = feedback["ordinary_failure"]
+                tagged_obs = observation
+                if feedback["test_failed"]:
+                    tagged_obs = "METACORSI_CONFIRMED_FAILURE_EVIDENCE\n" + observation
+                sa_recent_observations.append(tagged_obs[-10000:])
+            elif failure_locked:
                 confirmed_failure = _confirmed_focused_failure(commands, return_codes)
                 if confirmed_failure:
                     repository_evidence_window = (
@@ -740,6 +851,11 @@ RECENT ACTION SUMMARY:
                 if gate_failures:
                     observation = "RCA FOCUSED GATE BLOCKED COMPLETION:\n" + "\n".join(gate_failures)
                     history[-1]["completion_blocked_by_rca_gate"] = True
+                    if v24_split_attractor:
+                        sa_pending_counterevidence = True
+                        sa_recent_observations.append(
+                            "METACORSI_CONFIRMED_FAILURE_EVIDENCE\n" + observation[-10000:]
+                        )
                     continue
                 history[-1]["rca_focused_gate"] = "passed" if gate_commands else "not-required"
                 materialization = await self._materialize_candidate(environment, "agent-done")
@@ -753,8 +869,12 @@ RECENT ACTION SUMMARY:
             json.dumps({"model": self.model_name, "control_mode": control_mode,
                         "knowledge_store": knowledge_path,
                         "grounding": (active_grounding_receipt
-                                      if failure_locked else brain.grounding_receipt()),
+                                      if (failure_locked or v24_split_attractor)
+                                      else brain.grounding_receipt()),
                         "grounding_history": grounding_history,
+                        "split_attractor_metrics": (
+                            brain.split_attractor.metrics() if v24_split_attractor else None
+                        ),
                         "candidate_seed": candidate_seed,
                         "evolved_knowledge": evolved_context,
                         "max_steps": max_steps, "candidate_materialization": materialization,

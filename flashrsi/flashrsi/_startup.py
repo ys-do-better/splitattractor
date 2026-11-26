@@ -166,6 +166,10 @@ def _role(config, label, kind):
         from flashrsi.agents.opencode import _validate
 
         _validate(config)
+    elif kind in {"deepseek_harness", "dsh"}:
+        from flashrsi.agents.deepseek_harness import _validate
+
+        _validate(config)
     if kind == "codex":
         if config.get("cli_path"):
             raise ValueError(

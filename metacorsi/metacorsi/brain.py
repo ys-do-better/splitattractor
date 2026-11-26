@@ -13,7 +13,9 @@ from .generator import AgentGenerator, GeneratedAgent
 from .knowledge import K7SkillRouter
 from .knowledge.grounding import GroundedKnowledgeGraph
 from .knowledge.indexed_ltm import (GroundingRecord, IndexedLTM,
-                                    render_grounded_application)
+                                    render_grounded_application,
+                                    render_split_attractor_directive)
+from .knowledge.split_attractor import SplitAttractorStepResult, SplitAttractorWM
 from .knowledge.store import (KnowledgeAtom, VersionedKnowledgeStore, k7_seed_atoms,
                               render_atoms, retrieve_atoms)
 from .monitor import Monitor
@@ -65,6 +67,9 @@ class MetaCoRSIBrain:
             )
         self.last_groundings: tuple[GroundingRecord, ...] = ()
         self.ltm_policy = os.environ.get("METACORSI_LTM_POLICY", "full_v1")
+        sa_mode = "naive" if self.ltm_policy == "naive_latch_v24" else "sa"
+        self.split_attractor = SplitAttractorWM(mode=sa_mode)
+        self.working_memory: WorkingMemory | None = None
         self.knowledge.version = self.ltm.active.version
         self.skill_router = K7SkillRouter()
         self.perception = PerceptionCompiler()
@@ -90,6 +95,56 @@ class MetaCoRSIBrain:
     def grounding_receipt(self) -> list[dict[str, Any]]:
         return [item.json() for item in self.last_groundings]
 
+    def step_working_memory(
+        self,
+        task_text: str,
+        *,
+        task_id: str = "",
+        repository_evidence: str = "",
+        has_live_evidence: bool | None = None,
+        explicit_counterevidence: bool = False,
+        stagnation_steps: int = 0,
+        ordinary_command_failure: bool = False,
+        limit: int = 14,
+    ) -> tuple[str, SplitAttractorStepResult]:
+        """Advance V24 Split-Attractor Working Memory by one step and render context."""
+        bundle, signals, pfg_summary = self.indexed_ltm.score_candidates(
+            task_id=task_id,
+            task_text=task_text,
+            repository_evidence=repository_evidence,
+            limit=limit,
+            policy=self.ltm_policy,
+        )
+        live_flag = (
+            bool(repository_evidence.strip())
+            if has_live_evidence is None
+            else bool(has_live_evidence)
+        )
+        step_result = self.split_attractor.step(
+            signals,
+            has_live_evidence=live_flag,
+            explicit_counterevidence=explicit_counterevidence,
+            stagnation_steps=stagnation_steps,
+            ordinary_command_failure=ordinary_command_failure,
+            pfg_summary=pfg_summary,
+        )
+        self.last_groundings = (
+            (step_result.active_grounding,)
+            if step_result.active_grounding is not None
+            else ()
+        )
+        if self.working_memory is not None:
+            self.working_memory.update_split_attractor(step_result.to_wm_snapshot())
+        if step_result.step == 1:
+            rendered = render_grounded_application(
+                bundle, self.last_groundings, self.ltm_policy
+            )
+        else:
+            rendered = render_split_attractor_directive(
+                bundle, step_result, self.ltm_policy
+            )
+        return rendered, step_result
+
     def generate_agent(self, target: str, task_id: str, task_text: str) -> GeneratedAgent:
         """Steps 1-3: pin LTM, compile perception, and generate a target-specific cognitive agent."""
         snapshot = self.ltm.pin()
@@ -100,6 +155,7 @@ class MetaCoRSIBrain:
                  if self.control_mode == "rca_only" else
                  ["Monitor", "RCA", "minimal delta", "RCA regression", "promote/rollback"])
         memory = WorkingMemory(f"wm-{wm_digest}", task_id, snapshot.version, plans=plans)
+        self.working_memory = memory
         return self.generator.generate(target, snapshot.version, policy, memory, skills,
                                        self.control_mode)
 
@@ -172,4 +228,6 @@ class MetaCoRSIBrain:
                                 "abstractions": len(self.indexed_ltm.abstractions),
                                 "groundings": len(self.indexed_ltm.groundings),
                                 "retention_tasks": len(self.indexed_ltm.anchors)},
+                "split_attractor": self.split_attractor.metrics(),
+                "working_memory": self.working_memory.receipt() if self.working_memory else None,
                 "candidate": self.candidates.receipt(), "monitor": self.monitor.receipt()}

@@ -1,0 +1,10 @@
+prompt:
+  - AGENTS.md
+  - prompts/**
+skill:
+  - skills/**
+config:
+  - config.yaml
+  - config/**
+memory:
+  - memory/**

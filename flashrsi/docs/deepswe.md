@@ -47,7 +47,6 @@ Docker Linux daemon 和 Compose；自动获取数据需要 Git。`--plan` 只显
 这是接入现有 Agent 的评测接口，不声称复现官方榜单的模型、预算或 harness 配置。
 离线测试覆盖格式解析、划分、网络策略参数传递和结果映射。
 
-原生 DeepSeek Harness 路线使用 `agent.name: metacorsi`。它通过独立 Harbor 进程接入同一
-DeepSWE 接口，DSH 在宿主机请求模型，任务和 verifier 容器遵守原生禁网约束。
-配置见 [DeepSWE + DeepSeek Harness](../examples/quickstarts/deepswe_metacorsi.yaml)
-和 [MetaCoRSI 运行说明](./metacorsi.md)。
+DeepSeek Harness 支持两种接入方式：
+- **通用 Target Harness（`agent.name: dsh` 或 `deepseek_harness`）**：通过宿主机 DSH 规划命令、Harbor 容器内执行并由独立 verifier 评分，完整记录多轮 Trajectory 与 Token Usage，可直接运行基线评测、`metacorsi` 以及 `opro`、`gepa`、`skillopt`、`ace`、`ahe`、`rrsi` 等全部 FlashRSI 算法。配置见 [DeepSWE + DSH 通用配置](../examples/quickstarts/deepswe_dsh.yaml)。
+- **原生 MetaCoRSI 复现（`agent.name: metacorsi`）**：通过原生 `metacorsi_dsh_agent:AgentHarness` 接入同一 DeepSWE 接口。配置见 [DeepSWE + MetaCoRSI](../examples/quickstarts/deepswe_metacorsi.yaml) 和 [MetaCoRSI 运行说明](./metacorsi.md)。

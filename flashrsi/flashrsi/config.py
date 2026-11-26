@@ -167,7 +167,12 @@ def load_config(
     if not output_dir.is_absolute():
         output_dir = origin / output_dir
     config["run"]["output_dir"] = str(output_dir.resolve())
-    if config["agent"]["name"] in {"metacorsi", "metacorsi_miniagent"}:
+    if config["agent"]["name"] in {
+        "metacorsi",
+        "metacorsi_miniagent",
+        "deepseek_harness",
+        "dsh",
+    }:
         for section, keys in (
             ("agent", ("project_dir", "knowledge_dir", "python", "cli_path")),
             ("benchmark", ("data_path",)),
