@@ -4,7 +4,7 @@
 固定[官方仓库](https://github.com/datacurve-ai/deep-swe/tree/0b9fabbb63b9104d678fe965e1632f2dd9eaa2ea)
 commit `0b9fabbb63b9104d678fe965e1632f2dd9eaa2ea`。
 
-当前验证范围为合成任务的离线接口测试，原生任务、镜像和真实容器行为仍待验证。
+已在 DeepSWE 的 `datacurve/abs-stepped-slices` 真实任务上验证 Harbor 容器执行和独立评分。
 
 ## 配置
 
@@ -45,7 +45,9 @@ Docker Linux daemon 和 Compose；自动获取数据需要 Git。`--plan` 只显
   `rewards.reward`；其他原生分项保留在该事件。执行失败计零，不采信 Agent 自报分数。
 
 这是接入现有 Agent 的评测接口，不声称复现官方榜单的模型、预算或 harness 配置。
-原生任务、镜像和真实容器行为尚未验证；离线测试仅确认格式解析、划分、网络策略参数传递和结果映射。
+离线测试覆盖格式解析、划分、网络策略参数传递和结果映射。
 
-本地 MetaCoRSI 可通过独立 Harbor 进程接入同一 DeepSWE 接口，
-详见 [MetaCoRSI 配置和进化流程](./metacorsi.md)。
+原生 DeepSeek Harness 路线使用 `agent.name: metacorsi`。它通过独立 Harbor 进程接入同一
+DeepSWE 接口，DSH 在宿主机请求模型，任务和 verifier 容器遵守原生禁网约束。
+配置见 [DeepSWE + DeepSeek Harness](../examples/quickstarts/deepswe_metacorsi.yaml)
+和 [MetaCoRSI 运行说明](./metacorsi.md)。

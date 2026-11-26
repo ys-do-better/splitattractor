@@ -47,7 +47,7 @@ The [30-suite configuration index](benchmark-quickstart.md) links every register
 | Harbor | Terminal-Bench 2.0/2.1, SWE-bench Pro, DeepSWE, JobBench, and SpreadsheetBench 2 need Docker and Compose. JobBench also needs a Judge. | [Coding and spreadsheet tasks](coding-working-benchmarks.md), [DeepSWE](deepswe.md) |
 | Native interactive environments | τ²/τ³ need their user simulator; τ² retail also needs a Judge. ALFWorld needs local native data and Python 3.11/3.12. | [τ²](tau2-bench.md), [ALFWorld](alfworld.md), [configuration index](benchmark-quickstart.md) |
 
-SpreadsheetBench 2 covers its first three task categories and excludes Visualization. DeepSWE currently has an interface adapter; official task downloads and real execution are unverified. Each setup guide states its supported track and metric.
+SpreadsheetBench 2 covers its first three task categories and excludes Visualization. DeepSWE has been smoke-tested with a native task and independent verifier, including the local [DeepSeek Harness setup](metacorsi.md). Each setup guide states its supported track and metric.
 
 Container execution has additional harness requirements. Claude Code needs explicit credentials and cannot use host login; Claude Code and Codex containers reject `cli_path`. Codex containers execute the selected Snapshot Python core. See [container integration](agent-integration.md#可选-容器执行) and [Codex setup](codex.md).
 
