@@ -34,12 +34,25 @@ def bind(agent, benchmark):
 
     metacorsi = isinstance(agent, MetaCoRSITarget)
     if metacorsi:
-        if not (agent.config["llm"].get("api_key") or os.environ.get("METACORSI_DSH_API_KEY")):
-            raise ValueError("Set agent.llm.api_key or METACORSI_DSH_API_KEY for MetaCoRSI")
+        if not (
+            agent.config["llm"].get("api_key")
+            or os.environ.get("METACORSI_DSH_API_KEY")
+        ):
+            raise ValueError(
+                "Set agent.llm.api_key or METACORSI_DSH_API_KEY for MetaCoRSI"
+            )
         if agent.config["llm"].get("side_base_url"):
             raise ValueError("MetaCoRSI accepts a single DSH provider endpoint")
     else:
         bind_harbor(agent)
+    hosted = agent.config.get("harbor", {}).get("hosted_miniagent", False)
+    if hosted:
+        from flashrsi.agents import MetaCoRSIMiniAgent, MiniAgent
+        from flashrsi.integrations._hosted_miniagent import validate_resources
+
+        if type(agent) not in (MiniAgent, MetaCoRSIMiniAgent):
+            raise ValueError("Hosted DeepSWE requires a supported MiniAgent Target")
+        validate_resources(agent.snapshot)
     _model_hosts(agent.config)
 
     async def run(target, task):
@@ -50,6 +63,10 @@ def bind(agent, benchmark):
         hosts = _model_hosts(target.config)
         if metacorsi:
             return await target.run_task(task)
-        return await _run(target, task, agent_allowed_hosts=hosts)
+        return (
+            await _run(target, task, agent_allowed_hosts=hosts, hosted=True)
+            if hosted
+            else await _run(target, task, agent_allowed_hosts=hosts)
+        )
 
     agent._env_runner = run

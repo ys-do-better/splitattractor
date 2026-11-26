@@ -17,6 +17,7 @@ from flashrsi.agents import (
     Codex,
     Hermes,
     JiuwenSwarm,
+    MetaCoRSIMiniAgent,
     MetaCoRSITarget,
     MiniAgent,
     OpenClaw,
@@ -80,6 +81,7 @@ from flashrsi.core import Agent, Snapshot
 
 _AGENTS = {
     "metacorsi": MetaCoRSITarget,
+    "metacorsi_miniagent": MetaCoRSIMiniAgent,
     "jiuwenswarm": JiuwenSwarm,
     "miniagent": MiniAgent,
     "claude_code": ClaudeCode,
@@ -178,7 +180,10 @@ async def _prepare_target(config, *, snapshot=None):
     target = _make_agent(
         _lookup(_AGENTS, config.agent.name, "agent"), config.agent, "agent"
     )
-    if isinstance(target, MetaCoRSITarget) and config.benchmark.name != "deepswe":
+    if (
+        isinstance(target, (MetaCoRSITarget, MetaCoRSIMiniAgent))
+        and config.benchmark.name != "deepswe"
+    ):
         raise ValueError("The MetaCoRSI Target requires benchmark.name: deepswe")
     if snapshot is not None:
         try:
@@ -282,7 +287,7 @@ async def _prepare_target(config, *, snapshot=None):
         from flashrsi.integrations.deepswe import bind
 
         bind(target, benchmark)
-        if isinstance(target, MetaCoRSITarget):
+        if isinstance(target, (MetaCoRSITarget, MetaCoRSIMiniAgent)):
             await target.check_native()
     if isinstance(benchmark, JobBench):
         from flashrsi.integrations.jobbench import bind
@@ -320,20 +325,25 @@ async def _prepare(config):
     worker_config = config.algorithm.worker
     if algorithm_type.requires_worker == (worker_config.type == "none"):
         expected = "llm or agent" if algorithm_type.requires_worker else "none"
-        raise ValueError(f"{algorithm_type.name} requires algorithm.worker.type: {expected}")
+        raise ValueError(
+            f"{algorithm_type.name} requires algorithm.worker.type: {expected}"
+        )
     worker = None
     if worker_config.type != "none":
         worker_type = (
-            LLM if worker_config.type == "llm"
+            LLM
+            if worker_config.type == "llm"
             else _lookup(_AGENTS, worker_config.name, "worker")
         )
-        if worker_type in (JiuwenSwarm, MetaCoRSITarget):
+        if worker_type in (JiuwenSwarm, MetaCoRSITarget, MetaCoRSIMiniAgent):
             raise ValueError(f"{worker_type.name} is available as a Target only")
         worker = _make_agent(worker_type, worker_config, "algorithm.worker")
     target, benchmark = await _prepare_target(config)
     algorithm = algorithm_type(
         config.algorithm, target=target, worker=worker, benchmark=benchmark
     )
+    if isinstance(target, MetaCoRSIMiniAgent):
+        await target.check_native(forbidden_tasks=(*benchmark.dev, *benchmark.test))
     return algorithm
 
 
@@ -408,6 +418,8 @@ async def _prepare_evaluation(config):
     target, benchmark = await _prepare_target(config, snapshot=snapshot)
     target.set_scope({name: "r" for name in target.component_rules})
     benchmark.load()
+    if isinstance(target, MetaCoRSIMiniAgent):
+        await target.check_native(forbidden_tasks=benchmark.test)
     if not benchmark.test:
         raise ValueError(
             "Evaluation requires a non-empty benchmark.test; configure explicit test roles"

@@ -1,0 +1,29 @@
+# Development pilot. Historical dev5 is not an independent research test set.
+run:
+  output_dir: ../../runs/metacorsi-miniagent
+benchmark:
+  name: deepswe
+  # Set data_path to use a local DeepSWE checkout.
+  seed: 42
+  split_counts: {train: 2, dev: 1, test: 2}
+agent:
+  name: metacorsi_miniagent
+  project_dir: ../../../metacorsi
+  evaluation_scope: heldout
+  max_turns: 30
+  timeout: 1800
+  harbor:
+    hosted_miniagent: true
+  llm:
+    model_name: deepseek-flash
+    base_url: https://api.deepseek.com
+    max_tokens: 4096
+    llm_max_retries: 1
+algorithm:
+  name: metacorsi
+  max_steps: 2
+  # Native standard policy retains verified failures as P/R/F/S.
+  # Set grounding_feedback to reproduce the original positive-only queue.
+  evolution_policy: standard
+  worker:
+    type: none
