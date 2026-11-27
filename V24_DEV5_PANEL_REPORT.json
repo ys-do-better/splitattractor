@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-27T04:41:51.061928+00:00",
+  "label": "dev5_v24_sa_complete",
+  "tasks": 5,
+  "strict_passes": 4,
+  "pass_at_1": 0.8,
+  "mean_partial": 0.99943,
+  "exceptions": [],
+  "against": null,
+  "rows": [
+    {
+      "task": "abs-stepped-slices",
+      "reward": 1,
+      "partial": 1.0,
+      "f2p_passed": 6,
+      "f2p_total": 6,
+      "p2p_passed": 6,
+      "p2p_total": 6,
+      "exception": false,
+      "result": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa/jobs/panel_dev5_v24_sa/abs-stepped-slices__G9tebws/result.json",
+      "attempts": 1
+    },
+    {
+      "task": "awilix-async-container-initialization",
+      "reward": 1,
+      "partial": 1.0,
+      "f2p_passed": 24,
+      "f2p_total": 24,
+      "p2p_passed": 162,
+      "p2p_total": 162,
+      "exception": false,
+      "result": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa/jobs/panel_dev5_v24_sa/awilix-async-container-initializ__7Tkci7r/result.json",
+      "attempts": 1
+    },
+    {
+      "task": "bandit-structured-nosec-directives",
+      "reward": 0,
+      "partial": 0.9971509971509972,
+      "f2p_passed": 69,
+      "f2p_total": 69,
+      "p2p_passed": 281,
+      "p2p_total": 282,
+      "exception": false,
+      "result": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa/jobs/panel_dev5_v24_sa/bandit-structured-nosec-directiv__2RMoCXJ/result.json",
+      "attempts": 3
+    },
+    {
+      "task": "cattrs-partial-structuring-recovery",
+      "reward": 1,
+      "partial": 1.0,
+      "f2p_passed": 69,
+      "f2p_total": 69,
+      "p2p_passed": 7,
+      "p2p_total": 7,
+      "exception": false,
+      "result": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa_refined/jobs/panel_dev5_v24_sa_refined/cattrs-partial-structuring-recov__DozVEdx/result.json",
+      "attempts": 2
+    },
+    {
+      "task": "cliffy-config-file-parsing",
+      "reward": 1,
+      "partial": 1.0,
+      "f2p_passed": 37,
+      "f2p_total": 37,
+      "p2p_passed": 451,
+      "p2p_total": 451,
+      "exception": false,
+      "result": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa_refined/jobs/panel_dev5_v24_sa_refined/cliffy-config-file-parsing__WWoPSS9/result.json",
+      "attempts": 2
+    }
+  ]
+}
