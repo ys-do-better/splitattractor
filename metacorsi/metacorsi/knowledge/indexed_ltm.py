@@ -978,13 +978,20 @@ class IndexedLTM:
         # A verified fast episode carries its outcome memory.  A failed fast episode
         # carries a safety/verification boundary instead and is never mislabeled as M.
         fast_atoms = delta_pass if delta_pass else delta_fail
-        fast_roles = ("R", "F", "M") if delta_pass else ("R", "F", "S")
+        fast_roles: tuple[str, ...] = ("R", "F", "M") if delta_pass else ("R", "F", "S")
+        if not backbone_selected and not fast_atoms:
+            # Recover orphaned same-task near-miss atoms (P/R/F/S, never M) for
+            # unresolved backbone tasks that have no passing episode yet.
+            fast_atoms = [
+                record.atom for record in task_records if record.outcome == "fail"
+            ]
+            fast_roles = ("P", "R", "F", "S")
         for kind in fast_roles:
             candidates = sorted((atom for atom in fast_atoms if atom.kind == kind), key=rank)
             if candidates:
                 delta_selected.append(candidates[0])
         selected.extend(backbone_selected[:5])
-        selected.extend(delta_selected[:3])
+        selected.extend(delta_selected[:4 if not backbone_selected else 3])
         return tuple(selected), {
             "task": task_key,
             "signature": f"backbone-v{layer.get('backbone_version', 'unknown')}+delta",
@@ -2140,8 +2147,10 @@ def render_indexed_bundle(bundle: RetrievalBundle, policy: str = "full_v1") -> s
                                     "retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11",
                                     "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}
         content_limit = 1500 if policy == "experience_v14" else (
-            520 if policy in {"retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11", "situation_v13",
-                              "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES} else 260
+            720 if policy in _V24_POLICIES else (
+                520 if policy in {"retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11", "situation_v13",
+                                  "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"} else 260
+            )
         )
         content = atom.content if not compact_policy else re.sub(r"\s+", " ", atom.content).strip()[:content_limit]
         lines.append(f"- {role}: {atom.content} [id={atom.atom_id}; confidence={atom.confidence:.2f}]")
