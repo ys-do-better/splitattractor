@@ -965,8 +965,13 @@ class IndexedLTM:
         delta_pass = [record.atom for record in delta_records if record.outcome == "pass"]
         delta_fail = [record.atom for record in delta_records if record.outcome == "fail"]
 
-        def rank(atom: KnowledgeAtom) -> tuple[float, int, str]:
-            return (-atom.confidence, -len(atom.content), atom.atom_id)
+        def rank(atom: KnowledgeAtom) -> tuple[int, float, int, str]:
+            has_reflection = int(
+                "reflected invariant:" in atom.content.lower()
+                or "reflection strategy:" in atom.content.lower()
+                or "rca transition guard" in atom.content.lower()
+            )
+            return (-has_reflection, -atom.confidence, -len(atom.content), atom.atom_id)
 
         selected: list[KnowledgeAtom] = []
         backbone_selected: list[KnowledgeAtom] = []
@@ -1184,6 +1189,14 @@ class IndexedLTM:
             record.atom.atom_id in delta_ids and record.outcome == "pass"
             for record in task_records
         )
+        has_reflected_near_miss = any(
+            record.outcome == "fail"
+            and (
+                "reflected invariant:" in record.atom.content.lower()
+                or "reflection strategy:" in record.atom.content.lower()
+            )
+            for record in task_records
+        )
         verified_task_loci = {
             locus
             for record in task_records
@@ -1246,7 +1259,14 @@ class IndexedLTM:
             else:
                 causal_score = 0.0
 
-            effective_triggers = abstract.trigger_tags
+            _GENERIC_SHELL_STOP_TAGS = {
+                "app", "git", "commit", "staged", "branch", "local", "clean",
+                "status", "diff", "identity", "file", "files", "line", "lines",
+                "code", "path", "dir", "run", "check", "checks",
+            }
+            effective_triggers = tuple(
+                t for t in abstract.trigger_tags if t not in _GENERIC_SHELL_STOP_TAGS
+            )
             if not effective_triggers:
                 task_toks = {
                     tok for t in support_tasks for tok in knowledge_tags(t)
@@ -1259,6 +1279,7 @@ class IndexedLTM:
                             set(rec.atom.tags or knowledge_tags(rec.atom.content))
                             - task_toks
                             - _RELATION_STOP_TAGS
+                            - _GENERIC_SHELL_STOP_TAGS
                         ):
                             fallback_tags[t] = fallback_tags.get(t, 0) + 1
                 effective_triggers = tuple(
@@ -1319,13 +1340,19 @@ class IndexedLTM:
             cap_or_causal_aligned = (
                 live_cap_score >= 0.35
                 or task_affinities.get(abstract.capability, 0.0) >= 0.5
-                or locus_in_live
+                or (locus_in_live and (cap_score >= 0.25 or confirmed_failure))
             )
-            # When the task already has a verified exact-task Fast Delta recipe in
-            # Working Memory, keep cross-task schemas inhibited unless a confirmed
-            # test failure requires cross-task diagnostic rescue.
-            fast_delta_allows_cross_task = (not has_exact_fast_delta) or (
-                confirmed_failure and len(matched_cues) >= 2 and locus_in_live
+            # When the task already has a verified exact-task Fast Delta recipe or
+            # a reflected same-task near-miss invariant in Working Memory, keep
+            # cross-task schemas inhibited unless a confirmed test failure requires
+            # cross-task diagnostic rescue.
+            fast_delta_allows_cross_task = (
+                not (has_exact_fast_delta or has_reflected_near_miss)
+            ) or (
+                confirmed_failure
+                and len(matched_cues) >= 2
+                and locus_in_live
+                and cap_score >= 0.25
             )
             cue_satisfied = (
                 len(matched_cues) >= 1
@@ -1597,6 +1624,14 @@ class IndexedLTM:
         delta_ids = set((self.manifest.get("memory_layers") or {}).get("delta_atom_ids") or ())
         has_exact_fast_delta = any(
             record.atom.atom_id in delta_ids and record.outcome == "pass"
+            for record in task_records
+        )
+        has_reflected_near_miss = any(
+            record.outcome == "fail"
+            and (
+                "reflected invariant:" in record.atom.content.lower()
+                or "reflection strategy:" in record.atom.content.lower()
+            )
             for record in task_records
         )
         verified_task_loci = {

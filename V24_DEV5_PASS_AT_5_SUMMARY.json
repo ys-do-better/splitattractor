@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-27T08:51:58.475513+00:00",
+  "metric": "Pass@5",
+  "policy": "split_attractor_v24",
+  "memory_strategy": "split_attractor",
+  "knowledge_sha256": "136e105dc75a1f00a1df79037df4af54e11c7aad077f695de7d142e923930272",
+  "knowledge_unchanged": true,
+  "tasks_total": 5,
+  "tasks_passed": 5,
+  "pass_at_1": 0.8,
+  "pass_at_5": 1.0,
+  "first_pass_attempt": {
+    "abs-stepped-slices": 1,
+    "awilix-async-container-initialization": 1,
+    "bandit-structured-nosec-directives": 4,
+    "cattrs-partial-structuring-recovery": 1,
+    "cliffy-config-file-parsing": 1
+  },
+  "per_task_best": {
+    "abs-stepped-slices": {
+      "attempt": 1,
+      "reward": 1.0,
+      "f2p": "6/6",
+      "p2p": "6/6",
+      "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa/jobs/panel_dev5_v24_sa/abs-stepped-slices__cF6Q8kH"
+    },
+    "awilix-async-container-initialization": {
+      "attempt": 1,
+      "reward": 1.0,
+      "f2p": "24/24",
+      "p2p": "162/162",
+      "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa/jobs/panel_dev5_v24_sa/awilix-async-container-initializ__4qG8d7m"
+    },
+    "cattrs-partial-structuring-recovery": {
+      "attempt": 1,
+      "reward": 1.0,
+      "f2p": "69/69",
+      "p2p": "7/7",
+      "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa_refined/jobs/panel_dev5_v24_sa_refined/cattrs-partial-structuring-recov__79iB2qL"
+    },
+    "cliffy-config-file-parsing": {
+      "attempt": 1,
+      "reward": 1.0,
+      "f2p": "37/37",
+      "p2p": "451/451",
+      "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_sa_refined/jobs/panel_dev5_v24_sa_refined/cliffy-config-file-parsing__jM2qN9x"
+    },
+    "bandit-structured-nosec-directives": {
+      "attempt": 4,
+      "reward": 1.0,
+      "f2p": "69/69",
+      "p2p": "282/282",
+      "partial": 1.0,
+      "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_passat5/attempt_4/jobs/v24_passat5_a4/bandit-structured-nosec-directiv__Gtw5HxC"
+    }
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "tasks": [
+        "abs-stepped-slices",
+        "awilix-async-container-initialization",
+        "bandit-structured-nosec-directives",
+        "cattrs-partial-structuring-recovery",
+        "cliffy-config-file-parsing"
+      ],
+      "passed_in_attempt": [
+        "abs-stepped-slices",
+        "awilix-async-container-initialization",
+        "cattrs-partial-structuring-recovery",
+        "cliffy-config-file-parsing"
+      ],
+      "remaining_after_attempt": [
+        "bandit-structured-nosec-directives"
+      ]
+    },
+    {
+      "attempt": 2,
+      "rewards": {
+        "bandit-structured-nosec-directives": {
+          "attempt": 2,
+          "reward": 0.0,
+          "f2p": "69/69",
+          "p2p": "281/282",
+          "partial": 0.9971509971509972,
+          "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_passat5/attempt_2/jobs/v24_passat5_a2/bandit-structured-nosec-directiv__qBGoTZw"
+        }
+      },
+      "remaining_after_attempt": [
+        "bandit-structured-nosec-directives"
+      ]
+    },
+    {
+      "attempt": 3,
+      "rewards": {
+        "bandit-structured-nosec-directives": {
+          "attempt": 3,
+          "reward": 0.0,
+          "f2p": "69/69",
+          "p2p": "281/282",
+          "partial": 0.9971509971509972,
+          "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_passat5/attempt_3/jobs/v24_passat5_a3/bandit-structured-nosec-directiv__T4CzSiU"
+        }
+      },
+      "remaining_after_attempt": [
+        "bandit-structured-nosec-directives"
+      ]
+    },
+    {
+      "attempt": 4,
+      "rewards": {
+        "bandit-structured-nosec-directives": {
+          "attempt": 4,
+          "reward": 1.0,
+          "f2p": "69/69",
+          "p2p": "282/282",
+          "partial": 1.0,
+          "trial": "/Users/yanshi/Downloads/metacorsi/runs/dev5_v24_passat5/attempt_4/jobs/v24_passat5_a4/bandit-structured-nosec-directiv__Gtw5HxC"
+        }
+      },
+      "remaining_after_attempt": []
+    }
+  ]
+}
