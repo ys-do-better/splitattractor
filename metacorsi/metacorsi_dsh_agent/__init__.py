@@ -521,8 +521,14 @@ class AgentHarness(BaseAgent):
         initial = await environment.exec("pwd && find . -maxdepth 2 -type f | head -80", timeout_sec=60)
         observation = (initial.stdout or "") + (initial.stderr or "")
         v24_split_attractor = brain.ltm_policy in {"split_attractor_v24", "naive_latch_v24"}
+        v24_predictive = brain.ltm_policy == "predictive_coding_v24"
         failure_locked = brain.ltm_policy == "failure_locked_v21"
-        evidence_gated = brain.ltm_policy in {"evidence_gated_v20", "failure_locked_v21"}
+        evidence_gated = brain.ltm_policy in {
+            "evidence_gated_v20",
+            "failure_locked_v21",
+            "sleep_consolidation_v24",
+            "engram_ensemble_v24",
+        }
         if v24_split_attractor:
             # Step 0 starts with PFG-hDeltaK gate closed (g_0 = 0): task-local
             # Slow Backbone anchors remain available, while cross-task schemas
@@ -534,6 +540,19 @@ class AgentHarness(BaseAgent):
                 has_live_evidence=False,
             )
             grounding_history: list[dict] = [sa_step0.json()]
+        elif v24_predictive:
+            bundle0, pc_step0 = brain.predictive_coding.step(
+                task_id=self.session_id or "deepswe",
+                task_text=instruction,
+                repository_evidence="",
+            )
+            brain.last_groundings = ()
+            from metacorsi.knowledge.indexed_ltm import render_grounded_application
+
+            evolved_context = render_grounded_application(
+                bundle0, (), "predictive_coding_v24"
+            )
+            grounding_history = [pc_step0.json()]
         else:
             evolved_context = brain.evolved_knowledge_prompt(
                 instruction,
@@ -541,7 +560,7 @@ class AgentHarness(BaseAgent):
                 # V20 must not ground cross-task knowledge from a task statement or
                 # a shallow file listing.  It starts with the local episode only and
                 # re-runs grounding after the agent has collected repository evidence.
-                repository_evidence="" if evidence_gated else observation,
+                repository_evidence="" if brain.ltm_policy in {"evidence_gated_v20", "failure_locked_v21"} else observation,
             )
             grounding_history = [{
                 "step": 0,
@@ -616,6 +635,36 @@ class AgentHarness(BaseAgent):
                     "reinhibitory_erase",
                 }:
                     knowledge_update = sa_directive
+            elif v24_predictive and step > 1:
+                live_window = "\n".join(sa_recent_observations[-2:])[-16000:]
+                _, pc_step = brain.predictive_coding.step(
+                    task_id=self.session_id or "deepswe",
+                    task_text=instruction,
+                    repository_evidence=live_window,
+                    explicit_counterevidence=sa_pending_counterevidence,
+                    stagnation_steps=sa_stagnation_steps,
+                )
+                sa_pending_counterevidence = False
+                grounding_history.append(pc_step.json())
+                if pc_step.active_grounding is not None:
+                    brain.last_groundings = (pc_step.active_grounding,)
+                    active_grounding_receipt = [pc_step.active_grounding.json()]
+                elif pc_step.transition == "falsification_reset":
+                    brain.last_groundings = ()
+                    active_grounding_receipt = []
+                if pc_step.transition in {"surprise_driven_activation", "prediction_error_shift"} and pc_step.active_grounding:
+                    rec = pc_step.active_grounding
+                    knowledge_update = (
+                        f"\n\n[PREDICTIVE-CODING SURPRISE UPDATE (surprise={pc_step.error_signal.surprise_magnitude:.3f}; "
+                        f"type={pc_step.error_signal.error_type})]:\n"
+                        + "\n".join(f"- {a}" for a in rec.instantiated_action)
+                    )
+                elif pc_step.transition == "falsification_reset":
+                    knowledge_update = (
+                        "\n\n[PREDICTIVE-CODING FALSIFICATION RESET]:\n"
+                        f"Previous hypothesis was falsified by persistent prediction error ({pc_step.reason}). "
+                        "Abandon that repair direction and re-derive causal error from current trace."
+                    )
             elif evidence_gated and step > 1:
                 repository_evidence = (repository_evidence_window + "\n" + observation)[-32000:]
                 refreshed_context = brain.evolved_knowledge_prompt(
@@ -789,15 +838,20 @@ RECENT ACTION SUMMARY:
                     observation += "\n\nMETACORSI RCA/REGRESSION DIRECTIVE:\n" + json.dumps(
                         rca_record, ensure_ascii=False
                     )
-            if v24_split_attractor:
+            if v24_split_attractor or v24_predictive:
+                gate_active = (
+                    brain.split_attractor.gate == 1
+                    if v24_split_attractor
+                    else (brain.predictive_coding.active_abstract_id is not None)
+                )
                 feedback = _classify_step_feedback(
                     commands,
                     return_codes,
-                    gate_Active=brain.split_attractor.gate == 1,
+                    gate_Active=gate_active,
                     edited_since_latch=sa_edited_since_latch,
                     rca_gate_blocked=False,
                 )
-                if feedback["edited"] and brain.split_attractor.gate == 1:
+                if feedback["edited"] and gate_active:
                     sa_edited_since_latch = True
                 if feedback["test_passed"]:
                     sa_stagnation_steps = 0
@@ -805,7 +859,7 @@ RECENT ACTION SUMMARY:
                 elif feedback["explicit_counterevidence"]:
                     sa_pending_counterevidence = True
                     sa_stagnation_steps += 1
-                elif feedback["test_failed"] and brain.split_attractor.gate == 1:
+                elif feedback["test_failed"] and gate_active:
                     sa_stagnation_steps += 1
                 sa_ordinary_failure = feedback["ordinary_failure"]
                 tagged_obs = observation

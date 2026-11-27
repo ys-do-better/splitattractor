@@ -58,9 +58,18 @@ _MEMORY_STRATEGIES = {
     "hippocampal_index",
     "event_segmentation",
     "split_attractor",
+    "sleep_consolidation",
+    "predictive_coding",
+    "engram_ensemble",
 }
 
-_V24_POLICIES = {"split_attractor_v24", "naive_latch_v24"}
+_V24_POLICIES = {
+    "split_attractor_v24",
+    "naive_latch_v24",
+    "sleep_consolidation_v24",
+    "predictive_coding_v24",
+    "engram_ensemble_v24",
+}
 
 
 def _extract_live_symbols(evidence: str, limit: int = 6) -> tuple[str, ...]:
@@ -1464,7 +1473,7 @@ class IndexedLTM:
         persists them with the episode; post-verifier evolution marks each
         receipt verified or rejected and consolidates that evidence next turn.
         """
-        if policy in _V24_POLICIES:
+        if policy in {"split_attractor_v24", "naive_latch_v24"}:
             from .split_attractor import SplitAttractorWM
 
             mode = "naive" if policy == "naive_latch_v24" else "sa"
@@ -1482,6 +1491,40 @@ class IndexedLTM:
                 pfg_summary=pfg_summary,
             )
             groundings = (step_res.active_grounding,) if step_res.active_grounding else ()
+            return bundle, groundings
+
+        if policy == "sleep_consolidation_v24":
+            from .sleep_consolidation import SleepConsolidationMemory
+
+            bundle, groundings, _ = SleepConsolidationMemory(self).ground(
+                task_id=task_id,
+                task_text=task_text,
+                repository_evidence=repository_evidence,
+                limit=limit,
+            )
+            return bundle, groundings
+
+        if policy == "predictive_coding_v24":
+            from .predictive_coding import PredictiveCodingMemory
+
+            bundle, step_res = PredictiveCodingMemory(self).step(
+                task_id=task_id,
+                task_text=task_text,
+                repository_evidence=repository_evidence,
+                limit=limit,
+            )
+            groundings = (step_res.active_grounding,) if step_res.active_grounding else ()
+            return bundle, groundings
+
+        if policy == "engram_ensemble_v24":
+            from .engram_ensemble import EngramEnsembleMemory
+
+            bundle, groundings, _ = EngramEnsembleMemory(self).ground(
+                task_id=task_id,
+                task_text=task_text,
+                repository_evidence=repository_evidence,
+                limit=limit,
+            )
             return bundle, groundings
 
         memory_strategy = _memory_strategy() if policy == "modular_reverse_v23" else "v23_modular"

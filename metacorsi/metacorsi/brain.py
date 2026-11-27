@@ -11,10 +11,13 @@ from .cognition import PerceptionCompiler, WorkingMemory
 from .contracts import FailureEvidence, RCADiagnosis, RegressionPlan, TestResult
 from .generator import AgentGenerator, GeneratedAgent
 from .knowledge import K7SkillRouter
+from .knowledge.engram_ensemble import EngramEnsembleMemory
 from .knowledge.grounding import GroundedKnowledgeGraph
 from .knowledge.indexed_ltm import (GroundingRecord, IndexedLTM,
                                     render_grounded_application,
                                     render_split_attractor_directive)
+from .knowledge.predictive_coding import PredictiveCodingMemory
+from .knowledge.sleep_consolidation import SleepConsolidationMemory
 from .knowledge.split_attractor import SplitAttractorStepResult, SplitAttractorWM
 from .knowledge.store import (KnowledgeAtom, VersionedKnowledgeStore, k7_seed_atoms,
                               render_atoms, retrieve_atoms)
@@ -69,6 +72,7 @@ class MetaCoRSIBrain:
         self.ltm_policy = os.environ.get("METACORSI_LTM_POLICY", "full_v1")
         sa_mode = "naive" if self.ltm_policy == "naive_latch_v24" else "sa"
         self.split_attractor = SplitAttractorWM(mode=sa_mode)
+        self.predictive_coding = PredictiveCodingMemory(self.indexed_ltm)
         self.working_memory: WorkingMemory | None = None
         self.knowledge.version = self.ltm.active.version
         self.skill_router = K7SkillRouter()

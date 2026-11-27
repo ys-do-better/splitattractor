@@ -1,0 +1,246 @@
+{
+  "k28_20task_audit": {
+    "modular_reverse_v23": {
+      "step0_premature_lock_on_novel_tasks": "6/8",
+      "step0_negative_transfer_risk_rate": 0.75,
+      "fast_delta_non_interference_rate": "2/5",
+      "live_evidence_causal_alignment": "11/20",
+      "hard4_multi_boundary_or_symbol_grounding": "0/4"
+    },
+    "naive_latch_v24": {
+      "step0_premature_lock_on_novel_tasks": "0/8",
+      "step0_negative_transfer_risk_rate": 0.0,
+      "fast_delta_non_interference_rate": "5/5",
+      "live_evidence_causal_alignment": "8/20",
+      "hard4_multi_boundary_or_symbol_grounding": "0/4"
+    },
+    "split_attractor_v24": {
+      "step0_premature_lock_on_novel_tasks": "0/8",
+      "step0_negative_transfer_risk_rate": 0.0,
+      "fast_delta_non_interference_rate": "5/5",
+      "live_evidence_causal_alignment": "8/20",
+      "hard4_multi_boundary_or_symbol_grounding": "0/4"
+    },
+    "sleep_consolidation_v24": {
+      "step0_premature_lock_on_novel_tasks": "1/8",
+      "step0_negative_transfer_risk_rate": 0.125,
+      "fast_delta_non_interference_rate": "5/5",
+      "live_evidence_causal_alignment": "7/20",
+      "hard4_multi_boundary_or_symbol_grounding": "1/4"
+    },
+    "predictive_coding_v24": {
+      "step0_premature_lock_on_novel_tasks": "0/8",
+      "step0_negative_transfer_risk_rate": 0.0,
+      "fast_delta_non_interference_rate": "5/5",
+      "live_evidence_causal_alignment": "19/20",
+      "hard4_multi_boundary_or_symbol_grounding": "4/4"
+    },
+    "engram_ensemble_v24": {
+      "step0_premature_lock_on_novel_tasks": "2/8",
+      "step0_negative_transfer_risk_rate": 0.25,
+      "fast_delta_non_interference_rate": "5/5",
+      "live_evidence_causal_alignment": "12/20",
+      "hard4_multi_boundary_or_symbol_grounding": "3/4"
+    }
+  },
+  "k29_20task_audit": {
+    "modular_reverse_v23": {
+      "step0_premature_lock_on_novel_tasks": "6/8",
+      "step0_negative_transfer_risk_rate": 0.75,
+      "fast_delta_non_interference_rate": "0/0",
+      "live_evidence_causal_alignment": "9/20",
+      "hard4_multi_boundary_or_symbol_grounding": "0/4"
+    },
+    "naive_latch_v24": {
+      "step0_premature_lock_on_novel_tasks": "0/8",
+      "step0_negative_transfer_risk_rate": 0.0,
+      "fast_delta_non_interference_rate": "0/0",
+      "live_evidence_causal_alignment": "5/20",
+      "hard4_multi_boundary_or_symbol_grounding": "1/4"
+    },
+    "split_attractor_v24": {
+      "step0_premature_lock_on_novel_tasks": "0/8",
+      "step0_negative_transfer_risk_rate": 0.0,
+      "fast_delta_non_interference_rate": "0/0",
+      "live_evidence_causal_alignment": "5/20",
+      "hard4_multi_boundary_or_symbol_grounding": "1/4"
+    },
+    "sleep_consolidation_v24": {
+      "step0_premature_lock_on_novel_tasks": "1/8",
+      "step0_negative_transfer_risk_rate": 0.125,
+      "fast_delta_non_interference_rate": "0/0",
+      "live_evidence_causal_alignment": "3/20",
+      "hard4_multi_boundary_or_symbol_grounding": "1/4"
+    },
+    "predictive_coding_v24": {
+      "step0_premature_lock_on_novel_tasks": "0/8",
+      "step0_negative_transfer_risk_rate": 0.0,
+      "fast_delta_non_interference_rate": "0/0",
+      "live_evidence_causal_alignment": "18/20",
+      "hard4_multi_boundary_or_symbol_grounding": "4/4"
+    },
+    "engram_ensemble_v24": {
+      "step0_premature_lock_on_novel_tasks": "2/8",
+      "step0_negative_transfer_risk_rate": 0.25,
+      "fast_delta_non_interference_rate": "0/0",
+      "live_evidence_causal_alignment": "10/20",
+      "hard4_multi_boundary_or_symbol_grounding": "3/4"
+    }
+  },
+  "dev5_trajectory_replay_on_k28": {
+    "abs-stepped-slices": {
+      "steps": 23,
+      "refined_split_attractor_sa": {
+        "mode": "sa",
+        "total_steps": 24,
+        "disinhibitory_writes": 1,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 0,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 16,
+        "latched_steps": 8
+      },
+      "naive_latch": {
+        "mode": "naive",
+        "total_steps": 24,
+        "disinhibitory_writes": 1,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 0,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 16,
+        "latched_steps": 8
+      },
+      "predictive_coding": {
+        "activations": 5,
+        "falsifications": 2,
+        "active_steps": 17
+      }
+    },
+    "awilix-async-container-initializ": {
+      "steps": 24,
+      "refined_split_attractor_sa": {
+        "mode": "sa",
+        "total_steps": 25,
+        "disinhibitory_writes": 1,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 1,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 14,
+        "latched_steps": 11
+      },
+      "naive_latch": {
+        "mode": "naive",
+        "total_steps": 25,
+        "disinhibitory_writes": 1,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 1,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 14,
+        "latched_steps": 11
+      },
+      "predictive_coding": {
+        "activations": 4,
+        "falsifications": 0,
+        "active_steps": 13
+      }
+    },
+    "bandit-structured-nosec-directiv": {
+      "steps": 23,
+      "refined_split_attractor_sa": {
+        "mode": "sa",
+        "total_steps": 24,
+        "disinhibitory_writes": 2,
+        "reinhibitory_erases": 1,
+        "unjustified_switches": 0,
+        "retraction_latencies": [
+          7
+        ],
+        "mean_retraction_latency": 7.0,
+        "tracking_steps": 14,
+        "latched_steps": 10
+      },
+      "naive_latch": {
+        "mode": "naive",
+        "total_steps": 24,
+        "disinhibitory_writes": 2,
+        "reinhibitory_erases": 1,
+        "unjustified_switches": 0,
+        "retraction_latencies": [
+          7
+        ],
+        "mean_retraction_latency": 7.0,
+        "tracking_steps": 14,
+        "latched_steps": 10
+      },
+      "predictive_coding": {
+        "activations": 5,
+        "falsifications": 3,
+        "active_steps": 14
+      }
+    },
+    "cattrs-partial-structuring-recov": {
+      "steps": 24,
+      "refined_split_attractor_sa": {
+        "mode": "sa",
+        "total_steps": 25,
+        "disinhibitory_writes": 0,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 0,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 25,
+        "latched_steps": 0
+      },
+      "naive_latch": {
+        "mode": "naive",
+        "total_steps": 25,
+        "disinhibitory_writes": 0,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 0,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 25,
+        "latched_steps": 0
+      },
+      "predictive_coding": {
+        "activations": 2,
+        "falsifications": 1,
+        "active_steps": 2
+      }
+    },
+    "cliffy-config-file-parsing": {
+      "steps": 24,
+      "refined_split_attractor_sa": {
+        "mode": "sa",
+        "total_steps": 25,
+        "disinhibitory_writes": 0,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 0,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 25,
+        "latched_steps": 0
+      },
+      "naive_latch": {
+        "mode": "naive",
+        "total_steps": 25,
+        "disinhibitory_writes": 0,
+        "reinhibitory_erases": 0,
+        "unjustified_switches": 0,
+        "retraction_latencies": [],
+        "mean_retraction_latency": 0.0,
+        "tracking_steps": 25,
+        "latched_steps": 0
+      },
+      "predictive_coding": {
+        "activations": 3,
+        "falsifications": 3,
+        "active_steps": 5
+      }
+    }
+  }
+}
