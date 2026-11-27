@@ -244,6 +244,12 @@ class EngramEnsembleMemory:
         has_exact_fast_delta = any(
             r.atom.atom_id in delta_ids and r.outcome == "pass" for r in task_records
         )
+        if not repository_evidence.strip():
+            return bundle, (), {
+                "paradigm": "engram_ensemble_v24",
+                "status": "step0_ensemble_awaiting_live_evidence",
+                "ensemble_size": 0,
+            }
         if has_exact_fast_delta and "METACORSI_CONFIRMED_FAILURE_EVIDENCE" not in repository_evidence:
             return bundle, (), {
                 "paradigm": "engram_ensemble_v24",
@@ -298,9 +304,9 @@ class EngramEnsembleMemory:
             specificity = 0.35 if abstract.invariant.startswith("Preserve the verified") else 1.0
 
             drive = _clip01(
-                0.30 * cap_score
-                + 0.28 * locus_score
-                + 0.24 * cue_score
+                0.25 * cap_score
+                + 0.35 * locus_score
+                + 0.22 * cue_score
                 + 0.10 * source_div
                 + 0.08 * specificity
             )
@@ -326,7 +332,7 @@ class EngramEnsembleMemory:
                     (
                         edge.weight * act.get(edge.target_id, 0.0)
                         for edge in self.inh_edges.get(aid, ())
-                        if edge.target_id in act and act.get(edge.target_id, 0.0) >= act.get(aid, 0.0)
+                        if edge.target_id in act and act.get(edge.target_id, 0.0) > act.get(aid, 0.0)
                     ),
                     default=0.0,
                 )
@@ -339,7 +345,11 @@ class EngramEnsembleMemory:
         valid_primaries = [
             aid
             for aid, score in act.items()
-            if score >= self.primary_threshold and len(matched_cues_by_id.get(aid, ())) >= 1
+            if score >= self.primary_threshold
+            and (
+                len(matched_cues_by_id.get(aid, ())) >= 1
+                or self.ltm.abstractions[aid].causal_locus in observed_loci
+            )
         ]
         if not valid_primaries:
             return bundle, (), {

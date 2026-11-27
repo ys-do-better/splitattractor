@@ -351,6 +351,13 @@ class SleepConsolidationMemory:
         # REM downscaling suppresses cross-task schemas unless concrete live counterevidence
         # demands external rescue. This protects exact fast episodes (e.g., cattrs/cliffy)
         # from cross-task interference!
+        if not repository_evidence.strip():
+            return bundle, (), {
+                "paradigm": "sleep_consolidation_v24",
+                "status": "step0_sleep_gate_awaiting_live_evidence",
+                "pruned_count": sum(1 for s in self.schemas.values() if s.pruned),
+                "active_schemas": len(self.schemas),
+            }
         if has_exact_fast_delta and "METACORSI_CONFIRMED_FAILURE_EVIDENCE" not in repository_evidence:
             return bundle, (), {
                 "paradigm": "sleep_consolidation_v24",
@@ -379,20 +386,20 @@ class SleepConsolidationMemory:
             anti_penalty = 0.08 * len(matched_neg)
 
             resonance = (
-                0.30 * cap_score
-                + 0.28 * locus_score
-                + 0.24 * cue_score
+                0.26 * cap_score
+                + 0.34 * locus_score
+                + 0.22 * cue_score
                 + 0.18 * schema.synaptic_weight
                 - anti_penalty
             )
             # Vigilance gating: reject schemas that do not cross their REM-calibrated threshold
-            # or have zero discriminative cue overlap.
+            # or have neither discriminative cue overlap nor confirmed live causal locus.
             effective_vigilance = (
-                schema.vigilance_threshold + 0.08
+                schema.vigilance_threshold + 0.02
                 if has_verified_task_memory
-                else schema.vigilance_threshold
+                else schema.vigilance_threshold - 0.04
             )
-            if len(matched_pos) == 0 or resonance < effective_vigilance:
+            if (len(matched_pos) == 0 and locus_score < 1.0) or resonance < effective_vigilance:
                 continue
             candidates.append((resonance, schema, matched_pos))
 

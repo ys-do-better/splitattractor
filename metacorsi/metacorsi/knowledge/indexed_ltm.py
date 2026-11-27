@@ -1239,8 +1239,30 @@ class IndexedLTM:
             else:
                 causal_score = 0.0
 
-            matched_cues = tuple(sorted(evidence_query.intersection(abstract.trigger_tags)))
-            trigger_denominator = max(1, min(3, len(abstract.trigger_tags)))
+            effective_triggers = abstract.trigger_tags
+            if not effective_triggers:
+                task_toks = {
+                    tok for t in support_tasks for tok in knowledge_tags(t)
+                }
+                fallback_tags: dict[str, int] = {}
+                for atom_id in abstract.supporting_atom_ids:
+                    rec = self.records.get(atom_id)
+                    if rec and rec.outcome == "pass":
+                        for t in (
+                            set(rec.atom.tags or knowledge_tags(rec.atom.content))
+                            - task_toks
+                            - _RELATION_STOP_TAGS
+                        ):
+                            fallback_tags[t] = fallback_tags.get(t, 0) + 1
+                effective_triggers = tuple(
+                    t
+                    for t, _ in sorted(
+                        fallback_tags.items(), key=lambda kv: (-kv[1], kv[0])
+                    )[:8]
+                )
+
+            matched_cues = tuple(sorted(evidence_query.intersection(effective_triggers)))
+            trigger_denominator = max(1, min(3, len(effective_triggers)))
             if live_text:
                 trigger_score = min(1.0, len(matched_cues) / trigger_denominator)
             else:
@@ -1253,7 +1275,7 @@ class IndexedLTM:
                 episodic_score = (
                     1.0 if abstract.causal_locus in verified_task_loci else -0.5
                 )
-            specificity = min(1.0, len(abstract.trigger_tags) / 4.0)
+            specificity = min(1.0, len(effective_triggers) / 4.0)
             if abstract.invariant.startswith("Preserve the verified"):
                 specificity *= 0.35
 
@@ -1268,17 +1290,29 @@ class IndexedLTM:
                 specificity=specificity,
                 status_ok=abstract.status in {"validated", "transferable"},
             )
+            if locus_in_live and (len(matched_cues) >= 1 or confirmed_failure):
+                # Cross-capability causal bridge: when live evidence confirms the
+                # exact causal locus and cues, allow causal resonance to reach
+                # the disinhibition threshold even if the capability label differs.
+                causal_bridge = (
+                    0.34 * causal_score
+                    + 0.26 * max(trigger_score, 0.45 if confirmed_failure else 0.0)
+                    + 0.20 * cap_score
+                    + 0.10 * source_score
+                    + 0.10 * feedback_score
+                )
+                u_score = max(u_score, min(1.0, causal_bridge))
             if not live_text:
                 # Without live repository evidence, scale down static prior so
                 # u_i(0) stays sub-threshold while preserving candidate ordering.
                 u_score = min(0.35, u_score * 0.65)
 
             # Applicability condition matching: trigger signal in live evidence
-            # must match at least one discriminative cue of the candidate schema
-            # (never allow cues=[] boilerplate schemas to open the gate on shallow listings).
-            cap_aligned = (
+            # must match at least one discriminative cue or confirmed causal locus.
+            cap_or_causal_aligned = (
                 live_cap_score >= 0.35
-                or (not has_live_cap and task_affinities.get(abstract.capability, 0.0) >= 0.5)
+                or task_affinities.get(abstract.capability, 0.0) >= 0.5
+                or locus_in_live
             )
             # When the task already has a verified exact-task Fast Delta recipe in
             # Working Memory, keep cross-task schemas inhibited unless a confirmed
@@ -1288,12 +1322,11 @@ class IndexedLTM:
             )
             cue_satisfied = (
                 len(matched_cues) >= 1
-                if abstract.trigger_tags
-                else (confirmed_failure and locus_in_live)
+                or (confirmed_failure and locus_in_live)
             )
             condition_matched = (
                 bool(live_text)
-                and cap_aligned
+                and cap_or_causal_aligned
                 and fast_delta_allows_cross_task
                 and cue_satisfied
                 and (locus_in_live or locus_in_task or confirmed_failure or has_rca_directive)

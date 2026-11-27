@@ -360,7 +360,20 @@ class SplitAttractorWM:
             # Gate was already open (prev_gate == 1) and no explicit erase triggered.
             latched_id = prev_abstract_id or winner_id
             latched_p = p_scores.get(latched_id, 0.0)
-            if winner_id == latched_id and latched_p >= self.maintain_threshold:
+            if self.mode == "sa" and latched_p >= self.maintain_threshold and latched_id in by_id:
+                # In a true Split Attractor (V24-SA), the closed PFG-hDeltaK recurrent
+                # loop and fast lateral inhibition lock the active bump in place until
+                # re-inhibition (counterevidence or stagnation) breaks the loop.
+                self.gate = 1
+                self.state = "LATCHED"
+                self.active_abstract_id = latched_id
+                self.active_grounding = by_id[latched_id].grounding
+                transition = "sustained_latch"
+                reason = (
+                    f"sustained attractor lock on {latched_id} (p={latched_p:.3f}, "
+                    f"ordinary_failure_ignored={ordinary_command_failure})"
+                )
+            elif winner_id == latched_id and latched_p >= self.maintain_threshold:
                 self.gate = 1
                 self.state = "LATCHED"
                 self.active_abstract_id = latched_id
@@ -376,7 +389,7 @@ class SplitAttractorWM:
                 and winner_p >= self.open_threshold
                 and winner_p > latched_p
             ):
-                # A competing candidate overcame the recurrent hysteresis barrier w1 * h(t-1)
+                # In V24-Naive (w1=0), lack of attractor locking allows mid-run switching
                 self.gate = 1
                 self.state = "LATCHED"
                 self.active_abstract_id = winner_id
