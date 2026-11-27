@@ -1163,6 +1163,11 @@ class IndexedLTM:
             if atom_id in self.records
         )
         has_verified_task_memory = any(record.outcome == "pass" for record in task_records)
+        delta_ids = set((self.manifest.get("memory_layers") or {}).get("delta_atom_ids") or ())
+        has_exact_fast_delta = any(
+            record.atom.atom_id in delta_ids and record.outcome == "pass"
+            for record in task_records
+        )
         verified_task_loci = {
             locus
             for record in task_records
@@ -1260,14 +1265,29 @@ class IndexedLTM:
                 u_score = min(0.35, u_score * 0.65)
 
             # Applicability condition matching: trigger signal in live evidence
-            # must match the candidate schema's causal locus and/or trigger cues.
+            # must match at least one discriminative cue of the candidate schema
+            # (never allow cues=[] boilerplate schemas to open the gate on shallow listings).
             cap_aligned = (
                 live_cap_score >= 0.35
                 or (not has_live_cap and task_affinities.get(abstract.capability, 0.0) >= 0.5)
             )
-            condition_matched = bool(live_text) and cap_aligned and (
-                (locus_in_live and (bool(matched_cues) or confirmed_failure or has_rca_directive or bool(live_symbols)))
-                or (len(matched_cues) >= 1 and (locus_in_live or locus_in_task or confirmed_failure))
+            # When the task already has a verified exact-task Fast Delta recipe in
+            # Working Memory, keep cross-task schemas inhibited unless a confirmed
+            # test failure requires cross-task diagnostic rescue.
+            fast_delta_allows_cross_task = (not has_exact_fast_delta) or (
+                confirmed_failure and len(matched_cues) >= 2 and locus_in_live
+            )
+            cue_satisfied = (
+                len(matched_cues) >= 1
+                if abstract.trigger_tags
+                else (confirmed_failure and locus_in_live)
+            )
+            condition_matched = (
+                bool(live_text)
+                and cap_aligned
+                and fast_delta_allows_cross_task
+                and cue_satisfied
+                and (locus_in_live or locus_in_task or confirmed_failure or has_rca_directive)
             )
 
             # Reverse-ground to Top-1 target-disjoint passing source episode
@@ -1491,6 +1511,11 @@ class IndexedLTM:
             if atom_id in self.records
         )
         has_verified_task_memory = any(record.outcome == "pass" for record in task_records)
+        delta_ids = set((self.manifest.get("memory_layers") or {}).get("delta_atom_ids") or ())
+        has_exact_fast_delta = any(
+            record.atom.atom_id in delta_ids and record.outcome == "pass"
+            for record in task_records
+        )
         verified_task_loci = {
             locus
             for record in task_records if record.outcome == "pass"
@@ -2151,12 +2176,18 @@ def render_split_attractor_directive(
             "Do NOT continue editing along that premise; re-anchor on current task-local RCA and live code evidence."
         )
     if step_result.gate == 1 and step_result.active_grounding is not None:
+        record = step_result.active_grounding
         h_val = step_result.h_scores.get(step_result.active_abstract_id or "", 0.0)
         p_val = step_result.p_scores.get(step_result.active_abstract_id or "", 0.0)
-        body = render_grounded_application(bundle, (step_result.active_grounding,), policy)
-        return (
+        lines = [
             f"\n\n[SPLIT-ATTRACTOR DISINHIBITORY WRITE (mode={step_result.mode}; "
-            f"gate=1; transition={step_result.transition}; p={p_val:.3f}; h={h_val:.3f})]:\n"
-            + body
-        )
+            f"gate=1; transition={step_result.transition}; p={p_val:.3f}; h={h_val:.3f})]:",
+            f"- SPLIT-ATTRACTOR LATCHED GROUNDING {record.grounding_id}: strategy={record.bindings.get('memory_strategy')}; module={record.bindings.get('module')}; abstract={record.abstract_id}",
+            f"  mixture=local_episode:{record.bindings.get('local_episode_weight')} + abstract_residual:{record.bindings.get('abstract_residual_weight')}",
+            f"  source_episode={record.bindings.get('source_episode')}; grounded_atoms={record.bindings.get('grounded_atom_ids')}",
+            f"  target_roles={record.bindings.get('target_roles')}; live_symbols={record.bindings.get('live_symbols', 'n/a')}; reverse_grounded_knowledge={list(record.instantiated_action)}",
+            "  authority=ROLE_BOUND_RESIDUAL: preserve the local episode; apply only the mapped mechanism, never source-specific files or symbols.",
+            f"  verify={list(record.verification_plan)}",
+        ]
+        return "\n".join(lines)
     return ""

@@ -51,13 +51,14 @@ def main() -> None:
                        "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17",
                        "competitive_v18", "bridge_v19", "evidence_gated_v20",
                        "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23",
+                       "split_attractor_v24", "naive_latch_v24",
                    ), default="full_v1",
                    help="abstract/grounding rendering and activation policy")
     p.add_argument("--memory-strategy", choices=(
                        "v23_modular", "anthropic_search_notes", "anthropic_dreaming",
                        "memtree_collapsed", "memtree_traversal", "cls_dual_store",
                        "schema_assimilation", "art_resonance", "hippocampal_index",
-                       "event_segmentation",
+                       "event_segmentation", "split_attractor",
                    ), default="v23_modular",
                    help="research-matrix memory organization used by modular_reverse_v23")
     p.add_argument("--dsh-patch", type=Path,

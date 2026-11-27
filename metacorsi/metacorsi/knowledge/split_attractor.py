@@ -417,8 +417,12 @@ class SplitAttractorWM:
             active_id = self.active_abstract_id
             prev_h = self.h_state.get(active_id, 0.0)
             active_p = p_scores.get(active_id, 0.0)
-            # Slow excitation update for Top-1 winner; fast inhibition zeros all j != i*
-            new_h = _clip01((1.0 - self.alpha) * prev_h + self.alpha * self.w2 * active_p)
+            if transition in {"disinhibitory_write", "attractor_switch"} or prev_h <= 1e-6:
+                # Disinhibition immediately closes the PFG-hDeltaK loop at full latch potential
+                new_h = _clip01(self.w2 * active_p)
+            else:
+                # Subsequent steps evolve via slow recurrent integration; fast inhibition zeros j != i*
+                new_h = _clip01((1.0 - self.alpha) * prev_h + self.alpha * self.w2 * active_p)
             for aid in all_ids:
                 h_scores[aid] = new_h if aid == active_id else 0.0
         else:
