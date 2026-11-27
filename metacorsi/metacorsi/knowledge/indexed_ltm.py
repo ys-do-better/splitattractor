@@ -2147,7 +2147,7 @@ def render_indexed_bundle(bundle: RetrievalBundle, policy: str = "full_v1") -> s
                                     "retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11",
                                     "situation_v13", "experience_v14", "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23", *_V24_POLICIES}
         content_limit = 1500 if policy == "experience_v14" else (
-            720 if policy in _V24_POLICIES else (
+            1000 if policy in _V24_POLICIES else (
                 520 if policy in {"retention_v8", "hierarchical_v9", "feedback_weighted_v10", "champion_v11", "situation_v13",
                                   "isolated_v15", "layered_v15", "consensus_v15", "transfer_v15", "transfer_v16", "adaptive_v17", "competitive_v18", "bridge_v19", "evidence_gated_v20", "failure_locked_v21", "soft_grounding_v22", "modular_reverse_v23"} else 260
             )
